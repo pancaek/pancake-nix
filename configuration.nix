@@ -26,9 +26,9 @@
     };
   };
   boot.plymouth.enable = true;
-  
+  boot.kernelParams = [ "quiet" "splash" "vga=current" "udev.log_priority=3" ];
   networking.hostName = "pancake-nix"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -116,7 +116,7 @@
     firefox
     adw-gtk3
     papirus-icon-theme
-    papirus-folders
+    # papirus-folders
     volantes-cursors
     gnome-extension-manager
     gnome.gnome-tweaks
@@ -130,6 +130,8 @@
     obs-studio
     nixfmt
     vscode-fhs
+    spotify
+    gh
 
   ]) ++ (with pkgs.gnomeExtensions; [ appindicator ddterm ]);
   # For piper
@@ -151,6 +153,9 @@
       true; # Open ports in the firewall for Source Dedicated Server
   };
   services.xserver.excludePackages = (with pkgs; [ xterm ]);
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
