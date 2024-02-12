@@ -63,10 +63,10 @@
     };
   };
   # Wonky in Wayland
-  # i18n.inputMethod = {
-  #   enabled = "ibus";
-  #   ibus = { engines = with pkgs.ibus-engines; [ mozc ]; };
-  # };
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus = { engines = with pkgs.ibus-engines; [ mozc ]; };
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
