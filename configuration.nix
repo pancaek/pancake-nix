@@ -20,6 +20,9 @@
   #  boot.loader.systemd-boot.enable = true;
   #  boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.plymouth.enable = true;
+  boot.kernelParams = [ "quiet" "splash" "vga=current" "udev.log_priority=3" ];
+
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
