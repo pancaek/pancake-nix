@@ -9,14 +9,12 @@
     ./hardware-configuration.nix
   ];
 
-  # Enable flake support
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
   };
-
   # Bootloader.
   # Use the systemd-boot EFI boot loader.
   #  boot.loader.systemd-boot.enable = true;
@@ -33,8 +31,6 @@
       device = "nodev";
     };
   };
-  boot.plymouth.enable = true;
-  boot.kernelParams = [ "quiet" "splash" "vga=current" "udev.log_priority=3" ];
   networking.hostName = "pancake-nix"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -52,22 +48,22 @@
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
-      LC_ADDRESS = defaulLocale;
-      LC_IDENTIFICATION = defaulLocale;
-      LC_MEASUREMENT = defaulLocale;
-      LC_MONETARY = defaulLocale;
-      LC_NAME = defaulLocale;
-      LC_NUMERIC = defaulLocale;
-      LC_PAPER = defaulLocale;
-      LC_TELEPHONE = defaulLocale;
-      LC_TIME = defaultLocale;
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
     };
   };
-
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus = { engines = with pkgs.ibus-engines; [ mozc ]; };
-  };
+  # Wonky in Wayland
+  # i18n.inputMethod = {
+  #   enabled = "ibus";
+  #   ibus = { engines = with pkgs.ibus-engines; [ mozc ]; };
+  # };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -93,8 +89,10 @@
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
@@ -125,7 +123,7 @@
     firefox
     adw-gtk3
     papirus-icon-theme
-    # papirus-folders # dunno why this is broken
+    # papirus-folders
     volantes-cursors
     gnome-extension-manager
     gnome.gnome-tweaks
@@ -143,6 +141,7 @@
     spotify
     gh
     reaper
+    discord
   ]) ++ (with pkgs.gnomeExtensions; [ appindicator ddterm ]);
   # For piper
   services.ratbagd.enable = true;
