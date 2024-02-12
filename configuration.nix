@@ -9,6 +9,14 @@
     ./hardware-configuration.nix
   ];
 
+  # Enable flake support
+  nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+
   # Bootloader.
   # Use the systemd-boot EFI boot loader.
   #  boot.loader.systemd-boot.enable = true;
@@ -41,31 +49,34 @@
   time.timeZone = "America/Los_Angeles";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = defaulLocale;
+      LC_IDENTIFICATION = defaulLocale;
+      LC_MEASUREMENT = defaulLocale;
+      LC_MONETARY = defaulLocale;
+      LC_NAME = defaulLocale;
+      LC_NUMERIC = defaulLocale;
+      LC_PAPER = defaulLocale;
+      LC_TELEPHONE = defaulLocale;
+      LC_TIME = defaultLocale;
+    };
+  };
 
   i18n.inputMethod = {
     enabled = "ibus";
     ibus = { engines = with pkgs.ibus-engines; [ mozc ]; };
   };
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver = {
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+  };
 
   # Configure keymap in X11
   services.xserver = {
@@ -101,7 +112,7 @@
     isNormalUser = true;
     description = "Devyn Boer";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ discord ];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -110,13 +121,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = (with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
     git
     firefox
     adw-gtk3
     papirus-icon-theme
-    # papirus-folders
+    # papirus-folders # dunno why this is broken
     volantes-cursors
     gnome-extension-manager
     gnome.gnome-tweaks
@@ -126,13 +135,14 @@
     qmk
     piper
     celluloid
+    discord
     lutris
     obs-studio
     nixfmt
     vscode-fhs
     spotify
     gh
-
+    reaper
   ]) ++ (with pkgs.gnomeExtensions; [ appindicator ddterm ]);
   # For piper
   services.ratbagd.enable = true;
@@ -182,12 +192,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
 
   # Only needed for the VM
   services.spice-vdagentd.enable = true;
