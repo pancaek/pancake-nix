@@ -25,8 +25,10 @@
       device = "nodev";
     };
   };
+  boot.plymouth.enable = true;
+  
   networking.hostName = "pancake-nix"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -128,7 +130,6 @@
     obs-studio
     nixfmt
     vscode-fhs
-    gh
 
   ]) ++ (with pkgs.gnomeExtensions; [ appindicator ddterm ]);
   # For piper
@@ -161,7 +162,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
