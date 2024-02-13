@@ -44,6 +44,17 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Bluetooth
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot =
+    true; # powers up the default Bluetooth controller on boot
+
+  systemd.user.services.mpris-proxy = {
+    description = "Mpris proxy";
+    after = [ "network.target" "sound.target" ];
+    wantedBy = [ "default.target" ];
+    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+  };
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
@@ -126,7 +137,6 @@
     firefox
     adw-gtk3
     papirus-icon-theme
-    # papirus-folders
     volantes-cursors
     gnome-extension-manager
     gnome.gnome-tweaks
