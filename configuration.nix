@@ -145,17 +145,18 @@
     qmk
     piper
     celluloid
-    discord
-    lutris
     obs-studio
     nixfmt
     vscode-fhs
     spotify
     firefox
     reaper
-    vesktop
     meslo-lgs-nf
     bat
+    zsh-autosuggestions
+    zsh-history-substring-search
+    zsh-syntax-highlighting
+    vesktop
   ]) ++ (with pkgs.gnomeExtensions; [ appindicator ddterm ]);
   # For piper
   services.ratbagd.enable = true;
@@ -168,6 +169,7 @@
       totem # gnome video
       gnome-maps
     ]);
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall =

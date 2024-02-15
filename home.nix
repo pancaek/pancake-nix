@@ -13,10 +13,16 @@
   programs.zsh = {
     enable = true;
     shellAliases = {
-      update = "sudo nixos-rebuild switch";
+      nix-update = "sudo nixos-rebuild switch";
+      nix-clean = "sudo nix-collect-garbage -d";
       cat = "bat";
     };
     dotDir = ".config/zsh";
+
+    syntaxHighlighting.enable = true;
+    historySubstringSearch.enable = true;
+    enableAutosuggestions = true;
+
   };
 
   programs.bat = {
