@@ -15,6 +15,9 @@
       experimental-features = nix-command flakes
     '';
   };
+
+  users.defaultUserShell = pkgs.zsh;
+  programs.zsh = { enable = true; };
   # Bootloader.
   # Use the systemd-boot EFI boot loader.
   #  boot.loader.systemd-boot.enable = true;
@@ -45,16 +48,11 @@
   networking.networkmanager.enable = true;
 
   # Bluetooth
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot =
-    true; # powers up the default Bluetooth controller on boot
-
-  systemd.user.services.mpris-proxy = {
-    description = "Mpris proxy";
-    after = [ "network.target" "sound.target" ];
-    wantedBy = [ "default.target" ];
-    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+  hardware.bluetooth = {
+    enable = true; # enables support for Bluetooth
+    powerOnBoot = true; # powers up the default Bluetooth controller on boot
   };
+
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
@@ -92,6 +90,7 @@
   services.xserver = {
     layout = "us";
     xkbVariant = "";
+    xkbOptions = "compose:menu";
   };
 
   # Enable CUPS to print documents.
@@ -152,9 +151,11 @@
     nixfmt
     vscode-fhs
     spotify
-    gh
+    firefox
     reaper
-    discord
+    vesktop
+    meslo-lgs-nf
+    bat
   ]) ++ (with pkgs.gnomeExtensions; [ appindicator ddterm ]);
   # For piper
   services.ratbagd.enable = true;
@@ -203,7 +204,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  # system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 
   # Only needed for the VM
   services.spice-vdagentd.enable = true;
