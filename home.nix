@@ -18,10 +18,14 @@
       cat = "bat";
     };
     dotDir = ".config/zsh";
-
-    syntaxHighlighting.enable = true;
-    historySubstringSearch.enable = true;
+    history.path = "${config.xdg.configHome}/zsh/zsh_history";
+    historySubstringSearch = {
+      enable = true;
+      searchUpKey = "$terminfo[kcuu1]";
+      searchDownKey = "$terminfo[kcud1]";
+    };
     enableAutosuggestions = true;
+    syntaxHighlighting.enable = true;
 
   };
 
