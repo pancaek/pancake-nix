@@ -2,20 +2,30 @@
   description = "My flakes configuration";
 
   inputs = {
-
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
-    nixosConfigurations = {
-      # TODO please change the hostname to your own
-      pancake-nix = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager }:
+    let
+      system = "x86_64-linux";
+      overlay-unstable = final: prev: {
+        # use this variant if unfree packages are needed:
+        unstable = import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      };
+    in {
+      nixosConfigurations.pancake-nix = nixpkgs.lib.nixosSystem {
+        inherit system;
         modules = [
+          # Overlays-module makes "pkgs.unstable" available in configuration.nix
+          ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
           ./configuration.nix
 
           # make home-manager as a module of nixos
@@ -26,11 +36,8 @@
             home-manager.useUserPackages = true;
 
             home-manager.users.pancaek = import ./home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
           }
         ];
       };
     };
-  };
 }

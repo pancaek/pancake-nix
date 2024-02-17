@@ -2,9 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, ... }: {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -15,6 +13,8 @@
       experimental-features = nix-command flakes
     '';
   };
+
+  nixpkgs.overlays = [ outputs.unstable-packages ];
 
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = { enable = true; };
@@ -133,12 +133,12 @@
   # $ nix search wget
   environment.systemPackages = (with pkgs; [
     git
-    firefox
     adw-gtk3
-    papirus-icon-theme
+    (papirus-icon-theme.override { color = "red"; })
     volantes-cursors
     gnome-extension-manager
     gnome.gnome-tweaks
+    gnome.gnome-terminal
     neofetch
     g4music
     endeavour
@@ -149,26 +149,30 @@
     nixfmt
     vscode-fhs
     spotify
-    firefox
     reaper
-    meslo-lgs-nf
     bat
     zsh-autosuggestions
     zsh-history-substring-search
     zsh-syntax-highlighting
-    vesktop
   ]) ++ (with pkgs.gnomeExtensions; [ appindicator ddterm ]);
+
   # For piper
   services.ratbagd.enable = true;
 
   environment.gnome.excludePackages =
-    (with pkgs; [ gnome-tour gnome-connections ]) ++ (with pkgs.gnome; [
+    (with pkgs; [ gnome-tour gnome-connections gnome-console ])
+    ++ (with pkgs.gnome; [
       gnome-music
       epiphany # web browser
       geary # email reader
       totem # gnome video
       gnome-maps
+      gnome-characters
     ]);
+  fonts.packages = (with pkgs; [ meslo-lgs-nf ]);
+
+  # Enableable programs
+  programs.firefox = { enable = true; };
 
   programs.steam = {
     enable = true;
