@@ -22,9 +22,6 @@
   #  boot.loader.systemd-boot.enable = true;
   #  boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.plymouth.enable = true;
-  boot.kernelParams = [ "quiet" "splash" "vga=current" "udev.log_priority=3" ];
-
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
@@ -128,6 +125,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+
+  modules.quiet-boot.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = (with pkgs; [
@@ -142,7 +142,7 @@
     g4music
     endeavour
     qmk
-    piper
+    # piper
     celluloid
     obs-studio
     vscode-fhs
@@ -159,8 +159,8 @@
   ]) ++ (with pkgs.gnomeExtensions; [ appindicator ddterm ]);
 
   # For piper
-  services.ratbagd.enable = true;
-
+  # services.ratbagd.enable = true;
+  programs.piper.enable = true;
   environment.gnome.excludePackages =
     (with pkgs; [ gnome-tour gnome-connections gnome-console ])
     ++ (with pkgs.gnome; [
