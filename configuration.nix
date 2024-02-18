@@ -14,8 +14,6 @@
     '';
   };
 
-  nixpkgs.overlays = [ outputs.unstable-packages ];
-
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = { enable = true; };
   # Bootloader.
@@ -151,6 +149,7 @@
     spotify
     reaper
     bat
+    discord
     zsh-autosuggestions
     zsh-history-substring-search
     zsh-syntax-highlighting

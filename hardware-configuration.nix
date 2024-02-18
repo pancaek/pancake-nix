@@ -8,18 +8,18 @@
     [ (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "usb_storage" "sd_mod" "virtio_blk" ];
+  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "usb_storage" "sd_mod" "virtio_blk" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b9979555-8a06-4ead-afaa-05fbcf5b0123";
+    { device = "/dev/disk/by-uuid/c6f603fc-91c8-4e66-a683-2ff2ef26c0bf";
       fsType = "ext4";
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/F740-BA18";
+    { device = "/dev/disk/by-uuid/54E0-59D7";
       fsType = "vfat";
     };
 
