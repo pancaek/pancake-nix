@@ -3,7 +3,8 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }: {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -144,7 +145,6 @@
     piper
     celluloid
     obs-studio
-    nixfmt
     vscode-fhs
     spotify
     reaper
@@ -153,6 +153,9 @@
     zsh-autosuggestions
     zsh-history-substring-search
     zsh-syntax-highlighting
+    nixd
+    nixfmt
+    nixpkgs-fmt
   ]) ++ (with pkgs.gnomeExtensions; [ appindicator ddterm ]);
 
   # For piper
