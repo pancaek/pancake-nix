@@ -9,7 +9,7 @@ in
 {
   # Declare what settings a user of this module can set.
   options.modules.pancake-gnome = {
-    enable = mkEnableOption "My personal gnome defaults, very opinionated, procee with caution";
+    enable = mkEnableOption "My personal gnome defaults, very opinionated, proceed with caution";
   };
 
   # Define what other settings, services and resources should be active IF
@@ -17,23 +17,25 @@ in
   # by setting "modules.pancake-gnome.enable = true;".
   config = mkIf cfg.enable {
 
-
     services.xserver = {
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
     };
 
-    environment.systemPackages = [
-      gnome-extension-manager
-      gnome.gnome-tweaks
-      gnome.gnome-terminal
-      g4music
-      endeavour
-      celluloid
-    ];
+    environment.systemPackages =
+      (with pkgs;
+      [
+        gnome-extension-manager
+        gnome.gnome-tweaks
+        gnome.gnome-terminal
+        g4music
+        endeavour
+        celluloid
+      ]);
 
     environment.gnome.excludePackages =
-      (with pkgs; [ gnome-tour gnome-connections gnome-console ])
+      (with pkgs;
+      [ gnome-tour gnome-connections gnome-console ])
       ++ (with pkgs.gnome; [
         gnome-music
         epiphany # web browser
@@ -42,7 +44,6 @@ in
         gnome-maps
         gnome-characters
       ]);
-
 
     services.xserver.excludePackages = (with pkgs; [ xterm ]);
 
