@@ -37,6 +37,8 @@
               ./modules/piper.nix
               ./modules/quiet-boot.nix
               ./modules/wayland.nix
+              ./modules/xdg-compliance.nix
+              ./modules/desktops/pancake-gnome.nix
 
               # make home-manager as a module of nixos
               # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`

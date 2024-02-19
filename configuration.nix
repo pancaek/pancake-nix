@@ -17,10 +17,6 @@
 
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = { enable = true; };
-  # Bootloader.
-  # Use the systemd-boot EFI boot loader.
-  #  boot.loader.systemd-boot.enable = true;
-  #  boot.loader.efi.canTouchEfiVariables = true;
 
   boot.loader = {
     efi = {
@@ -134,21 +130,17 @@
     adw-gtk3
     (papirus-icon-theme.override { color = "red"; })
     volantes-cursors
-    gnome-extension-manager
-    gnome.gnome-tweaks
-    gnome.gnome-terminal
     neofetch
-    g4music
-    endeavour
     qmk
-    celluloid
     obs-studio
     vscode-fhs
     spotify
     reaper
     bat
+    eza
     discord
     (unstable.vesktop.override { withSystemVencord = false; })
+    zsh-completions
     zsh-autosuggestions
     zsh-history-substring-search
     zsh-syntax-highlighting
@@ -157,19 +149,10 @@
     nixpkgs-fmt
   ]) ++ (with pkgs.gnomeExtensions; [ appindicator ddterm rounded-corners ]);
 
-  # For piper
-  # services.ratbagd.enable = true;
+  modules.pancake-gnome.enable = true;
+
   programs.piper.enable = true;
-  environment.gnome.excludePackages =
-    (with pkgs; [ gnome-tour gnome-connections gnome-console ])
-    ++ (with pkgs.gnome; [
-      gnome-music
-      epiphany # web browser
-      geary # email reader
-      totem # gnome video
-      gnome-maps
-      gnome-characters
-    ]);
+
   fonts.packages = (with pkgs; [ meslo-lgs-nf ]);
 
   # Enableable programs
@@ -182,9 +165,6 @@
     dedicatedServer.openFirewall =
       true; # Open ports in the firewall for Source Dedicated Server
   };
-  services.xserver.excludePackages = (with pkgs; [ xterm ]);
-
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
