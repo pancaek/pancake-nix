@@ -3,7 +3,7 @@
 {
   home = {
     username = "pancaek";
-    homeDirectory = "/home/pancaek";
+    homeDirectory = "/home/${config.home.username}";
     stateVersion =
       "23.11"; # To figure this out you can comment out the line and see what version it expected.
   };
@@ -16,10 +16,10 @@
       nix-update = "sudo nixos-rebuild switch";
       nix-clean = "sudo nix-collect-garbage -d";
       cat = "bat";
-      refresh = "source .config/zsh/.zshrc";
+      refresh = "source ${config.programs.zsh.dotDir}/.zshrc";
     };
     dotDir = ".config/zsh";
-    history.path = "${config.xdg.configHome}/zsh/zsh_history";
+    history.path = "${config.programs.zsh.dotDir}/zsh_history";
     historySubstringSearch = {
       enable = true;
       searchUpKey = "$terminfo[kcuu1]";
@@ -30,7 +30,7 @@
 
     initExtra = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      source ~/.config/zsh/.p10k.zsh'';
+      source ~/${config.programs.zsh.dotDir}/.p10k.zsh'';
 
     initExtraBeforeCompInit = ''
       # p10k instant prompt
@@ -38,10 +38,11 @@
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
     '';
   };
-  programs.dircolors.enable = true;
 
   home.file."${config.programs.zsh.dotDir}/.p10k.zsh".source = ./p10k/p10k.zsh;
 
+
+  programs.dircolors.enable = true;
 
   programs.bat = {
     enable = true;
