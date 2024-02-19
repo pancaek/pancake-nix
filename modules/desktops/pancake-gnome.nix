@@ -35,7 +35,11 @@ in
 
     environment.gnome.excludePackages =
       (with pkgs;
-      [ gnome-tour gnome-connections gnome-console ])
+      [
+        gnome-tour
+        gnome-connections
+        gnome-console
+      ])
       ++ (with pkgs.gnome; [
         gnome-music
         epiphany # web browser

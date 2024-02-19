@@ -12,14 +12,16 @@
 
   programs.zsh = {
     enable = true;
+    dotDir = ".config/zsh";
     shellAliases = {
       nix-update = "sudo nixos-rebuild switch";
       nix-clean = "sudo nix-collect-garbage -d";
       cat = "bat";
-      refresh = "source ${config.programs.zsh.dotDir}/.zshrc";
+      ls = "ls --color=auto";
+      grep = "grep --color=auto";
+      refresh = "source ${config.home.homeDirectory}/${config.programs.zsh.dotDir}/.zshrc";
     };
-    dotDir = ".config/zsh";
-    history.path = "${config.programs.zsh.dotDir}/zsh_history";
+    history.path = "${config.home.homeDirectory}/${config.programs.zsh.dotDir}/zsh_history";
     historySubstringSearch = {
       enable = true;
       searchUpKey = "$terminfo[kcuu1]";
@@ -30,17 +32,29 @@
 
     initExtra = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      source ~/${config.programs.zsh.dotDir}/.p10k.zsh'';
+      source ${config.home.homeDirectory}/${config.programs.zsh.dotDir}/.p10k.zsh
+
+      bindkey '^[[1;5D' backward-word
+      bindkey '^[[1;5C' forward-word
+
+      bindkey '^[[3~' delete-char
+      bindkey '^H' backward-delete-word      
+    '';
 
     initExtraBeforeCompInit = ''
       # p10k instant prompt
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
+
+      zstyle ':completion:*' rehash true                              # automatically find new exec>
+      zstyle ':completion:*' menu select                              # Highlight menu selection
+      zstyle ':completion::complete:*' gain-privileges 1              # sudo completions
+      zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' # case insensitive
     '';
+
   };
 
   home.file."${config.programs.zsh.dotDir}/.p10k.zsh".source = ./p10k/p10k.zsh;
-
 
   programs.dircolors.enable = true;
 
