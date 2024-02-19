@@ -40,6 +40,9 @@
   };
   programs.dircolors.enable = true;
 
+  home.file."${config.programs.zsh.dotDir}/.p10k.zsh".source = ./p10k/p10k.zsh;
+
+
   programs.bat = {
     enable = true;
     config = {

@@ -125,7 +125,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-
   modules.quiet-boot.enable = true;
 
   # List packages installed in system profile. To search, run:
@@ -142,7 +141,6 @@
     g4music
     endeavour
     qmk
-    # piper
     celluloid
     obs-studio
     vscode-fhs
@@ -150,13 +148,14 @@
     reaper
     bat
     discord
+    (unstable.vesktop.override { withSystemVencord = false; })
     zsh-autosuggestions
     zsh-history-substring-search
     zsh-syntax-highlighting
     nixd
     nixfmt
     nixpkgs-fmt
-  ]) ++ (with pkgs.gnomeExtensions; [ appindicator ddterm ]);
+  ]) ++ (with pkgs.gnomeExtensions; [ appindicator ddterm rounded-corners ]);
 
   # For piper
   # services.ratbagd.enable = true;
