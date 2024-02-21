@@ -10,10 +10,8 @@
 
   nix = {
     package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-      auto-optimise-store = true
-    '';
+    optimise.automatic = true;
+    settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
   users.defaultUserShell = pkgs.zsh;
