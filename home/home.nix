@@ -19,9 +19,9 @@
       cat = "bat";
       ls = "ls --color=auto";
       grep = "grep --color=auto";
-      refresh = "source ${config.home.homeDirectory}/${config.programs.zsh.dotDir}/.zshrc";
+      refresh = "source $HOME/${config.programs.zsh.dotDir}/.zshrc";
     };
-    history.path = "${config.home.homeDirectory}/${config.programs.zsh.dotDir}/zsh_history";
+    history.path = "$HOME/${config.programs.zsh.dotDir}/zsh_history";
     historySubstringSearch = {
       enable = true;
       searchUpKey = "$terminfo[kcuu1]";
@@ -32,7 +32,7 @@
 
     initExtra = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      source ${config.home.homeDirectory}/${config.programs.zsh.dotDir}/.p10k.zsh
+      source $HOME/${config.programs.zsh.dotDir}/.p10k.zsh
 
       bindkey '^[[1;5D' backward-word
       bindkey '^[[1;5C' forward-word
