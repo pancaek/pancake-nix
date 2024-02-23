@@ -117,7 +117,6 @@
     isNormalUser = true;
     description = "Devyn Boer";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -134,18 +133,12 @@
     volantes-cursors
     neofetch
     qmk
-    obs-studio
-    vscode-fhs
-    spotify
-    reaper
-    bat
-    eza
-    discord
-    (unstable.vesktop.override { withSystemVencord = false; })
     zsh-completions
     zsh-autosuggestions
     zsh-history-substring-search
     zsh-syntax-highlighting
+    bat
+    eza
     nixd
     nixfmt
     nixpkgs-fmt

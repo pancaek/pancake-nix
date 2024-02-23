@@ -10,6 +10,15 @@
 
   programs.home-manager.enable = true;
 
+  home.packages = with pkgs; [
+    obs-studio
+    vscode-fhs
+    spotify
+    reaper
+    discord
+    # (unstable.vesktop.override { withSystemVencord = false; }) # it's broken :(
+  ];
+
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
