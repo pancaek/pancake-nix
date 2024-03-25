@@ -49,6 +49,9 @@ in
         gnome-characters
       ]);
 
+
+# environment.systemPackages = with pkgs; [ gnomeExtensions.FOO ],
+
     services.xserver.excludePackages = (with pkgs; [ xterm ]);
 
   };

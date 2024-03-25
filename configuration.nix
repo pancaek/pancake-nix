@@ -115,7 +115,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.pancaek = {
     isNormalUser = true;
-    description = "Devyn Boer";
+    description = "Pancake";
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
@@ -189,5 +189,5 @@
   system.stateVersion = "23.11"; # Did you read the comment?
 
   # Only needed for the VM
-  services.spice-vdagentd.enable = true;
+  # services.spice-vdagentd.enable = true;
 }

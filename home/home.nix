@@ -15,8 +15,7 @@
     vscode-fhs
     spotify
     reaper
-    discord
-    # (unstable.vesktop.override { withSystemVencord = false; }) # it's broken :(
+    (unstable.vesktop.override { withSystemVencord = false; })
   ];
 
   programs.zsh = {
@@ -47,7 +46,7 @@
       bindkey '^[[1;5C' forward-word
 
       bindkey '^[[3~' delete-char
-      bindkey '^H' backward-delete-word      
+      bindkey '^H' backward-delete-word
     '';
 
     initExtraBeforeCompInit = ''
