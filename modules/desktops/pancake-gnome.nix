@@ -1,7 +1,7 @@
 { lib, pkgs, config, ... }:
 with lib;
 let
-  # Shorter name to access final settings a 
+  # Shorter name to access final settings a
   # user HAS ACTUALLY SET.
   # cfg is a typical convention.
   cfg = config.modules.pancake-gnome;
@@ -13,7 +13,7 @@ in
   };
 
   # Define what other settings, services and resources should be active IF
-  # a user of this module ENABLED this module 
+  # a user of this module ENABLED this module
   # by setting "modules.pancake-gnome.enable = true;".
   config = mkIf cfg.enable {
 
@@ -31,7 +31,18 @@ in
         g4music
         endeavour
         celluloid
+      ]) ++ (with pkgs.gnomeExtensions; [
+        appindicator
+        ddterm
+        rounded-corners
+        vertical-workspaces
+        caffeine
+        clipboard-history
+        user-themes
+        alphabetical-app-grid
+        custom-accent-colors
       ]);
+
 
     environment.gnome.excludePackages =
       (with pkgs;
@@ -47,10 +58,8 @@ in
         totem # gnome video
         gnome-maps
         gnome-characters
+        gnome-shell-extensions
       ]);
-
-
-# environment.systemPackages = with pkgs; [ gnomeExtensions.FOO ],
 
     services.xserver.excludePackages = (with pkgs; [ xterm ]);
 

@@ -13,7 +13,6 @@
   home.packages = with pkgs; [
     obs-studio
     vscode-fhs
-    spotify
     reaper
     (unstable.vesktop.override { withSystemVencord = false; })
   ];
