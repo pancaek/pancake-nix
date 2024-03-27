@@ -2,7 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+
+{
+
+
+
+
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -124,6 +130,8 @@
 
   modules.quiet-boot.enable = true;
 
+
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = (with pkgs; [
@@ -143,7 +151,13 @@
     nixfmt
     nixpkgs-fmt
     gh
+
   ]);
+
+
+
+
+
   modules.pancake-gnome.enable = true;
 
   fonts.packages = (with pkgs; [ meslo-lgs-nf ]);
