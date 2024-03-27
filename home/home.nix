@@ -16,7 +16,16 @@
     reaper
     (unstable.vesktop.override { withSystemVencord = false; })
     (spotify.overrideAttrs (oldAttrs: rec {
-      installPhase = oldAttrs.installPhase + ''sed -i "s:^Exec=:Exec=env -u WAYLAND_DISPLAY :" "$out/share/applications/spotify.desktop"'';
+      installPhase =
+        let
+          patchContext = ''
+            cp "$out/share/spotify/spotify.desktop" "$out/share/applications/"
+          '';
+           patchString = ''
+            sed -i "s:^Exec=:Exec=env -u WAYLAND_DISPLAY :" "$out/share/spotify/spotify.desktop"
+          '';
+        in
+        builtins.replaceStrings [ patchContext ] [ (patchString + patchContext) ] oldAttrs.installPhase;
     }))
   ];
 
