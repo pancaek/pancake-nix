@@ -39,7 +39,7 @@ in
         caffeine
         clipboard-history
         user-themes
-        alphabetical-app-grid
+        # alphabetical-app-grid #! Busted for now?
         custom-accent-colors
       ]);
 
