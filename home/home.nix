@@ -5,7 +5,7 @@
     username = "pancaek";
     homeDirectory = "/home/${config.home.username}";
     stateVersion =
-      "23.11"; # To figure this out you can comment out the line and see what version it expected.
+      "24.05"; # To figure this out you can comment out the line and see what version it expected.
   };
 
   programs.home-manager.enable = true;
@@ -14,7 +14,7 @@
     obs-studio
     vscode-fhs
     reaper
-#    (vesktop.override { withSystemVencord = false; })
+#   (vesktop.override { withSystemVencord = false; })
     (spotify.overrideAttrs (oldAttrs: rec {
       installPhase =
         let
