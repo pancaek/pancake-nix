@@ -22,9 +22,9 @@
             modules = [
 
               ./configuration.nix
-              #./modules/piper.nix
-              #./modules/quiet-boot.nix
-              #./modules/wayland.nix
+              ./modules/piper.nix
+              ./modules/quiet-boot.nix
+              ./modules/wayland.nix
               # ./modules/xdg-compliance.nix # TODO another day
               ./modules/desktops/pancake-gnome.nix
 
