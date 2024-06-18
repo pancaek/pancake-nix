@@ -103,9 +103,7 @@
     isNormalUser = true;
     description = "Pancake";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
+
   };
 
   # Install firefox.
@@ -123,6 +121,13 @@
   gh
   zsh
   ];
+
+
+
+  modules.pancake-gnome.enable = true;
+
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
