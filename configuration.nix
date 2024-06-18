@@ -10,9 +10,27 @@
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+
+  nix = {
+    package = pkgs.nixVersions.git;
+    optimise.automatic = true;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
+
+  users.defaultUserShell = pkgs.zsh;
+  programs.zsh = { enable = true; };
+
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi"; # ← use the same mount point here.
+    };
+    grub = {
+      efiSupport = true;
+      #efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
+      device = "nodev";
+    };
+  };
 
   networking.hostName = "pancake-laptop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -100,6 +118,7 @@
   #  wget
   git
   gh
+  zsh
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
