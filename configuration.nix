@@ -12,10 +12,13 @@
 
 
   nix = {
-    package = pkgs.nixVersions.git;
+#    package = pkgs.nixVersions.latest;
     optimise.automatic = true;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
+
+#nix.package = pkgs.nixVersions.latest;
+
 
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = { enable = true; };
