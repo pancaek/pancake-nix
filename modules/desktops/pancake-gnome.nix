@@ -10,7 +10,7 @@ in
 
   imports = [
     # Paths to other modules.
-    ../kvantum.nix
+    # ../kvantum.nix
   ];
   # Declare what settings a user of this module can set.
   options.modules.pancake-gnome = {
