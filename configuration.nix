@@ -15,6 +15,7 @@
   ];
 
   nix = {
+    # package = pkgs.nixUnstable;
     optimise.automatic = true;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
@@ -33,7 +34,7 @@
       device = "nodev";
     };
   };
-  networking.hostName = "pancake-nix"; # Define your hostname.
+  networking.hostName = "pancake-laptop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -80,10 +81,10 @@
   services.xserver.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "";
-    xkbOptions = "compose:menu";
+    variant = "";
+    options = "compose:menu";
   };
 
   # Enable CUPS to print documents.
