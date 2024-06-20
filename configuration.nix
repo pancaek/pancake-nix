@@ -166,13 +166,6 @@
       true; # Open ports in the firewall for Source Dedicated Server
   };
 
-	hardware.nvidia.prime = { 
-    offload.enable = lib.mkForce false;
-    sync.enable = lib.mkForce true;
-		intelBusId = "PCI:0:02:0";
-		nvidiaBusId = "PCI:01:00:0";
-};
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
