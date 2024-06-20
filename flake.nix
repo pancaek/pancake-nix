@@ -8,9 +8,10 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+      nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, home-manager }:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware }:
     let
       system = "x86_64-linux";
     in
@@ -20,9 +21,8 @@
           {
             inherit system;
             modules = [
-
+              nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
               ./configuration.nix
-              ./modules/piper.nix
               ./modules/quiet-boot.nix
               ./modules/wayland.nix
               # ./modules/xdg-compliance.nix # TODO another day

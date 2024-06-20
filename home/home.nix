@@ -14,7 +14,7 @@
     obs-studio
     vscode-fhs
     reaper
-#   (vesktop.override { withSystemVencord = false; })
+#   vesktop
     (spotify.overrideAttrs (oldAttrs: rec {
       installPhase =
         let
