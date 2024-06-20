@@ -1,30 +1,24 @@
 { lib, pkgs, config, ... }:
-with lib;
+
 let
-  # Shorter name to access final settings a
-  # user HAS ACTUALLY SET.
-  # cfg is a typical convention.
   cfg = config.modules.pancake-gnome;
 in
 {
-
   imports = [
-    # Paths to other modules.
-    # ../kvantum.nix
+    ../kvantum.nix
+    ../piper.nix
+    
   ];
-  # Declare what settings a user of this module can set.
+
   options.modules.pancake-gnome = {
-    enable = mkEnableOption "My personal gnome defaults, very opinionated, proceed with caution";
+    enable = lib.mkEnableOption "My personal gnome defaults, very opinionated, proceed with caution";
   };
 
-  # Define what other settings, services and resources should be active IF
-  # a user of this module ENABLED this module
-  # by setting "modules.pancake-gnome.enable = true;".
-  config = mkIf cfg.enable {
-
+  config = lib.mkIf cfg.enable {
     services.xserver = {
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
+      excludePackages = (with pkgs; [ xterm ]);
     };
 
     environment.systemPackages =
@@ -49,7 +43,6 @@ in
         alphabetical-app-grid
       ]);
 
-
     environment.gnome.excludePackages =
       (with pkgs;
       [
@@ -67,11 +60,7 @@ in
         gnome-shell-extensions
       ]);
 
-    services.xserver.excludePackages = (with pkgs; [ xterm ]);
-
+    programs.kvantum.enable = true;
+    programs.piper.enable = true;
   };
-  # programs.kvantum.enable = true;
-
-
 }
-
