@@ -42,7 +42,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Make wayland play nice maybe hopefully
-  modules.wayland.enable = true;
+  modules.wayland.enable = false;
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -124,6 +124,7 @@
 
   modules.quiet-boot.enable = true;
 
+  boot.initrd.kernelModules = [ "ahci" ];
 
 
   # List packages installed in system profile. To search, run:
@@ -147,8 +148,6 @@
     gh
     vesktop
   ]);
-
-
 
 
   fonts.packages = (with pkgs; [ meslo-lgs-nf ]);

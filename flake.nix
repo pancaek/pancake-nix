@@ -10,7 +10,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware }:
+  outputs = { self, nixpkgs, home-manager }:
     let
       system = "x86_64-linux";
     in
@@ -23,7 +23,7 @@
               ./configuration.nix
               ./modules/quiet-boot.nix
               ./modules/wayland.nix
-              ./modules/nvidia/laptop.nix
+              ./modules/hardware/laptop.nix
               # ./modules/xdg-compliance.nix # TODO another day
               ./modules/desktops/pancake-gnome.nix
 
@@ -42,4 +42,3 @@
       };
     };
 }
-
