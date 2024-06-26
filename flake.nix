@@ -22,6 +22,8 @@
             modules = [
               ./configuration.nix
               ./modules/quiet-boot.nix
+              ./modules/audio.nix
+              ./modules/printing.nix
               ./modules/wayland.nix
               ./modules/hardware/laptop.nix
               # ./modules/xdg-compliance.nix # TODO another day
