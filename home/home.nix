@@ -14,18 +14,17 @@
     obs-studio
     vscode-fhs
     reaper
-#   vesktop
+    #   vesktop
     (spotify.overrideAttrs (oldAttrs: rec {
-      installPhase =
-        let
-          patchContext = ''
-            cp "$out/share/spotify/spotify.desktop" "$out/share/applications/"
-          '';
-           patchString = ''
-            sed -i "s:^Exec=:Exec=env -u WAYLAND_DISPLAY :" "$out/share/spotify/spotify.desktop"
-          '';
-        in
-        builtins.replaceStrings [ patchContext ] [ (patchString + patchContext) ] oldAttrs.installPhase;
+      installPhase = let
+        patchContext = ''
+          cp "$out/share/spotify/spotify.desktop" "$out/share/applications/"
+        '';
+        patchString = ''
+          sed -i "s:^Exec=:Exec=env -u WAYLAND_DISPLAY :" "$out/share/spotify/spotify.desktop"
+        '';
+      in builtins.replaceStrings [ patchContext ]
+      [ (patchString + patchContext) ] oldAttrs.installPhase;
     }))
   ];
 
