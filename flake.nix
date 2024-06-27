@@ -8,9 +8,10 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    inputs.nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, home-manager }:
+  outputs = { self, nixpkgs, home-manager, nur}:
     let
       system = "x86_64-linux";
     in
@@ -20,6 +21,7 @@
           {
             inherit system;
             modules = [
+              nur.nixosModules.nur
               ./configuration.nix
               ./modules/quiet-boot.nix
               ./modules/audio.nix
