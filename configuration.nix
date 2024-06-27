@@ -95,11 +95,9 @@ modules.printing.enable = true;
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   modules.quiet-boot.enable = true;
   modules.audio.enable = true;
+  modules.printing.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -157,6 +155,9 @@ modules.printing.enable = true;
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
