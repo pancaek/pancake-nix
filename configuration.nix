@@ -18,7 +18,7 @@
   };
 
   users.defaultUserShell = pkgs.zsh;
-  programs.zsh = { enable = true; };
+  programs.zsh.enable = true;
 
   boot.loader = {
     efi = {
@@ -81,10 +81,9 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "";
-    options = "compose:menu";
+    options = "compose:menu"; = {
   };
 
-modules.printing.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -108,6 +107,10 @@ modules.printing.enable = true;
     volantes-cursors
     neofetch
     qmk
+    gh
+    vesktop
+    (mpv.override { scripts = [ mpvScripts.uosc ]; })
+  ] ++ [
     zsh-completions
     zsh-autosuggestions
     zsh-history-substring-search
@@ -115,19 +118,16 @@ modules.printing.enable = true;
     bat
     eza
     nixd
-    nixfmt
+    nixfmt-rfc-style
     nixpkgs-fmt
-    gh
-    vesktop
-    (mpv.override { scripts = [ mpvScripts.uosc ]; })
-  ]);
+]);
 
   fonts.packages = (with pkgs; [ meslo-lgs-nf ]);
 
   modules.pancake-gnome.enable = true;
 
   # Enableable programs
-  programs.firefox = { enable = true; };
+  programs.firefox.enable = true;
 
   programs.steam = {
     enable = true;
