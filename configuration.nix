@@ -81,7 +81,7 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "";
-    options = "compose:menu"; = {
+    options = "compose:menu";
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
