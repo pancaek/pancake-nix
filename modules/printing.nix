@@ -8,7 +8,7 @@ let
 in {
   # Declare what settings a user of this module can set.
   options.modules.printing = {
-    enable = mkEnableOption "Enable options to for audio";
+    enable = mkEnableOption "Enable options for printing";
   };
 
   # Define what other settings, services and resources should be active IF
