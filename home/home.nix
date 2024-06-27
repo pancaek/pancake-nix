@@ -15,17 +15,17 @@
     vscode-fhs
     reaper
     #   vesktop
-    (spotify.overrideAttrs (oldAttrs: rec {
-      installPhase = let
-        patchContext = ''
-          cp "$out/share/spotify/spotify.desktop" "$out/share/applications/"
-        '';
-        patchString = ''
-          sed -i "s:^Exec=:Exec=env -u WAYLAND_DISPLAY :" "$out/share/spotify/spotify.desktop"
-        '';
-      in builtins.replaceStrings [ patchContext ]
-      [ (patchString + patchContext) ] oldAttrs.installPhase;
-    }))
+    # (spotify.overrideAttrs (oldAttrs: rec {
+    #   installPhase = let
+    #     patchContext = ''
+    #       cp "$out/share/spotify/spotify.desktop" "$out/share/applications/"
+    #     '';
+    #     patchString = ''
+    #       sed -i "s:^Exec=:Exec=env -u WAYLAND_DISPLAY :" "$out/share/spotify/spotify.desktop"
+    #     '';
+    #   in builtins.replaceStrings [ patchContext ]
+    #   [ (patchString + patchContext) ] oldAttrs.installPhase;
+    # }))
   ];
 
   programs.zsh = {
