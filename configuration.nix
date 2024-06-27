@@ -110,6 +110,7 @@
     gh
     vesktop
     (mpv.override { scripts = [ mpvScripts.uosc ]; })
+    # nur.repos.nltch.spotify-adblock
   ] ++ [
     zsh-completions
     zsh-autosuggestions
@@ -120,7 +121,7 @@
     nixd
     nixfmt-rfc-style
     nixpkgs-fmt
-]);
+] ++ [ config.nur.repos.nltch.spotify-adblock ]);
 
   fonts.packages = (with pkgs; [ meslo-lgs-nf ]);
 
