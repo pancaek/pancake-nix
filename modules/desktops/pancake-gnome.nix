@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 let
   cfg = config.modules.pancake-gnome;
@@ -7,7 +12,7 @@ in
   imports = [
     ../kvantum.nix
     ../piper.nix
-    
+    ../polkit-auth.nix
   ];
 
   options.modules.pancake-gnome = {
@@ -22,8 +27,7 @@ in
     };
 
     environment.systemPackages =
-      (with pkgs;
-      [
+      (with pkgs; [
         gnome-extension-manager
         gnome.gnome-tweaks
         gnome.gnome-terminal
@@ -31,7 +35,8 @@ in
         endeavour
         celluloid
         gradience
-      ]) ++ (with pkgs.gnomeExtensions; [
+      ])
+      ++ (with pkgs.gnomeExtensions; [
         appindicator
         ddterm
         rounded-corners
@@ -44,8 +49,7 @@ in
       ]);
 
     environment.gnome.excludePackages =
-      (with pkgs;
-      [
+      (with pkgs; [
         gnome-tour
         gnome-connections
         gnome-console
@@ -62,5 +66,9 @@ in
 
     programs.kvantum.enable = true;
     programs.piper.enable = true;
+    # modules.polkit-auth = {
+    #   enable = true;
+    #   agent = "gnome";
+    # };
   };
 }
