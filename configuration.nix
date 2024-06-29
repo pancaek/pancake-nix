@@ -110,7 +110,6 @@
     gh
     vesktop
     (mpv.override { scripts = [ mpvScripts.uosc ]; })
-    # nur.repos.nltch.spotify-adblock
   ] ++ [
     zsh-completions
     zsh-autosuggestions
