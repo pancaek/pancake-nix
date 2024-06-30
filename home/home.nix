@@ -1,11 +1,15 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   home = {
     username = "pancaek";
     homeDirectory = "/home/${config.home.username}";
-    stateVersion =
-      "24.05"; # To figure this out you can comment out the line and see what version it expected.
+    stateVersion = "24.05"; # To figure this out you can comment out the line and see what version it expected.
   };
 
   programs.home-manager.enable = true;
@@ -69,7 +73,6 @@
       zstyle ':completion::complete:*' gain-privileges 1              # sudo completions
       zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' # case insensitive
     '';
-
   };
 
   home.file."${config.programs.zsh.dotDir}/.p10k.zsh".source = ./p10k/p10k.zsh;
@@ -87,7 +90,9 @@
     enable = true;
     userName = "pancaek";
     userEmail = "20342389+pancaek@users.noreply.github.com";
-    aliases = { amend = "commit --amend"; };
+    aliases = {
+      amend = "commit --amend";
+    };
 
     extraConfig = {
       diff = {
