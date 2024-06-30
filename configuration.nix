@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
 
@@ -14,7 +19,10 @@
   nix = {
     # package = pkgs.nixUnstable;
     optimise.automatic = true;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   users.defaultUserShell = pkgs.zsh;
@@ -71,7 +79,9 @@
   # Wonky in Wayland
   i18n.inputMethod = {
     enabled = "ibus";
-    ibus = { engines = with pkgs.ibus-engines; [ mozc ]; };
+    ibus = {
+      engines = with pkgs.ibus-engines; [ mozc ];
+    };
   };
 
   # Enable the X11 windowing system.
@@ -91,7 +101,10 @@
   users.users.pancaek = {
     isNormalUser = true;
     description = "Pancake";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   modules.quiet-boot.enable = true;
@@ -100,27 +113,32 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = (with pkgs; [
-    git
-    adw-gtk3
-    (papirus-icon-theme.override { color = "red"; })
-    volantes-cursors
-    neofetch
-    qmk
-    gh
-    vesktop
-    (mpv.override { scripts = [ mpvScripts.uosc ]; })
-  ] ++ [
-    zsh-completions
-    zsh-autosuggestions
-    zsh-history-substring-search
-    zsh-syntax-highlighting
-    bat
-    eza
-    nixd
-    nixfmt-rfc-style
-    nixpkgs-fmt
-] ++ [ config.nur.repos.nltch.spotify-adblock ]);
+  environment.systemPackages = (
+    with pkgs;
+    [
+      git
+      adw-gtk3
+      (papirus-icon-theme.override { color = "red"; })
+      volantes-cursors
+      neofetch
+      qmk
+      gh
+      vesktop
+      (mpv.override { scripts = [ mpvScripts.uosc ]; })
+    ]
+    ++ [
+      zsh-completions
+      zsh-autosuggestions
+      zsh-history-substring-search
+      zsh-syntax-highlighting
+      bat
+      eza
+      nixd
+      nixfmt-rfc-style
+      nixpkgs-fmt
+    ]
+    ++ [ config.nur.repos.nltch.spotify-adblock ]
+  );
 
   fonts.packages = (with pkgs; [ meslo-lgs-nf ]);
 
@@ -131,10 +149,8 @@
 
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall =
-      true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall =
-      true; # Open ports in the firewall for Source Dedicated Server
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
   # Some programs need SUID wrappers, can be configured further or are
