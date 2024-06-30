@@ -1,8 +1,7 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
+{ lib
+, pkgs
+, config
+, ...
 }:
 with lib;
 let
@@ -10,18 +9,19 @@ let
   # user of hello.nix module HAS ACTUALLY SET.
   # cfg is a typical convention.
   cfg = config.modules.polkit-auth;
-  agentPackages = {
-    "gnome" = pkgs.polkit_gnome;
-    "kde" = pkgs.kdePackages.polkit-kde-agent-1;
-  };
-
-  agentScripts = {
-    "gnome" = pkgs.writeShellScriptBin "start-gnome-polkit" ''
-      exec ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
-    '';
-    "kde" = pkgs.writeShellScriptBin "start-kde-polkit" ''
-      exec ${pkgs.polkit_kde}/libexec/polkit-kde-authentication-agent-1
-    '';
+  agents = {
+    "gnome" = {
+      package = pkgs.polkit_gnome;
+      script = pkgs.writeShellScriptBin "start-gnome-polkit" ''
+        exec ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
+      '';
+    };
+    "kde" = {
+      package = pkgs.kdePackages.polkit-kde-agent-1;
+      script = pkgs.writeShellScriptBin "start-kde-polkit" ''
+        exec ${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1
+      '';
+    };
   };
 in
 {
@@ -47,9 +47,9 @@ in
 
     security.polkit.enable = true;
 
-    environment.systemPackages = optionals (cfg.agent != null) [
-      agentScripts.${cfg.agent}
-      agentPackages.${cfg.agent}
+    environment.systemPackages = mkIf (cfg.agent != null) [
+      agents.${cfg.agent}.script
+      agents.${cfg.agent}.package
     ];
   };
 }
