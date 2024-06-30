@@ -1,11 +1,17 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
 let
   # Shorter name to access final settings a
   # user of hello.nix module HAS ACTUALLY SET.
   # cfg is a typical convention.
   cfg = config.modules.printing;
-in {
+in
+{
   # Declare what settings a user of this module can set.
   options.modules.printing = {
     enable = mkEnableOption "Enable options for printing";

@@ -1,7 +1,12 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
 let
-  # Shorter name to access final settings a 
+  # Shorter name to access final settings a
   # user of hello.nix module HAS ACTUALLY SET.
   # cfg is a typical convention.
   cfg = config.modules.quiet-boot;
@@ -13,10 +18,15 @@ in
   };
 
   # Define what other settings, services and resources should be active IF
-  # a user of this "hello.nix" module ENABLED this module 
+  # a user of this "hello.nix" module ENABLED this module
   # by setting "services.hello.enable = true;".
   config = mkIf cfg.enable {
     boot.plymouth.enable = true;
-    boot.kernelParams = [ "quiet" "splash" "vga=current" "udev.log_priority=3" ];
+    boot.kernelParams = [
+      "quiet"
+      "splash"
+      "vga=current"
+      "udev.log_priority=3"
+    ];
   };
 }
