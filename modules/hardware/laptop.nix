@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 {
   # Enable OpenGL
@@ -47,14 +52,15 @@
       intelBusId = "PCI:0:02:0";
       nvidiaBusId = "PCI:01:00:0";
     };
-
   };
 
   # Gnome 40 introduced a new way of managing power, without tlp.
   # However, these 2 services clash when enabled simultaneously.
   # https://github.com/NixOS/nixos-hardware/issues/260
-  services.tlp.enable = lib.mkDefault ((lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")
-                                       || !config.services.power-profiles-daemon.enable);
+  services.tlp.enable = lib.mkDefault (
+    (lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")
+    || !config.services.power-profiles-daemon.enable
+  );
   # boot = lib.mkIf config.services.tlp.enable {
   #   kernelModules = [ "acpi_call" ];
   #   extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
