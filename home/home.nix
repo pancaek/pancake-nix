@@ -91,7 +91,7 @@
     userName = "pancaek";
     userEmail = "20342389+pancaek@users.noreply.github.com";
     aliases = {
-      amend = "commit --amend";
+      amend = "commit --amend -C HEAD";
     };
 
     extraConfig = {
