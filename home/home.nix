@@ -91,7 +91,7 @@
      
      
     aliases = {
-      amend = "commit --amend";
+      amend = "commit --amend -C HEAD";
     };
 
     extraConfig = {
