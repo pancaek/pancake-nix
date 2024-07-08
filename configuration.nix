@@ -25,9 +25,6 @@
     ];
   };
 
-  users.defaultUserShell = pkgs.zsh;
-  programs.zsh.enable = true;
-
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
@@ -106,6 +103,9 @@
       "wheel"
     ];
   };
+
+  users.defaultUserShell = pkgs.zsh;
+  programs.zsh.enable = true;
 
   modules.quiet-boot.enable = true;
   modules.audio.enable = true;
