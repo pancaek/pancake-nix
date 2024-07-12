@@ -65,7 +65,6 @@ in
       ]);
 
     programs.kvantum.enable = true;
-    programs.piper.enable = true;
     # modules.polkit-auth = {
     #   enable = true;
     #   agent = "gnome";
