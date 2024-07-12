@@ -21,6 +21,7 @@ in
   # by setting "services.hello.enable = true;".
   config = lib.mkIf cfg.enable {
     services.ratbagd.enable = true;
-    environment.systemPackages = [ pkgs.piper ];
+
+    environment.systemPackages = with pkgs; [ piper ];
   };
 }
