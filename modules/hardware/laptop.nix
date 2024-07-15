@@ -11,6 +11,7 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [ nvidia-vaapi-driver ];
   };
 
   # Load nvidia driver for Xorg and Wayland
@@ -61,8 +62,9 @@
     (lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")
     || !config.services.power-profiles-daemon.enable
   );
-  # boot = lib.mkIf config.services.tlp.enable {
-  #   kernelModules = [ "acpi_call" ];
-  #   extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-  # };
+
+  environment.sessionVariables = {
+    MOZ_DISABLE_RDD_SANDBOX = 1;
+    LIBVA_DRIVER_NAME = "nvidia";
+  };
 }
