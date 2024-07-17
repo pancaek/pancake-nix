@@ -126,6 +126,7 @@
       gh
       vesktop
       (mpv.override { scripts = [ mpvScripts.uosc ]; })
+      # gpodder
     ]
     ++ [
       zsh-completions
