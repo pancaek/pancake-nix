@@ -20,6 +20,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+
     services.xserver = {
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
@@ -39,13 +40,14 @@ in
       ++ (with pkgs.gnomeExtensions; [
         appindicator
         ddterm
-        rounded-corners
+        # rounded-corners # TODO: somethings up with this one, watch git
         vertical-workspaces
         caffeine
         clipboard-history
         user-themes
         custom-accent-colors
         alphabetical-app-grid
+        hassleless-overview-search # TODO: Version bump
       ]);
 
     environment.gnome.excludePackages =
