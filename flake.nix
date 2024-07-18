@@ -49,13 +49,6 @@
         }
       );
     in
-    # overlay-unstable = final: prev: {
-    #   # use this variant if unfree packages are needed:
-    #   unstable = import nixpkgs-unstable {
-    #     inherit system;
-    #     config.allowUnfree = true;
-    #   };
-    # };
     {
       nixosConfigurations = {
         pancake-laptop = nixpkgs.lib.nixosSystem {
