@@ -95,6 +95,9 @@
     };
 
     extraConfig = {
+      core = {
+        editor = "code --wait";
+      };
       diff = {
         algorithm = "patience";
         compactionHeuristic = true;
