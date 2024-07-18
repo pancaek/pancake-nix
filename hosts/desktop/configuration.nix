@@ -157,7 +157,10 @@
   # TODO:  Fix hardware acceleration
   # XXX: Home manager extensions / ui tweaks (tabmanager)
   programs.firefox.enable = true;
-  programs.piper.enable = true;
+  programs.piper = {
+    enable = true;
+    experimental = true;
+  };
 
   programs.steam = {
     enable = true;
