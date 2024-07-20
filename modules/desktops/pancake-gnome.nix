@@ -71,5 +71,24 @@ in
     #   enable = true;
     #   agent = "gnome";
     # };
+
+    home-manager.users =
+      let
+        mapHomeManager =
+          usrs: content:
+          builtins.listToAttrs (
+            map (usr: {
+              name = usr;
+              value = content;
+            }) usrs
+          );
+      in
+
+      mapHomeManager [ "pancaek" ] {
+
+        programs.zsh.shellAliases = {
+          uwu = "echo hi ";
+        };
+      };
   };
 }
