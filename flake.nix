@@ -40,6 +40,7 @@
             ./modules/quiet-boot.nix
             ./modules/audio.nix
             ./modules/printing.nix
+            ./modules/ibus.nix
             ./modules/wayland.nix
             ./modules/hardware/laptop.nix
             # ./modules/xdg-compliance.nix # TODO another day
@@ -68,6 +69,7 @@
             ./modules/quiet-boot.nix
             ./modules/audio.nix
             ./modules/printing.nix
+            ./modules/ibus.nix
             ./modules/wayland.nix
             ./modules/hardware/desktop.nix
             # ./modules/xdg-compliance.nix # TODO another day
