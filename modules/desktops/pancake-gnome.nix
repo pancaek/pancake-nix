@@ -74,9 +74,24 @@ in
 
     home-manager.sharedModules = [
       {
-        programs.zsh.shellAliases = {
-          uwu = "echo hi ";
-        };
+        home.file =
+          let
+            autostartItem = title: commandList: {
+              ".config/autostart/${title}.desktop".text = ''
+                [Desktop Entry]
+                Name=${title}
+                Exec=sh -c '${lib.strings.concatStringsSep " ; " commandList}'
+                StartupNotify=true
+                Terminal=false
+                Type=Application
+              '';
+            };
+          in
+          autostartItem "v-shell-fix" [
+            "sleep 2"
+            "gnome-extensions disable vertical-workspaces@G-dH.github.com"
+            "gnome-extensions enable vertical-workspaces@G-dH.github.com"
+          ];
       }
     ];
   };
