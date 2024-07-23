@@ -36,6 +36,7 @@ in
         endeavour
         celluloid
         gradience
+        xmousepasteblock
       ])
       ++ (with pkgs.gnomeExtensions; [
         appindicator
@@ -72,27 +73,31 @@ in
     #   agent = "gnome";
     # };
 
-    home-manager.sharedModules = [
-      {
-        home.file =
-          let
-            autostartItem = title: commandList: {
-              ".config/autostart/${title}.desktop".text = ''
-                [Desktop Entry]
-                Name=${title}
-                Exec=sh -c '${lib.strings.concatStringsSep " ; " commandList}'
-                StartupNotify=true
-                Terminal=false
-                Type=Application
-              '';
-            };
-          in
-          autostartItem "v-shell-fix" [
-            "sleep 2"
-            "gnome-extensions disable vertical-workspaces@G-dH.github.com"
-            "gnome-extensions enable vertical-workspaces@G-dH.github.com"
-          ];
-      }
-    ];
+    home-manager.sharedModules =
+      let
+        autostartItem = title: commandList: {
+          home.file.".config/autostart/${title}.desktop".text = ''
+            [Desktop Entry]
+            Name=${title}
+            Exec=${
+              if builtins.length commandList == 1 then
+                builtins.elemAt commandList 0
+              else
+                "sh -c '${lib.strings.concatStringsSep " ; " commandList}'"
+            }
+            StartupNotify=true
+            Terminal=false
+            Type=Application
+          '';
+        };
+      in
+      [
+        (autostartItem "v-shell-fix" [
+          "sleep 2"
+          "gnome-extensions disable vertical-workspaces@G-dH.github.com"
+          "gnome-extensions enable vertical-workspaces@G-dH.github.com"
+        ])
+        (autostartItem "xmousepasteblock" [ "xmousepasteblock &" ])
+      ];
   };
 }
