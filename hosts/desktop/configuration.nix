@@ -74,14 +74,13 @@
       LC_TIME = "en_US.UTF-8";
     };
   };
-  # Wonky in Wayland
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus = {
-      engines = with pkgs.ibus-engines; [ mozc ];
-    };
-  };
 
+  # TODO IBUS:
+
+  modules.ibus = {
+    enable = true;
+    engines = with pkgs.ibus-engines; [ mozc ];
+  };
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
