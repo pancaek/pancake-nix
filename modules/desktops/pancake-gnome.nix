@@ -46,8 +46,8 @@ in
         clipboard-history
         user-themes
         custom-accent-colors
-        alphabetical-app-grid
-        hassleless-overview-search # TODO: Version bump
+        # alphabetical-app-grid
+        # hassleless-overview-search # TODO: Version bump
       ]);
 
     environment.gnome.excludePackages =
