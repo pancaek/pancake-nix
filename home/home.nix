@@ -18,18 +18,7 @@
     obs-studio
     vscode-fhs
     reaper
-    #   vesktop
-    # (spotify.overrideAttrs (oldAttrs: rec {
-    #   installPhase = let
-    #     patchContext = ''
-    #       cp "$out/share/spotify/spotify.desktop" "$out/share/applications/"
-    #     '';
-    #     patchString = ''
-    #       sed -i "s:^Exec=:Exec=env -u WAYLAND_DISPLAY :" "$out/share/spotify/spotify.desktop"
-    #     '';
-    #   in builtins.replaceStrings [ patchContext ]
-    #   [ (patchString + patchContext) ] oldAttrs.installPhase;
-    # }))
+    vesktop
   ];
 
   programs.zsh = {
@@ -61,6 +50,21 @@
 
       bindkey '^[[3~' delete-char
       bindkey '^H' backward-delete-word
+
+
+      # Color man pages
+
+      # https://bbs.archlinux.org/viewtopic.php?id=287185
+      export GROFF_NO_SGR=1
+
+      export LESS_TERMCAP_mb=$'\E[01;32m'
+      export LESS_TERMCAP_md=$'\E[01;32m'
+      export LESS_TERMCAP_me=$'\E[0m'
+      export LESS_TERMCAP_se=$'\E[0m'
+      export LESS_TERMCAP_so=$'\E[01;47;34m'
+      export LESS_TERMCAP_ue=$'\E[0m'
+      export LESS_TERMCAP_us=$'\E[01;36m'
+      export LESS=-R
     '';
 
     initExtraBeforeCompInit = ''
