@@ -123,7 +123,7 @@
       neofetch
       qmk
       gh
-      vesktop
+      # vesktop
       (mpv.override { scripts = [ mpvScripts.uosc ]; })
       # gpodder
     ]
