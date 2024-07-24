@@ -26,7 +26,7 @@
     in
     {
       nixosConfigurations = {
-        pancake-laptop = nixpkgs.lib.nixosSystem {
+        pancake-pc = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             # (
@@ -36,13 +36,13 @@
             #   }
             # )
             nur.nixosModules.nur
-            ./hosts/laptop/configuration.nix
+            ./hosts/desktop/configuration.nix
             ./modules/quiet-boot.nix
             ./modules/audio.nix
             ./modules/printing.nix
             ./modules/ibus.nix
             ./modules/wayland.nix
-            ./modules/hardware/laptop.nix
+            ./modules/hardware/desktop.nix
             # ./modules/xdg-compliance.nix # TODO another day
             ./modules/desktops/pancake-gnome.nix
 
@@ -61,17 +61,23 @@
           ];
         };
 
-        pancake-pc = nixpkgs.lib.nixosSystem {
+        pancake-laptop = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
+            # (
+            #   { config, pkgs, ... }:
+            #   {
+            #     nixpkgs.overlays = [ overlay-unstable ];
+            #   }
+            # )
             nur.nixosModules.nur
-            ./hosts/desktop/configuration.nix
+            ./hosts/laptop/configuration.nix
             ./modules/quiet-boot.nix
             ./modules/audio.nix
             ./modules/printing.nix
             ./modules/ibus.nix
             ./modules/wayland.nix
-            ./modules/hardware/desktop.nix
+            ./modules/hardware/laptop.nix
             # ./modules/xdg-compliance.nix # TODO another day
             ./modules/desktops/pancake-gnome.nix
 
