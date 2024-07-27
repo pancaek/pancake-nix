@@ -153,9 +153,18 @@
   modules.pancake-gnome.enable = true;
 
   # Enableable programs
-  # TODO:  Fix hardware acceleration
   # XXX: Home manager extensions / ui tweaks (tabmanager)
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    preferences = {
+      # NVIDIA VA-API
+      "media.ffmpeg.vaapi.enabled" = true;
+      "media.rdd-ffmpeg.enabled" = true;
+      "gfx.x11-egl.force-enabled" = true;
+      "widget.dmabuf.force-enabled" = true;
+    };
+  };
+
   programs.piper = {
     enable = true;
     experimental = true;
