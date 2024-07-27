@@ -22,7 +22,6 @@
     }:
     let
       system = "x86_64-linux";
-
     in
     {
       nixosConfigurations = {
@@ -42,7 +41,7 @@
             ./modules/printing.nix
             ./modules/ibus.nix
             ./modules/wayland.nix
-            ./modules/hardware/desktop.nix
+            ./hosts/desktop/nvidia.nix
             # ./modules/xdg-compliance.nix # TODO another day
             ./modules/desktops/pancake-gnome.nix
 
@@ -77,7 +76,7 @@
             ./modules/printing.nix
             ./modules/ibus.nix
             ./modules/wayland.nix
-            ./modules/hardware/laptop.nix
+            ./hosts/laptop/nvidia.nix
             # ./modules/xdg-compliance.nix # TODO another day
             ./modules/desktops/pancake-gnome.nix
 
