@@ -36,9 +36,9 @@ in
 
     home-manager.sharedModules =
       let
-        matchName = name: (lib.any (e: lib.getName e == name) cfg.engines);
+        usingEngine = name: (lib.any (e: lib.getName e == name) cfg.engines);
       in
-      lib.mkIf (matchName "ibus-mozc") [
+      lib.mkIf (usingEngine "ibus-mozc") [
         { home.file.".config/mozc/ibus_config.textproto".source = ../home/mozc/ibus_config.textproto; }
       ];
   };
