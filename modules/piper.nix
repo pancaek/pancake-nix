@@ -15,7 +15,6 @@ let
       pkgs.piper
     else
       pkgs.piper.overrideAttrs (prev: {
-        version = "git";
         src = pkgs.fetchFromGitHub {
           owner = "libratbag";
           repo = "piper";
@@ -32,7 +31,6 @@ let
       pkgs.libratbag
     else
       pkgs.libratbag.overrideAttrs (prev: {
-        version = "git";
         src = pkgs.fetchFromGitHub {
           owner = "libratbag";
           repo = "libratbag";

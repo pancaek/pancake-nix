@@ -75,19 +75,17 @@ in
 
     home-manager.sharedModules =
       let
-        item =
-          title: commandList:
-          pkgs.makeDesktopItem {
-            desktopName = title;
-            name = title;
-            exec =
-              if builtins.length commandList == 1 then
-                builtins.elemAt commandList 0
-              else
-                "sh -c '${lib.strings.concatStringsSep " ; " commandList}'";
-          };
         autostartItem = title: commandList: {
-          home.file.".config/autostart/${title}.desktop".text = (item title commandList).text;
+          home.file.".config/autostart/${title}.desktop".text =
+            (pkgs.makeDesktopItem {
+              desktopName = title;
+              name = title;
+              exec =
+                if builtins.length commandList == 1 then
+                  builtins.elemAt commandList 0
+                else
+                  "sh -c '${lib.concatStringsSep " ; " commandList}'";
+            }).text;
         };
       in
       [
