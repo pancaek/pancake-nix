@@ -7,6 +7,7 @@
 
 let
   cfg = config.modules.pancake-gnome;
+  isNvidia = lib.elem "nvidia" config.services.xserver.videoDrivers;
 in
 {
   imports = [
@@ -49,7 +50,34 @@ in
         custom-accent-colors
         # alphabetical-app-grid
         # hassleless-overview-search # TODO: Version bump
-      ]);
+      ])
+      ++ lib.optionals isNvidia [
+        # NOTE: This is a webkit2gtk issue
+        # related https://github.com/NixOS/nixpkgs/issues/32580
+        # not everything is broken so I'm just wrapping broken stuff
+
+        # gnome-help looks to be a symlink to yelp already so I think this is fine,
+        (pkgs.runCommand "gnome-help" { buildInputs = [ pkgs.makeWrapper ]; } ''
+          makeWrapper ${pkgs.gnome.yelp}/bin/yelp $out/bin/gnome-help \
+          --set WEBKIT_DISABLE_COMPOSITING_MODE 1
+        '')
+        # yelp itself can have a cleaner link because its a proper package
+        (pkgs.runCommand "yelp" { buildInputs = [ pkgs.makeWrapper ]; } ''
+          mkdir $out
+          # Link every top-level folder from pkgs.hello to our new target
+          ln -s ${pkgs.gnome.yelp}/* $out
+          # Except the bin folder
+          rm $out/bin
+          mkdir $out/bin
+          # We create the bin folder ourselves and link every binary in it
+          ln -s ${pkgs.gnome.yelp}/bin/* $out/bin
+          # Except the main binary
+          rm $out/bin/yelp
+          # Because we create this ourself, by creating a wrapper
+          makeWrapper ${pkgs.gnome.yelp}/bin/yelp $out/bin/yelp \
+          --set WEBKIT_DISABLE_COMPOSITING_MODE 1
+        '')
+      ];
 
     environment.gnome.excludePackages =
       (with pkgs; [
