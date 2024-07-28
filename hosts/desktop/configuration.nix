@@ -154,16 +154,7 @@
 
   # Enableable programs
   # XXX: Home manager extensions / ui tweaks (tabmanager)
-  programs.firefox = {
-    enable = true;
-    preferences = {
-      # NVIDIA VA-API
-      "media.ffmpeg.vaapi.enabled" = true;
-      "media.rdd-ffmpeg.enabled" = true;
-      "gfx.x11-egl.force-enabled" = true;
-      "widget.dmabuf.force-enabled" = true;
-    };
-  };
+  modules.firefox.enable = true;
 
   programs.piper = {
     enable = true;
