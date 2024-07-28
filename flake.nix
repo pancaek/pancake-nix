@@ -40,6 +40,7 @@
             ./modules/audio.nix
             ./modules/printing.nix
             ./modules/ibus.nix
+            ./modules/firefox.nix
             ./modules/wayland.nix
             ./hosts/desktop/nvidia.nix
             # ./modules/xdg-compliance.nix # TODO another day
@@ -75,6 +76,7 @@
             ./modules/audio.nix
             ./modules/printing.nix
             ./modules/ibus.nix
+            ./modules/firefox.nix
             ./modules/wayland.nix
             ./hosts/laptop/nvidia.nix
             # ./modules/xdg-compliance.nix # TODO another day
