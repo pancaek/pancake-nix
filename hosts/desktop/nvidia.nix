@@ -48,9 +48,4 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-
-  environment.sessionVariables = {
-    MOZ_DISABLE_RDD_SANDBOX = 1;
-    LIBVA_DRIVER_NAME = "nvidia";
-  };
 }
