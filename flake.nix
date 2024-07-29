@@ -35,7 +35,6 @@
             #   }
             # )
             nur.nixosModules.nur
-            ./hosts/desktop/configuration.nix
             ./modules/quiet-boot.nix
             ./modules/audio.nix
             ./modules/printing.nix
@@ -45,6 +44,7 @@
             ./hosts/desktop/nvidia.nix
             # ./modules/xdg-compliance.nix # TODO another day
             ./modules/desktops/pancake-gnome.nix
+            ./hosts/desktop/configuration.nix
 
             # make home-manager as a module of nixos
             # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
@@ -71,7 +71,6 @@
             #   }
             # )
             nur.nixosModules.nur
-            ./hosts/laptop/configuration.nix
             ./modules/quiet-boot.nix
             ./modules/audio.nix
             ./modules/printing.nix
@@ -81,6 +80,7 @@
             ./hosts/laptop/nvidia.nix
             # ./modules/xdg-compliance.nix # TODO another day
             ./modules/desktops/pancake-gnome.nix
+            ./hosts/laptop/configuration.nix
 
             # make home-manager as a module of nixos
             # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
