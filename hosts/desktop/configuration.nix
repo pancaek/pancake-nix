@@ -123,9 +123,7 @@
       neofetch
       qmk
       gh
-      # vesktop
       (mpv.override { scripts = [ mpvScripts.uosc ]; })
-      # gpodder
     ]
     ++ [
       zsh-completions
@@ -140,7 +138,8 @@
     ]
     ++ [ config.nur.repos.nltch.spotify-adblock ]
   );
-
+  # NOTE: QMK udev rules
+  hardware.keyboard.qmk.enable = true;
   fonts.packages = (
     with pkgs;
     [
