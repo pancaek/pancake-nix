@@ -35,7 +35,7 @@ in
         gnome.gnome-terminal
         g4music
         endeavour
-        celluloid
+        mpv
         gradience
         xmousepasteblock
       ])
