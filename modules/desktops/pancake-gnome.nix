@@ -65,7 +65,7 @@ in
         # yelp itself can have a cleaner link because its a proper package
         (pkgs.runCommand "yelp" { buildInputs = [ pkgs.makeWrapper ]; } ''
           mkdir $out
-          # Link every top-level folder from pkgs.hello to our new target
+          # Link every top-level folder from yelp to our new target
           ln -s ${pkgs.gnome.yelp}/* $out
           # Except the bin folder
           rm $out/bin
