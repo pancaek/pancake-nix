@@ -119,7 +119,7 @@ in
       in
       [
         (autostartItem "v-shell-fix" [
-          "sleep 2"
+          "sleep 1"
           "gnome-extensions disable vertical-workspaces@G-dH.github.com"
           "gnome-extensions enable vertical-workspaces@G-dH.github.com"
         ])
