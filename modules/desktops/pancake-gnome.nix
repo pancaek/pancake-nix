@@ -47,6 +47,7 @@ in
         caffeine
         clipboard-history
         user-themes
+        legacy-gtk3-theme-scheme-auto-switcher # NOTE: Makes themes fully consistent
         custom-accent-colors
         # alphabetical-app-grid
         # hassleless-overview-search # TODO: Version bump
