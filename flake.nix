@@ -80,6 +80,7 @@
             ./hosts/laptop/nvidia.nix
             # ./modules/xdg-compliance.nix # TODO another day
             ./modules/desktops/pancake-gnome.nix
+            ./modules/desktops/pancake-bspwm.nix
             ./hosts/laptop/configuration.nix
 
             # make home-manager as a module of nixos

@@ -149,7 +149,7 @@
     ]
   );
 
-  modules.pancake-gnome.enable = true;
+  modules.pancake-bspwm.enable = true;
 
   # Enableable programs
   # XXX: Home manager extensions / ui tweaks (tabmanager)
