@@ -105,7 +105,7 @@ in
     home-manager.sharedModules =
       let
         autostartItem = title: commandList: {
-          home.file.".config/autostart/${title}.desktop".text =
+          xdg.configFile."autostart/${title}.desktop".text =
             (pkgs.makeDesktopItem {
               desktopName = title;
               name = title;
