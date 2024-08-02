@@ -15,6 +15,7 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
+    zsh-completions
     obs-studio
     vscode-fhs
     reaper
@@ -90,6 +91,9 @@
       style = "plain";
     };
   };
+
+  programs.eza.enable = true;
+  programs.zoxide.enable = true;
   programs.git = {
     enable = true;
     ***REMOVED***
