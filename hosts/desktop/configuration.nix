@@ -104,8 +104,10 @@
     ];
   };
 
+  # ZSH
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
+  environment.pathsToLink = [ "/share/zsh" ];
 
   modules.quiet-boot.enable = true;
   modules.audio.enable = true;
@@ -126,12 +128,6 @@
       (mpv.override { scripts = [ mpvScripts.uosc ]; })
     ]
     ++ [
-      zsh-completions
-      zsh-autosuggestions
-      zsh-history-substring-search
-      zsh-syntax-highlighting
-      bat
-      eza
       nixd
       nixfmt-rfc-style
       nixpkgs-fmt

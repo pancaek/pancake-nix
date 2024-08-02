@@ -103,8 +103,10 @@
     ];
   };
 
+  # ZSH
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
+  environment.pathsToLink = [ "/share/zsh" ];
 
   modules.quiet-boot.enable = true;
   modules.audio.enable = true;
@@ -122,16 +124,9 @@
       neofetch
       qmk
       gh
-      vesktop
       (mpv.override { scripts = [ mpvScripts.uosc ]; })
     ]
     ++ [
-      zsh-completions
-      zsh-autosuggestions
-      zsh-history-substring-search
-      zsh-syntax-highlighting
-      bat
-      eza
       nixd
       nixfmt-rfc-style
       nixpkgs-fmt
@@ -139,7 +134,17 @@
     ++ [ config.nur.repos.nltch.spotify-adblock ]
   );
 
-  fonts.packages = (with pkgs; [ meslo-lgs-nf ]);
+  # NOTE: QMK udev rules
+  hardware.keyboard.qmk.enable = true;
+
+  fonts.packages = (
+    with pkgs;
+    [
+      meslo-lgs-nf
+      noto-fonts
+      noto-fonts-cjk
+    ]
+  );
 
   modules.pancake-gnome.enable = true;
 
