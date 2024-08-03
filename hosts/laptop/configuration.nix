@@ -73,7 +73,6 @@
       LC_TIME = "en_US.UTF-8";
     };
   };
-  # TODO IBUS:
 
   modules.ibus = {
     enable = true;
@@ -106,11 +105,27 @@
   # ZSH
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
-  environment.pathsToLink = [ "/share/zsh" ];
+  # NOTE: Enabled by default in programs.zsh.enable (needed for completions from home-manager)
+  # environment.pathsToLink = [ "/share/zsh" ];
 
   modules.quiet-boot.enable = true;
   modules.audio.enable = true;
   modules.printing.enable = true;
+
+  modules.pancake-gnome.enable = true;
+
+  # Enableable programs
+  # XXX: Home manager extensions / ui tweaks (tabmanager)
+  modules.firefox.enable = true;
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
+  # NOTE: QMK udev rules
+  hardware.keyboard.qmk.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -134,9 +149,6 @@
     ++ [ config.nur.repos.nltch.spotify-adblock ]
   );
 
-  # NOTE: QMK udev rules
-  hardware.keyboard.qmk.enable = true;
-
   fonts.packages = (
     with pkgs;
     [
@@ -145,18 +157,6 @@
       noto-fonts-cjk
     ]
   );
-
-  modules.pancake-gnome.enable = true;
-
-  # Enableable programs
-  # XXX: Home manager extensions / ui tweaks (tabmanager)
-  modules.firefox.enable = true;
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
