@@ -113,7 +113,7 @@ in
                 if builtins.length commandList == 1 then
                   builtins.elemAt commandList 0
                 else
-                  "sh -c '${lib.concatStringsSep " ; " commandList}'";
+                  "sh -c '${lib.concatStringsSep " && " commandList}'";
             }).text;
         };
       in
