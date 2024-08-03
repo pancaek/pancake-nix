@@ -29,7 +29,6 @@
       nix-update = "sudo nixos-rebuild switch";
       nix-clean = "sudo nix-collect-garbage -d";
       cat = "bat";
-      ls = "ls --color=auto";
       grep = "grep --color=auto";
       refresh = "source $HOME/${config.programs.zsh.dotDir}/.zshrc";
     };
