@@ -27,9 +27,13 @@ in
       desktopManager.gnome.enable = true;
       excludePackages = (with pkgs; [ xterm ]);
     };
+    # NOTE: https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/2570
+    # I don't actually care about this but I want the panel to load
+    services.fwupd.enable = true;
 
     environment.systemPackages =
       (with pkgs; [
+
         gnome-extension-manager
         gnome.gnome-tweaks
         gnome.gnome-terminal
@@ -46,18 +50,15 @@ in
         caffeine
         clipboard-history
         user-themes
-        legacy-gtk3-theme-scheme-auto-switcher # NOTE: Makes themes fully consistent
+        legacy-gtk3-theme-scheme-auto-switcher
         custom-accent-colors
         alphabetical-app-grid
         primary-input-on-lockscreen
         # hassleless-overview-search # TODO: Version bump
 
-        # NOTE: V-shell replacements
-        gnome-40-ui-improvements
-        blur-my-shell
-        just-perfection
-        # TODO: these don't work yet
-        # show-apps-at-top
+        # NOTE: V-shell for some reason doesn't load properly system-wide
+        # I just installed manually for now
+        # vertical-workspaces
       ])
       ++ lib.optionals isNvidia [
         # NOTE: This is a webkit2gtk issue
@@ -124,13 +125,6 @@ in
             }).text;
         };
       in
-      [
-        # (autostartItem "v-shell-fix" [
-        #   "sleep 2"
-        #   "gnome-extensions disable vertical-workspaces@G-dH.github.com"
-        #   "gnome-extensions enable vertical-workspaces@G-dH.github.com"
-        # ])
-        (autostartItem "xmousepasteblock" [ "xmousepasteblock &" ])
-      ];
+      [ (autostartItem "xmousepasteblock" [ "xmousepasteblock &" ]) ];
   };
 }
