@@ -28,7 +28,7 @@ in
       excludePackages = (with pkgs; [ xterm ]);
     };
     # NOTE: https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/2570
-    # I don't actually care about this but I want the panel to load
+    # I don't actually care about functionality this but I want the panel to load
     services.fwupd.enable = true;
 
     environment.systemPackages =
@@ -37,6 +37,7 @@ in
         gnome-extension-manager
         gnome.gnome-tweaks
         gnome.gnome-terminal
+        dynamic-wallpaper
         g4music
         endeavour
         mpv
