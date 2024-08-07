@@ -144,6 +144,7 @@
       qmk
       gh
       (mpv.override { scripts = [ mpvScripts.uosc ]; })
+      cameractrls-gtk4
     ]
     ++ [
       nixd
