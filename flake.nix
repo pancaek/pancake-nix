@@ -22,21 +22,20 @@
     }:
     let
       system = "x86_64-linux";
-      camera_overlay = self: super: {
-        cameractrls-gtk4 = (nixpkgs.callPackage ./pkgs/cameractrls.nix).override { withGtk = 4; };
-      };
+      cameractrls_backport = (
+        final: prev: {
+          cameractrls = prev.callPackage ./pkgs/cameractrls.nix { };
+          cameractrls-gtk3 = final.cameractrls.override { withGtk = 3; };
+          cameractrls-gtk4 = final.cameractrls.override { withGtk = 4; };
+        }
+      );
     in
     {
       nixosConfigurations = {
         pancake-pc = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            (
-              { config, pkgs, ... }:
-              {
-                nixpkgs.overlays = [ camera_overlay ];
-              }
-            )
+            { nixpkgs.overlays = [ cameractrls_backport ]; }
             nur.nixosModules.nur
             ./modules/quiet-boot.nix
             ./modules/audio.nix
