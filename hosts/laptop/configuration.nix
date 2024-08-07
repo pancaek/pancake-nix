@@ -74,6 +74,9 @@
     };
   };
 
+  # Fix localectl
+  services.xserver.exportConfiguration = true;
+
   modules.ibus = {
     enable = true;
     engines = with pkgs.ibus-engines; [ mozc ];
