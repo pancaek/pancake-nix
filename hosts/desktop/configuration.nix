@@ -163,6 +163,7 @@
       meslo-lgs-nf
       noto-fonts
       noto-fonts-cjk
+      komika-fonts
     ]
   );
 

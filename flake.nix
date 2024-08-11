@@ -29,13 +29,21 @@
           cameractrls-gtk4 = final.cameractrls.override { withGtk = 4; };
         }
       );
+      komika-fonts_overlay = (
+        final: prev: { komika-fonts = prev.callPackage ./pkgs/komika-fonts.nix { }; }
+      );
     in
     {
       nixosConfigurations = {
         pancake-pc = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            { nixpkgs.overlays = [ cameractrls_backport ]; }
+            {
+              nixpkgs.overlays = [
+                cameractrls_backport
+                komika-fonts_overlay
+              ];
+            }
             nur.nixosModules.nur
             ./modules/quiet-boot.nix
             ./modules/audio.nix
