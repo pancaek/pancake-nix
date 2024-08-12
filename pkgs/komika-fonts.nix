@@ -4,7 +4,7 @@
   fetchzip,
   variants ? [
     "display"
-    "hands"
+    "hand"
     "poster"
     "text"
     "title"
@@ -33,7 +33,7 @@ let
       url = "https://www.1001fonts.com/download/komika-display.zip";
       hash = "sha256-6oNKuaoV+a/cFCKFXRV8gtWqvFtPGtrqg+vt8hQREMI=";
     };
-    "hands" = {
+    "hand" = {
       url = "https://www.1001fonts.com/download/komika.zip";
       hash = "sha256-yb5SWQj7BRCLYHL31m25bhCOuo8qAvkRzGH6UIo3Bbs=";
     };
@@ -106,4 +106,15 @@ stdenvNoCC.mkDerivation {
     runHook postInstall
   '';
 
+  meta = with lib; {
+    homepage = "https://moorstation.org/typoasis/designers/lab/index.htm";
+    # description from archive here: http://web.archive.org/web/20030422173903fw_/http://www.hardcovermedia.com/lab/Pages/Fontpages/komikahands.html since the live site doesn't have it
+    description = "The first ever comic lettering super family";
+    longDescription = ''
+      50 fonts, covering everything the comic artist needs when it comes to lettering. 10 text faces, 10 display faces, 10 tiling faces, 10 hand variations, 9 poster faces, and 20 balloons in a font.
+    '';
+    license = licenses.free;
+    platforms = platforms.all;
+    maintainers = with maintainers; [ ];
+  };
 }
