@@ -59,7 +59,7 @@ let
     };
     "komikahuna" = {
       url = "https://www.1001fonts.com/download/komikahuna.zip";
-      hash = "sha256-gjUeHE13UzNOzJ1GgeUJGK0IgUVOmFoCD6eMtN3f9lk=";
+      hash = "sha256-TjGxQA3ZyIOyJUNP+MVkYiSDk9WDIDPy3d2ttWC1aoc=";
     };
     "komikandy" = {
       url = "https://www.1001fonts.com/download/komikandy.zip";
@@ -67,7 +67,7 @@ let
     };
     "komikazba" = {
       url = "https://www.1001fonts.com/download/komikazba.zip";
-      hash = "sha256-QwlCje7bSDx2fTo1PydiwQ2hIRLZ96bNdijTgTKjvsA=";
+      hash = "sha256-SGJMP0OdZ/AEImN5S3QshCbWSLXO4qTjHnSQYqoy3Pc=";
     };
     "komikaze" = {
       url = "https://www.1001fonts.com/download/komikaze.zip";
@@ -95,7 +95,7 @@ let
 in
 stdenvNoCC.mkDerivation {
   pname = "komika-fonts";
-  version = "0-unstable-2024-08-11";
+  version = "0-unstable-2024-08-12";
   sourceRoot = ".";
 
   srcs = map (variant: fetchFont fontMap.${variant}) selectedFonts;
@@ -106,15 +106,15 @@ stdenvNoCC.mkDerivation {
     runHook postInstall
   '';
 
-  meta = with lib; {
+  meta = {
     homepage = "https://moorstation.org/typoasis/designers/lab/index.htm";
-    # description from archive here: http://web.archive.org/web/20030422173903fw_/http://www.hardcovermedia.com/lab/Pages/Fontpages/komikahands.html since the live site doesn't have it
+    # description from archive here: http://web.archive.org/web/20030422173903fw_/http://www.hardcovermedia.com/lab/Pages/Fontpages/komikahands.html
     description = "The first ever comic lettering super family";
     longDescription = ''
       50 fonts, covering everything the comic artist needs when it comes to lettering. 10 text faces, 10 display faces, 10 tiling faces, 10 hand variations, 9 poster faces, and 20 balloons in a font.
     '';
-    license = licenses.free;
-    platforms = platforms.all;
-    maintainers = with maintainers; [ ];
+    license = lib.licenses.free;
+    maintainers = with lib.maintainers; [ pancaek ];
+    platforms = lib.platforms.all;
   };
 }
