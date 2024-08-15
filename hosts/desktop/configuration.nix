@@ -152,7 +152,6 @@
     ++ [
       nixd
       nixfmt-rfc-style
-      nixpkgs-fmt
     ]
     ++ [ config.nur.repos.nltch.spotify-adblock ]
   );
