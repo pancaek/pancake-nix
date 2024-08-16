@@ -83,6 +83,7 @@
   services.xserver.enable = true;
 
   # Configure keymap in X11
+  console.useXkbConfig = true;
   services.xserver.xkb = {
     layout = "us";
     variant = "";
@@ -114,7 +115,6 @@
 
   modules.pancake-gnome.enable = true;
 
-  # Enableable programs
   # XXX: Home manager extensions / ui tweaks (tabmanager)
   modules.firefox.enable = true;
 
@@ -127,8 +127,6 @@
   # NOTE: QMK udev rules
   hardware.keyboard.qmk.enable = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = (
     with pkgs;
     [
@@ -144,7 +142,6 @@
     ++ [
       nixd
       nixfmt-rfc-style
-      nixpkgs-fmt
     ]
     ++ [ config.nur.repos.nltch.spotify-adblock ]
   );

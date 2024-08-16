@@ -79,10 +79,12 @@
     enable = true;
     engines = with pkgs.ibus-engines; [ mozc ];
   };
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Configure keymap in X11
+  console.useXkbConfig = true;
   services.xserver.xkb = {
     layout = "us";
     variant = "";
@@ -112,8 +114,6 @@
   modules.audio.enable = true;
   modules.printing.enable = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   modules.pancake-gnome.enable = true;
 
   # XXX: Home manager extensions / ui tweaks (tabmanager)
