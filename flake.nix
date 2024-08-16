@@ -50,10 +50,8 @@
             ./modules/printing.nix
             ./modules/ibus.nix
             ./modules/firefox.nix
-            ./modules/wayland.nix
-            ./hosts/desktop/nvidia.nix
-            # ./modules/xdg-compliance.nix # TODO another day
             ./modules/desktops/pancake-gnome.nix
+            ./hosts/desktop/nvidia.nix
             ./hosts/desktop/configuration.nix
 
             # make home-manager as a module of nixos
@@ -86,10 +84,8 @@
             ./modules/printing.nix
             ./modules/ibus.nix
             ./modules/firefox.nix
-            ./modules/wayland.nix
-            ./hosts/laptop/nvidia.nix
-            # ./modules/xdg-compliance.nix # TODO another day
             ./modules/desktops/pancake-gnome.nix
+            ./hosts/laptop/nvidia.nix
             ./hosts/laptop/configuration.nix
 
             # make home-manager as a module of nixos
