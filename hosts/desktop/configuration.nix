@@ -150,7 +150,7 @@
       nixd
       nixfmt-rfc-style
     ]
-    ++ [ config.nur.repos.nltch.spotify-adblock ]
+    ++ [ nltch.spotify-adblock ]
   );
 
   fonts.packages = (

@@ -4,12 +4,14 @@
   inputs = {
 
     nixpkgs.url = "nixpkgs/nixos-24.05";
-    # nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = "github:nix-community/NUR";
+    nltch = {
+      url = "github:NL-TCH/nur-packages";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -18,7 +20,7 @@
       nixpkgs,
       # nixpkgs-unstable,
       home-manager,
-      nur,
+      nltch,
     }:
     let
       system = "x86_64-linux";
@@ -32,6 +34,13 @@
       komika-fonts_overlay = (
         final: prev: { komika-fonts = prev.callPackage ./pkgs/komika-fonts.nix { }; }
       );
+      nltch_overlay = final: prev: {
+        nltch = import nltch {
+          # we need to explicitly pass pkgs since the repo is weird with flakes
+          pkgs = prev.pkgs;
+        };
+      };
+
     in
     {
       nixosConfigurations = {
@@ -40,11 +49,11 @@
           modules = [
             {
               nixpkgs.overlays = [
+                nltch_overlay
                 cameractrls_backport
                 komika-fonts_overlay
               ];
             }
-            nur.nixosModules.nur
             ./modules/quiet-boot.nix
             ./modules/audio.nix
             ./modules/printing.nix
@@ -72,13 +81,6 @@
         pancake-laptop = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            # (
-            #   { config, pkgs, ... }:
-            #   {
-            #     nixpkgs.overlays = [ overlay-unstable ];
-            #   }
-            # )
-            nur.nixosModules.nur
             ./modules/quiet-boot.nix
             ./modules/audio.nix
             ./modules/printing.nix
