@@ -41,11 +41,17 @@
         };
       };
 
+      extended-lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = prev; });
+
     in
     {
       nixosConfigurations = {
         pancake-pc = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = {
+            lib = extended-lib;
+          };
+
           modules = [
             {
               nixpkgs.overlays = [
