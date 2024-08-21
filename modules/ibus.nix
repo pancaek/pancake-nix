@@ -34,13 +34,8 @@ in
       };
     };
 
-    home-manager.sharedModules =
-      let
-        usingEngine = name: (lib.any (e: lib.getName e == name) cfg.engines);
-      in
-      lib.mkIf (usingEngine "ibus-mozc") [
-        { home.file.".config/mozc/ibus_config.textproto".source = ../home/mozc/ibus_config.textproto; }
-      ];
+    home-manager.sharedModules = lib.mkIf (lib.packageInList "ibus-mozc" cfg.engines) [
+      { xdg.configFile."mozc/ibus_config.textproto".source = ../home/mozc/ibus_config.textproto; }
+    ];
   };
-
 }
