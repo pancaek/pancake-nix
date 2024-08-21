@@ -62,9 +62,4 @@
     (lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")
     || !config.services.power-profiles-daemon.enable
   );
-
-  environment.sessionVariables = {
-    MOZ_DISABLE_RDD_SANDBOX = 1;
-    LIBVA_DRIVER_NAME = "nvidia";
-  };
 }
