@@ -138,7 +138,7 @@
     [
       git
       adw-gtk3
-      (papirus-icon-theme.override { color = "red"; })
+      (papirus-icon-theme.override { color = "indigo"; })
       volantes-cursors
       neofetch
       qmk
