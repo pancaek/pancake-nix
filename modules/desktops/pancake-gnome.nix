@@ -23,7 +23,10 @@ in
   config = lib.mkIf cfg.enable {
 
     services.xserver = {
-      displayManager.gdm.enable = true;
+      displayManager.gdm = {
+        enable = true;
+        wayland = false;
+      };
       desktopManager.gnome.enable = true;
       excludePackages = (with pkgs; [ xterm ]);
     };
