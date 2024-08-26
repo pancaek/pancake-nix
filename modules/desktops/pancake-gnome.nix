@@ -46,12 +46,13 @@ in
         mpv
         gradience
         xmousepasteblock
+        caffeine-ng
       ])
       ++ (with pkgs.gnomeExtensions; [
         appindicator
         ddterm
         # rounded-corners # TODO: somethings up with this one, watch git
-        caffeine
+        # caffeine TODO: Does this even do anything?
         clipboard-history
         user-themes
         legacy-gtk3-theme-scheme-auto-switcher
@@ -129,6 +130,9 @@ in
             }).text;
         };
       in
-      [ (autostartItem "xmousepasteblock" [ "xmousepasteblock &" ]) ];
+      [
+        (autostartItem "xmousepasteblock" [ "xmousepasteblock &" ])
+        (autostartItem "caffeine-ng" [ "caffeine &" ])
+      ];
   };
 }
