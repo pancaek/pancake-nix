@@ -127,7 +127,7 @@ in
       in
       [
         (autostartItem "xmousepasteblock" [ "xmousepasteblock &" ])
-        (autostartItem "caffeine-ng" [ "caffeine &" ])
+        (autostartItem "caffeine-ng" [ "caffeine" ])
       ];
   };
 }
