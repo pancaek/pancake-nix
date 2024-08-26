@@ -46,13 +46,12 @@ in
         mpv
         gradience
         xmousepasteblock
-        caffeine-ng
+        (writeShellScriptBin "caffeine" "exec ${lib.getExe pkgs.caffeine-ng} \"$@\"")
       ])
       ++ (with pkgs.gnomeExtensions; [
         appindicator
         ddterm
         # rounded-corners # TODO: somethings up with this one, watch git
-        # caffeine TODO: Does this even do anything?
         clipboard-history
         user-themes
         legacy-gtk3-theme-scheme-auto-switcher
@@ -110,10 +109,6 @@ in
       ]);
 
     programs.kvantum.enable = true;
-    # modules.polkit-auth = {
-    #   enable = true;
-    #   agent = "gnome";
-    # };
 
     home-manager.sharedModules =
       let
