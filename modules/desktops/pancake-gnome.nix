@@ -129,5 +129,28 @@ in
         (autostartItem "xmousepasteblock" [ "xmousepasteblock &" ])
         (autostartItem "caffeine-ng" [ "caffeine" ])
       ];
+
+    systemd.services.gdm-monitors = {
+      description = "Copy monitors.xml to GDM config at boot";
+
+      # Run after fs is ready
+      after = [ "local-fs.target" ];
+
+      # Run at boot
+      wantedBy = [ "multi-user.target" ];
+
+      # Service configuration
+      serviceConfig =
+        let
+          sourcePath = "/home/pancaek/.config/monitors.xml";
+          destPath = "/run/gdm/.config/monitors.xml";
+        in
+        {
+          Type = "oneshot";
+          ExecStart = "${pkgs.coreutils}/bin/cp \"${sourcePath}\" \"${destPath}\""; # Do the thing
+          # Fix permissions
+          ExecStartPost = "${pkgs.coreutils}/bin/chown gdm:gdm \"${destPath}\"";
+        };
+    };
   };
 }
