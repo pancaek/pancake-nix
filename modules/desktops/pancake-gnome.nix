@@ -46,7 +46,14 @@ in
         mpv
         gradience
         xmousepasteblock
-        (writeShellScriptBin "caffeine" "exec ${lib.getExe pkgs.caffeine-ng} \"$@\"")
+
+        (caffeine-ng.overrideAttrs (prev: {
+          postInstall =
+            prev.postInstall or ""
+            + ''
+              rm -rf $out/share/applications
+            '';
+        }))
       ])
       ++ (with pkgs.gnomeExtensions; [
         appindicator
@@ -97,6 +104,7 @@ in
         gnome-tour
         gnome-connections
         gnome-console
+        gnome-text-editor
       ])
       ++ (with pkgs.gnome; [
         gnome-music
@@ -106,6 +114,8 @@ in
         gnome-maps
         gnome-characters
         gnome-shell-extensions
+        gnome-calculator
+        gnome-contacts
       ]);
 
     programs.kvantum.enable = true;
@@ -127,7 +137,8 @@ in
       in
       [
         (autostartItem "xmousepasteblock" [ "xmousepasteblock &" ])
-        (autostartItem "caffeine-ng" [ "caffeine" ])
+        # NOTE: This is built-in to the package
+        # (autostartItem "caffeine-ng" [ "caffeine" ])
       ];
 
     systemd.services.gdm-monitors = {
