@@ -47,13 +47,15 @@ in
         gradience
         xmousepasteblock
 
-        (caffeine-ng.overrideAttrs (prev: {
-          postInstall =
-            prev.postInstall or ""
-            + ''
-              rm -rf $out/share/applications
-            '';
-        }))
+        (runCommand "caffeine" { } ''
+          shopt -s extglob
+          mkdir -p $out
+
+          # Copy share/ separately so I can exclude the icon
+          cp -r ${caffeine-ng}/!(share) $out
+          mkdir -p $out/share
+          cp -r ${caffeine-ng}/share/!(applications) $out/share
+        '')
       ])
       ++ (with pkgs.gnomeExtensions; [
         appindicator
