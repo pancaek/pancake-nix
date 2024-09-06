@@ -118,6 +118,7 @@ in
         gnome-shell-extensions
         gnome-calculator
         gnome-contacts
+        gnome-system-monitor
       ]);
 
     programs.kvantum.enable = true;
