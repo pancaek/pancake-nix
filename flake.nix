@@ -26,21 +26,25 @@
       system = "x86_64-linux";
       cameractrls_backport = (
         final: prev: {
-          cameractrls = prev.callPackage ./pkgs/cameractrls.nix { };
+          # cameractrls = prev.callPackage ./pkgs/cameractrls.nix { };
           cameractrls-gtk3 = final.cameractrls.override { withGtk = 3; };
           cameractrls-gtk4 = final.cameractrls.override { withGtk = 4; };
         }
       );
-      komika-fonts_overlay = (
-        final: prev: { komika-fonts = prev.callPackage ./pkgs/komika-fonts.nix { }; }
-      );
+
       nltch_overlay = final: prev: {
         nltch = import nltch {
           # we need to explicitly pass pkgs since the repo is weird with flakes
           pkgs = prev.pkgs;
         };
       };
-
+      packages-dir = (
+        final: prev:
+        nixpkgs.lib.packagesFromDirectoryRecursive {
+          directory = ./pkgs;
+          callPackage = prev.pkgs.callPackage;
+        }
+      );
       extended-lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = prev; });
 
     in
@@ -56,8 +60,8 @@
             {
               nixpkgs.overlays = [
                 nltch_overlay
+                packages-dir
                 cameractrls_backport
-                komika-fonts_overlay
               ];
             }
             ./modules/quiet-boot.nix
@@ -87,6 +91,13 @@
         pancake-laptop = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
+            {
+              nixpkgs.overlays = [
+                nltch_overlay
+                packages-dir
+                cameractrls_backport
+              ];
+            }
             ./modules/quiet-boot.nix
             ./modules/audio.nix
             ./modules/printing.nix
