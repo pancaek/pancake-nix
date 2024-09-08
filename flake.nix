@@ -24,13 +24,6 @@
     }:
     let
       system = "x86_64-linux";
-      cameractrls_backport = (
-        final: prev: {
-          # cameractrls = prev.callPackage ./pkgs/cameractrls.nix { };
-          cameractrls-gtk3 = final.cameractrls.override { withGtk = 3; };
-          cameractrls-gtk4 = final.cameractrls.override { withGtk = 4; };
-        }
-      );
 
       nltch_overlay = final: prev: {
         nltch = import nltch {
@@ -64,7 +57,6 @@
               nixpkgs.overlays = [
                 nltch_overlay
                 packages-dir
-                cameractrls_backport
               ];
             }
             ./modules/quiet-boot.nix
@@ -98,7 +90,6 @@
               nixpkgs.overlays = [
                 nltch_overlay
                 packages-dir
-                cameractrls_backport
               ];
             }
             ./modules/quiet-boot.nix
