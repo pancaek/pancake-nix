@@ -34,10 +34,10 @@
       packages-dir = (
         final: prev:
         (nixpkgs.lib.packagesFromDirectoryRecursive {
-          directory = ./pkgs;
+          directory = ./pkgs/by-name;
           inherit (prev.pkgs) callPackage;
         })
-        // import pkgs/all-packages.nix_ { inherit (prev) pkgs; }
+        // import pkgs/all-packages.nix { inherit (prev) pkgs; }
         # XXX: This .nix_ extension is needed to get around the file extension check
         # which would otherwise cause a `callPackage all-packages.nix`
       );
