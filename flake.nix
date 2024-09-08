@@ -28,7 +28,7 @@
       nltch_overlay = final: prev: {
         nltch = import nltch {
           # we need to explicitly pass pkgs since the repo is weird with flakes
-          pkgs = prev.pkgs;
+          inherit (prev) pkgs;
         };
       };
       packages-dir = (
