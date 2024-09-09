@@ -114,15 +114,15 @@
       adw-gtk3
       (papirus-icon-theme.override { color = "indigo"; })
       volantes-cursors
-      neofetch
+      fastfetch
       gh
-      (mpv.override { scripts = [ mpvScripts.uosc ]; })
+      (mpv.override { scripts = with mpvScripts; [ uosc ]; })
+      nltch.spotify-adblock
     ]
     ++ [
       nixd
       nixfmt-rfc-style
     ]
-    ++ [ nltch.spotify-adblock ]
   );
 
   fonts.packages = (
@@ -131,7 +131,8 @@
       meslo-lgs-nf
       noto-fonts
       noto-fonts-cjk
-      komika-fonts
+      noto-fonts-emoji
+      # komika-fonts
     ]
   );
 
