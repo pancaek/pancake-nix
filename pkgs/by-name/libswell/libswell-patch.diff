@@ -1,0 +1,22 @@
+diff --git a/WDL/swell/swell-wnd-generic.cpp b/WDL/swell/swell-wnd-generic.cpp
+index bfa9be05..b9b9f43a 100644
+--- a/WDL/swell/swell-wnd-generic.cpp
++++ b/WDL/swell/swell-wnd-generic.cpp
+@@ -8287,7 +8287,7 @@ BOOL SWELL_IsStaticText(HWND hwnd)
+ 
+ BOOL ShellExecute(HWND hwndDlg, const char *action,  const char *content1, const char *content2, const char *content3, int blah)
+ {
+-  const char *xdg = "/usr/bin/xdg-open";
++  const char *xdg = "xdg-open";
+   const char *argv[3] = { NULL };
+   char *tmp=NULL;
+ 
+@@ -8337,7 +8337,7 @@ BOOL ShellExecute(HWND hwndDlg, const char *action,  const char *content1, const
+   if (pid == 0) 
+   {
+     for (int x=0;argv[x];x++) argv[x] = strdup(argv[x]);
+-    execv(argv[0],(char *const*)argv);
++    execvp(argv[0],(char *const*)argv);
+     exit(0); // if execv fails for some reason
+   }
+   free(tmp);
