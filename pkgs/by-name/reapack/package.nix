@@ -39,6 +39,15 @@ stdenv.mkDerivation rec {
     sqlite
   ];
 
+  installPhase = ''
+    runHook preInstall
+
+    mkdir -p $out/lib
+    cp -r reaper_reapack-x86_64.so $out/lib
+
+    runHook postInstall
+  '';
+
   meta = with lib; {
     description = "Package manager for REAPER";
     homepage = "https://github.com/cfillion/reapack";
