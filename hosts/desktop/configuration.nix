@@ -50,6 +50,7 @@
       qmk
       cameractrls-gtk4
       helix
+      reapack
     ]
   );
 
