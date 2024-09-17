@@ -18,15 +18,16 @@
     zsh-completions
     obs-studio
     vscode-fhs
+    vesktop
     (reaper.overrideAttrs (prev: {
       postInstall =
         (prev.postInstall or "")
         + ''
           rm $out/opt/REAPER/libSwell.so
           ln -s ${libswell}/lib/libSwell.so $out/opt/REAPER/libSwell.so
-        '';
+        ''
+        + "ln -s ${reapack}/lib/REAPER/Plugins/reaper_rea]pack-x86_64.so $out/opt/REAPER/Plugins";
     }))
-    vesktop
   ];
 
   programs.zsh = {
