@@ -39,11 +39,13 @@ stdenv.mkDerivation rec {
     sqlite
   ];
 
+  patches = [ ./system-wide-install.patch ];
+
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/lib
-    cp -r reaper_reapack-x86_64.so $out/lib
+    mkdir -p $out/lib/REAPER/Plugins
+    cp reaper_reapack-x86_64.so $out/lib/REAPER/Plugins
 
     runHook postInstall
   '';
