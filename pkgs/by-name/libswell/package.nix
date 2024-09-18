@@ -24,8 +24,10 @@ stdenv.mkDerivation {
   ];
 
   buildPhase = ''
+    runHook preBuild
     cd WDL/swell
-    make
+    make PRELOAD_GDK=1
+    runHook postBuild
   '';
 
   installPhase = ''
