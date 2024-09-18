@@ -25,11 +25,26 @@
         + ''
           rm $out/opt/REAPER/libSwell.so
           ln -s ${libswell}/lib/libSwell.so $out/opt/REAPER/libSwell.so
-        ''
-        + "ln -s ${reapack}/lib/REAPER/Plugins/reaper_reapack-x86_64.so $out/opt/REAPER/Plugins"
-        + "ln -s ${reaper-sws-extension}/UserPlugins/reaper_sws-x86_64.so $out/opt/REAPER/Plugins";
+        '';
     }))
   ];
+
+  xdg.configFile."REAPER/UserPlugins" = {
+    source = pkgs.symlinkJoin {
+      name = "reaper-userplugins";
+      paths = [
+        "${pkgs.reapack}/lib/REAPER/Plugins/"
+        "${pkgs.reaper-sws-extension}/UserPlugins/"
+      ];
+    };
+    recursive = true;
+  };
+
+  xdg.configFile."REAPER/Scripts/sws_python64" = {
+    source = "${pkgs.reaper-sws-extension}/Scripts/sws_python64.py";
+  };
+
+  # recursive = true;
 
   programs.zsh = {
     enable = true;
