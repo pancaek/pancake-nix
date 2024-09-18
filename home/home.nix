@@ -29,7 +29,6 @@
         + "ln -s ${reapack}/lib/REAPER/Plugins/reaper_reapack-x86_64.so $out/opt/REAPER/Plugins"
         + "ln -s ${reaper-sws-extension}/UserPlugins/reaper_sws-x86_64.so $out/opt/REAPER/Plugins";
     }))
-    reaper-sws-extension
   ];
 
   programs.zsh = {
