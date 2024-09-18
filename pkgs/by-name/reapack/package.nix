@@ -40,7 +40,6 @@ stdenv.mkDerivation rec {
   ];
 
   patches = [ ./system-wide-install.patch ];
-  cmakeFlags = [ "PRELOAD_GDK=1" ];
 
   installPhase = ''
     runHook preInstall

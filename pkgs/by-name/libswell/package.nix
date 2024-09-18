@@ -23,17 +23,15 @@ stdenv.mkDerivation {
     gtk3
   ];
 
-  buildPhase = ''
-    runHook preBuild
+  buildFlags = [ "PRELOAD_GDK=1" ];
+
+  preBuild = ''
     cd WDL/swell
-    make PRELOAD_GDK=1
-    runHook postBuild
   '';
 
   installPhase = ''
     mkdir -p $out/lib
     cp libSwell.so $out/lib/libSwell.so
-
   '';
 
   patches = [ ./libswell-patch.diff ];
