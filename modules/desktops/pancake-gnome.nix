@@ -139,8 +139,7 @@ in
       in
       [
         (autostartItem "xmousepasteblock" [ "xmousepasteblock &" ])
-        # NOTE: This is built-in to the package
-        # (autostartItem "caffeine-ng" [ "caffeine" ])
+        (autostartItem "discord" [ "vesktop --start-minimized" ])
       ];
 
     systemd.services.gdm-monitors = {
