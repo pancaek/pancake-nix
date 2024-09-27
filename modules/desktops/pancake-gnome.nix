@@ -65,7 +65,6 @@ in
         user-themes
         legacy-gtk3-theme-scheme-auto-switcher
         custom-accent-colors
-        alphabetical-app-grid
         primary-input-on-lockscreen
         # hassleless-overview-search # TODO: Version bump
 
