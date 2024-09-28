@@ -18,7 +18,6 @@ stdenv.mkDerivation {
     hash = "sha256-om2bwIgFgo3F8QCeSL2W5ykThA9AAYq/3/kZPRII45Q=";
   };
   buildInputs = [
-    makeWrapper
     pkg-config
     gtk3
   ];
@@ -30,8 +29,10 @@ stdenv.mkDerivation {
   '';
 
   installPhase = ''
+    runHook preInstall
     mkdir -p $out/lib
     cp libSwell.so $out/lib/libSwell.so
+    runHook postInstall
   '';
 
   patches = [ ./libswell-patch.diff ];
