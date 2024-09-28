@@ -14,30 +14,42 @@ let
     if !cfg.experimental then
       pkgs.piper
     else
-      pkgs.piper.overrideAttrs (prev: {
-        src = pkgs.fetchFromGitHub {
-          owner = "libratbag";
-          repo = "piper";
-          rev = "efa2712fcbc4ac1e9e9d1a7a85334c2a5dc9bab4";
-          sha256 = "uC7BEKVPQz42rdutX4ft3W1MoUVlkFHq2RgQGKVhV2o=";
-        };
-        # Remove "-Dtests=false" flag that doesn't exist in the new version
-        # https://github.com/libratbag/piper/commit/a8ba2124318cc12477ffee932c7ae9c3614926c2
-        mesonFlags = lib.lists.remove "-Dtests=false" prev.mesonFlags;
-      });
+      pkgs.piper.overrideAttrs (
+        prev:
+        let
+          version = "0.8";
+        in
+        {
+          inherit version;
+          src = pkgs.fetchFromGitHub {
+            inherit (prev.src) owner repo;
+            rev = version;
+            hash = "sha256-j58fL6jJAzeagy5/1FmygUhdBm+PAlIkw22Rl/fLff4=";
+          };
+          # Remove "-Dtests=false" flag that doesn't exist in the new version
+          # https://github.com/libratbag/piper/commit/a8ba2124318cc12477ffee932c7ae9c3614926c2
+          mesonFlags = lib.remove "-Dtests=false" prev.mesonFlags;
+        }
+      );
 
   ratbagPackage =
     if !cfg.experimental then
       pkgs.libratbag
     else
-      pkgs.libratbag.overrideAttrs (prev: {
-        src = pkgs.fetchFromGitHub {
-          owner = "libratbag";
-          repo = "libratbag";
-          rev = "1c9662043f4a11af26537e394bbd90e38994066a";
-          sha256 = "IpN97PPn9p1y+cAh9qJAi5f4zzOlm6bjCxRrUTSXNqM=";
-        };
-      });
+      pkgs.libratbag.overrideAttrs (
+        prev:
+        let
+          version = "0.18";
+        in
+        {
+          inherit version;
+          src = pkgs.fetchFromGitHub {
+            inherit (prev.src) owner repo;
+            rev = "v${version}";
+            hash = "sha256-dAWKDF5hegvKhUZ4JW2J/P9uSs4xNrZLNinhAff6NSc=";
+          };
+        }
+      );
 in
 {
   # Declare what settings a user of this module can set.
