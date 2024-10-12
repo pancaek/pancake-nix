@@ -124,6 +124,19 @@
       nil
       nixfmt-rfc-style
     ]
+    ++ (lib.optionals (config.programs.steam.enable) [
+      (makeDesktopItem {
+        desktopName = "Proton Experimental";
+        name = "Proton Experimental";
+        noDisplay = true;
+      })
+      (makeDesktopItem {
+        desktopName = "Steam Linux Runtime 3.0 (sniper)";
+        name = "Steam Linux Runtime 3.0 (sniper)";
+        noDisplay = true;
+      })
+    ])
+
   );
 
   fonts.packages = (
