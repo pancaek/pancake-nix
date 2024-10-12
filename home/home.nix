@@ -29,19 +29,15 @@
     }))
   ];
 
-  xdg.configFile."REAPER/UserPlugins" = {
+  xdg.configFile."REAPER" = {
     source = pkgs.symlinkJoin {
       name = "reaper-userplugins";
       paths = [
-        "${pkgs.reapack}/lib/REAPER/Plugins/"
-        "${pkgs.reaper-sws-extension}/UserPlugins/"
+        "${pkgs.reaper-sws-extension}"
+        "${pkgs.reapack}"
       ];
     };
     recursive = true;
-  };
-
-  xdg.configFile."REAPER/Scripts/sws_python64" = {
-    source = "${pkgs.reaper-sws-extension}/Scripts/sws_python64.py";
   };
 
   # recursive = true;
