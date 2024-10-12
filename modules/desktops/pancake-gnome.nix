@@ -163,6 +163,7 @@ in
       [
         (autostartItem "xmousepasteblock" [ "xmousepasteblock &" ])
         (autostartItem "discord" [ "vesktop --start-minimized" ])
+        (autostartItem "element" [ "element-desktop --hidden" ])
       ];
 
     systemd.services.gdm-monitors = {
