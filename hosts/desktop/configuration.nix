@@ -50,7 +50,24 @@
       qmk
       cameractrls-gtk4
       helix
-      reapack
+      element-desktop
+      # calibre
+      (runCommand "foliate" { buildInputs = [ makeWrapper ]; } ''
+        mkdir $out
+        # Link every top-level folder from foliate to our new target
+        ln -s ${foliate}/* $out
+        # Except the bin folder
+        rm $out/bin
+        mkdir $out/bin
+        # We create the bin folder ourselves and link every binary in it
+        ln -s ${foliate}/bin/* $out/bin
+        # Except the main binary
+        rm $out/bin/foliate
+        # Because we create this ourself, by creating a wrapper
+        makeWrapper ${foliate}/bin/foliate $out/bin/foliate \
+        --set WEBKIT_DISABLE_DMABUF_RENDERER= 1
+      '')
+      zoom-us
     ]
   );
 
