@@ -34,28 +34,27 @@ stdenv.mkDerivation rec {
     ruby
     php
     libxml2
-    catch2_3 # I don't understand the difference between this and normal catch2 but it works so yay
+    catch2_3
     boost
     sqlite
   ];
 
   patches = [ ./system-wide-install.patch ];
 
-  installPhase = ''
-    runHook preInstall
+  # installPhase = ''
+  #   runHook preInstall
 
-    mkdir -p $out/lib/REAPER/Plugins
-    cp reaper_reapack-x86_64.so $out/lib/REAPER/Plugins
+  #   mkdir -p $out/lib/REAPER/Plugins
+  #   cp reaper_reapack-x86_64.so $out/lib/REAPER/Plugins
 
-    runHook postInstall
-  '';
+  #   runHook postInstall
+  # '';
 
   meta = with lib; {
     description = "Package manager for REAPER";
     homepage = "https://github.com/cfillion/reapack";
     license = licenses.gpl3Only;
     maintainers = with maintainers; [ ];
-    mainProgram = "reapack";
     platforms = platforms.all;
   };
 }
