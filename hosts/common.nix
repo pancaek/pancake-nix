@@ -112,12 +112,13 @@
     [
       git
       adw-gtk3
-      (papirus-icon-theme.override { color = "indigo"; })
+      (papirus-icon-theme.override { color = "yellow"; })
       volantes-cursors
       fastfetch
       gh
       (mpv.override { scripts = with mpvScripts; [ uosc ]; })
       nltch.spotify-adblock
+
     ]
     ++ [
       nixd

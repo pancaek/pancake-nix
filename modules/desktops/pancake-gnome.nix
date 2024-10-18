@@ -74,7 +74,6 @@ in
       ])
       ++ (with pkgs.gnomeExtensions; [
         appindicator
-        ddterm
         # rounded-corners # TODO: somethings up with this one, watch git
         clipboard-history
         user-themes
@@ -92,8 +91,7 @@ in
         lib.optionals
           (
             # Can't use config.environment.systemPackages here or we get infinite recursion
-            lib.elem "nvidia" config.services.xserver.videoDrivers
-            && !lib.packageInList "yelp" config.environment.gnome.excludePackages
+            isNvidia && !lib.packageInList "yelp" config.environment.gnome.excludePackages
           )
           [
             # NOTE: This is a webkit2gtk issue

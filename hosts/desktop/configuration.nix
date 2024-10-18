@@ -47,6 +47,9 @@
   environment.systemPackages = (
     with pkgs;
     [
+      praat
+      rstudio
+
       qmk
       cameractrls-gtk4
       helix
