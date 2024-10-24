@@ -117,8 +117,13 @@
       fastfetch
       gh
       (mpv.override { scripts = with mpvScripts; [ uosc ]; })
-      nltch.spotify-adblock
-
+      (nltch.spotify-adblock.overrideAttrs (old: {
+        postInstall =
+          (old.postInstall or "")
+          + ''
+            sed -i "s:^Exec=spotify %U:Exec=spotify --uri=\'%U\':" "$out/share/applications/spotify.desktop"
+          '';
+      }))
     ]
     ++ [
       nixd
