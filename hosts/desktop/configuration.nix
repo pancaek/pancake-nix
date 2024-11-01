@@ -71,6 +71,7 @@
         --set WEBKIT_DISABLE_DMABUF_RENDERER= 1
       '')
       zoom-us
+      google-chrome
     ]
   );
 

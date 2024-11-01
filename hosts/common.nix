@@ -107,6 +107,10 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
+  programs.spotify = {
+    enable = true;
+    package = with pkgs; nltch.spotify-adblock;
+  };
   environment.systemPackages = (
     with pkgs;
     [
@@ -117,13 +121,6 @@
       fastfetch
       gh
       (mpv.override { scripts = with mpvScripts; [ uosc ]; })
-      (nltch.spotify-adblock.overrideAttrs (old: {
-        postInstall =
-          (old.postInstall or "")
-          + ''
-            sed -i "s:^Exec=spotify %U:Exec=spotify --uri=\'%U\':" "$out/share/applications/spotify.desktop"
-          '';
-      }))
     ]
     ++ [
       nixd
@@ -155,6 +152,11 @@
       # komika-fonts
     ]
   );
+
+  networking.firewall = {
+    allowedUDPPorts = [ 5353 ];
+    allowedTCPPorts = [ 57621 ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
