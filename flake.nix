@@ -64,6 +64,7 @@
             ./modules/printing.nix
             ./modules/ibus.nix
             ./modules/firefox.nix
+            ./modules/spotify.nix
             ./modules/desktops/pancake-gnome.nix
             ./hosts/desktop/nvidia.nix
             ./hosts/desktop/configuration.nix
@@ -97,6 +98,7 @@
             ./modules/printing.nix
             ./modules/ibus.nix
             ./modules/firefox.nix
+            ./modules/spotify.nix
             ./modules/desktops/pancake-gnome.nix
             ./hosts/laptop/nvidia.nix
             ./hosts/laptop/configuration.nix
