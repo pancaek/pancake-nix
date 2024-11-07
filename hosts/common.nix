@@ -111,6 +111,7 @@
     enable = true;
     package = with pkgs; nltch.spotify-adblock;
   };
+
   environment.systemPackages = (
     with pkgs;
     [
@@ -149,6 +150,9 @@
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
+
+      corefonts
+      segoe-ui
       # komika-fonts
     ]
   );

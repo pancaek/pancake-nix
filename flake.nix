@@ -38,8 +38,6 @@
           inherit (prev.pkgs) callPackage;
         })
         // import pkgs/all-packages.nix { inherit (prev) pkgs; }
-        # XXX: This .nix_ extension is needed to get around the file extension check
-        # which would otherwise cause a `callPackage all-packages.nix`
       );
       extended-lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = prev; });
 
