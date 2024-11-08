@@ -2,7 +2,9 @@
   appimageTools,
   fetchurl,
   lib,
+  stdenvNoCC,
   makeWrapper,
+
 }:
 
 let
@@ -15,20 +17,47 @@ let
   };
 
   appimageContents = appimageTools.extract { inherit pname version src; };
+
+  finalApp = appimageTools.wrapType2 {
+    inherit pname version src;
+
+  };
+
 in
-appimageTools.wrapType2 {
-  inherit pname version src;
+stdenvNoCC.mkDerivation {
+  inherit pname version;
 
   nativeBuildInputs = [ makeWrapper ];
 
-  extraInstallCommands = ''
-    mkdir -p $out/share
-    cp -r ${appimageContents}/share/* $out/share/
-    install -Dm444 ${appimageContents}/starc.desktop $out/share/applications/starc.desktop
-    substituteInPlace $out/share/applications/starc.desktop \
-      --replace 'Icon=starc' 'Icon=dev.storyapps.starc'
-  '';
+  dontUnpack = true;
+  dontBuild = true;
 
+  installPhase =
+    let
+      desktopitem = builtins.readFile "${appimageContents}/starc.desktop";
+      newItem = builtins.replaceStrings [ "Icon=starc" ] [ "Icon=dev.storyapps.starc.png" ] (
+        desktopitem + "StartupWMClass=Story Architect"
+      );
+    in
+    ''
+      runHook preInstall
+      mkdir -p $out/share/applications/
+
+      echo "${newItem}" >> $out/share/applications/starc.desktop
+
+
+      install -m 444 -D ${appimageContents}/share/icons/hicolor/512x512/apps/dev.storyapps.starc.png \
+        $out/share/icons/hicolor/512x512/apps/dev.storyapps.starc.png
+      install -m 444 -D ${appimageContents}/share/icons/hicolor/1024x1024/apps/dev.storyapps.starc.png \
+        $out/share/icons/hicolor/1024x1024/apps/dev.storyapps.starc.png
+      install -m 444 -D ${appimageContents}/starc.png \
+        $out/share/icons/hicolor/1024x1024/apps/starc.png
+
+      makeWrapper ${finalApp}/bin/starc $out/bin/starc \
+        --unset QT_PLUGIN_PATH
+
+      runHook postInstall
+    '';
   meta = with lib; {
     description = "Starc AppImage";
     homepage = "https://starc.app/";

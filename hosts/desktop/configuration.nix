@@ -70,21 +70,6 @@
         makeWrapper ${foliate}/bin/foliate $out/bin/foliate \
         --set WEBKIT_DISABLE_DMABUF_RENDERER= 1
       '')
-      # (runCommand "starc" { buildInputs = [ makeWrapper ]; } ''
-      #   mkdir $out
-      #   # Link every top-level folder from starc to our new target
-      #   ln -s ${starc}/* $out
-      #   # Except the bin folder
-      #   rm $out/bin
-      #   mkdir $out/bin
-      #   # We create the bin folder ourselves and link every binary in it
-      #   ln -s ${starc}/bin/* $out/bin
-      #   # Except the main binary
-      #   rm $out/bin/starc
-      #   # Because we create this ourself, by creating a wrapper
-      #   makeWrapper ${starc}/bin/starc $out/bin/starc \
-      #   --unset QT_PLUGIN_PATH
-      # '')
 
       zoom-us
       chromium
