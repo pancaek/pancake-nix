@@ -72,11 +72,11 @@
       '')
 
       zoom-us
-      chromium
 
       texliveFull
 
-      starc
+      story-architect
+      chromium
     ]
   );
 

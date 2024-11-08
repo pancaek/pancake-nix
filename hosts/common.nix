@@ -161,6 +161,9 @@
     allowedUDPPorts = [ 5353 ];
     allowedTCPPorts = [ 57621 ];
   };
+  environment.variables = {
+    BROWSWER = "firefox";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
