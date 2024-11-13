@@ -6,7 +6,7 @@
 }:
 
 let
-  cfg = config.modules.pancake-gnome;
+  cfg = config.my.modules.pancake-gnome;
   isNvidia = lib.elem "nvidia" config.services.xserver.videoDrivers;
 in
 {
@@ -16,7 +16,7 @@ in
     ../polkit-auth.nix
   ];
 
-  options.modules.pancake-gnome = {
+  options.my.modules.pancake-gnome = {
     enable = lib.mkEnableOption "My personal gnome defaults, very opinionated, proceed with caution";
   };
 
@@ -138,7 +138,7 @@ in
         gnome-system-monitor
       ]);
 
-    programs.kvantum.enable = true;
+    my.programs.kvantum.enable = true;
 
     home-manager.sharedModules =
       let

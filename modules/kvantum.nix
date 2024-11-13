@@ -8,11 +8,11 @@ let
   # Shorter name to access final settings a
   # user of hello.nix module HAS ACTUALLY SET.
   # cfg is a typical convention.
-  cfg = config.programs.kvantum;
+  cfg = config.my.programs.kvantum;
 in
 {
   # Declare what settings a user of this module can set.
-  options.programs.kvantum = {
+  options.my.programs.kvantum = {
     enable = lib.mkEnableOption "kvantum";
   };
 

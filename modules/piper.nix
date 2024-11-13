@@ -9,7 +9,7 @@ let
   # user of hello.nix module HAS ACTUALLY SET.
   # cfg is a typical convention.
 
-  cfg = config.programs.piper;
+  cfg = config.my.programs.piper;
 
   piperPackage = lib.overrideAttrsIf (cfg.experimental) (
     prev:
@@ -46,7 +46,7 @@ let
 in
 {
   # Declare what settings a user of this module can set.
-  options.programs.piper = {
+  options.my.programs.piper = {
     enable = lib.mkEnableOption "piper";
     experimental = lib.mkOption {
       description = "Use git piper";

@@ -57,11 +57,6 @@
   # Fix localectl
   services.xserver.exportConfiguration = true;
 
-  modules.ibus = {
-    enable = true;
-    engines = with pkgs.ibus-engines; [ mozc ];
-  };
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -92,24 +87,26 @@
   # NOTE: Enabled by default in programs.zsh.enable (needed for completions from home-manager)
   # environment.pathsToLink = [ "/share/zsh" ];
 
-  modules.quiet-boot.enable = true;
-  modules.audio.enable = true;
-  modules.printing.enable = true;
-
-  modules.pancake-gnome.enable = true;
-
-  # XXX: Home manager extensions / ui tweaks (tabmanager)
-  modules.firefox.enable = true;
+  my = {
+    modules.quiet-boot.enable = true;
+    modules.audio.enable = true;
+    modules.printing.enable = true;
+    modules.pancake-gnome.enable = true;
+    modules.firefox.enable = true;
+    modules.ibus = {
+      enable = true;
+      engines = with pkgs.ibus-engines; [ mozc ];
+    };
+    programs.spotify = {
+      enable = true;
+      package = with pkgs; nltch.spotify-adblock;
+    };
+  };
 
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
-
-  programs.spotify = {
-    enable = true;
-    package = with pkgs; nltch.spotify-adblock;
   };
 
   environment.systemPackages = (

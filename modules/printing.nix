@@ -8,11 +8,11 @@ let
   # Shorter name to access final settings a
   # user of hello.nix module HAS ACTUALLY SET.
   # cfg is a typical convention.
-  cfg = config.modules.printing;
+  cfg = config.my.modules.printing;
 in
 {
   # Declare what settings a user of this module can set.
-  options.modules.printing = {
+  options.my.modules.printing = {
     enable = lib.mkEnableOption "Enable options for printing";
   };
 

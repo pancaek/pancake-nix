@@ -36,7 +36,7 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  programs.piper = {
+  my.programs.piper = {
     enable = true;
     experimental = true;
   };
@@ -48,7 +48,13 @@
     with pkgs;
     [
       praat
-      rstudio
+      (rstudioWrapper.override {
+        packages = with rPackages; [
+          ggplot2
+          dplyr
+          mgcv
+        ];
+      })
 
       qmk
       cameractrls-gtk4
@@ -75,7 +81,7 @@
 
       texliveFull
 
-      story-architect
+      starc
       chromium
     ]
   );

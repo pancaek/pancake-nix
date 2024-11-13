@@ -8,7 +8,7 @@ let
   # Shorter name to access final settings a
   # user of hello.nix module HAS ACTUALLY SET.
   # cfg is a typical convention.
-  cfg = config.modules.polkit-auth;
+  cfg = config.my.modules.polkit-auth;
   agents = {
     "gnome" = {
       package = pkgs.polkit_gnome;
@@ -26,7 +26,7 @@ let
 in
 {
   # Declare what settings a user of this module can set.
-  options.modules.polkit-auth = {
+  options.my.modules.polkit-auth = {
     enable = lib.mkEnableOption "Enable polkit";
     agent = lib.mkOption {
       description = "Auth agent to enable/make acessible on PATH";

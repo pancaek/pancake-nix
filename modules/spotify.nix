@@ -8,11 +8,11 @@ let
   # Shorter name to access final settings a
   # user of hello.nix module HAS ACTUALLY SET.
   # cfg is a typical convention.
-  cfg = config.programs.spotify;
+  cfg = config.my.programs.spotify;
 in
 {
   # Declare what settings a user of this module can set.
-  options.programs.spotify = {
+  options.my.programs.spotify = {
     enable = lib.mkEnableOption "Enable options for spotify";
     package = lib.mkOption {
       type = lib.types.package;
