@@ -8,11 +8,11 @@ let
   # Shorter name to access final settings a
   # user of hello.nix module HAS ACTUALLY SET.
   # cfg is a typical convention.
-  cfg = config.modules.audio;
+  cfg = config.my.modules.audio;
 in
 {
   # Declare what settings a user of this module can set.
-  options.modules.audio = {
+  options.my.modules.audio = {
     enable = lib.mkEnableOption "Enable options to for audio";
   };
 

@@ -8,11 +8,11 @@ let
   # Shorter name to access final settings a
   # user of hello.nix module HAS ACTUALLY SET.
   # cfg is a typical convention.
-  cfg = config.modules.ibus;
+  cfg = config.my.modules.ibus;
 in
 {
   # Declare what settings a user of this module can set.
-  options.modules.ibus = {
+  options.my.modules.ibus = {
     enable = lib.mkEnableOption "Enable ibus and ime tweaks";
     engines = lib.mkOption {
       type = with lib.types; listOf package;

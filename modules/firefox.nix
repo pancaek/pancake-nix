@@ -6,11 +6,11 @@
 }:
 
 let
-  cfg = config.modules.firefox;
+  cfg = config.my.modules.firefox;
   isNvidia = lib.elem "nvidia" config.services.xserver.videoDrivers;
 in
 {
-  options.modules.firefox = {
+  options.my.modules.firefox = {
     enable = lib.mkEnableOption "Enable firefox with extra compatibility tweaks";
   };
 
