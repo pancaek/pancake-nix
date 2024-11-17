@@ -17,7 +17,7 @@
   home.packages = with pkgs; [
     zsh-completions
     obs-studio
-    vscode-fhs
+    # vscode-fhs
     vesktop
     (reaper.overrideAttrs (prev: {
       postInstall =
@@ -64,6 +64,8 @@
     initExtra = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       source $HOME/${config.programs.zsh.dotDir}/.p10k.zsh
+
+      export TERM=my-xterm-256color
 
       bindkey '^[[1;5D' backward-word
       bindkey '^[[1;5C' forward-word

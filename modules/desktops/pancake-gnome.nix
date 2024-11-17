@@ -78,7 +78,7 @@ in
         custom-accent-colors
         primary-input-on-lockscreen
         # hassleless-overview-search # TODO: Version bump
-        sleep-through-notifications
+        # sleep-through-notifications
 
         # NOTE: V-shell for some reason doesn't load properly system-wide
         # I just installed manually for now

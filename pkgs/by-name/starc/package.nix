@@ -27,9 +27,10 @@ stdenvNoCC.mkDerivation (finalAttrs: {
       runHook preInstall
       # Fixup desktop item icons
       install -D ${appimageContents}/starc.desktop -t $out/share/applications/
-      sed -i -e 's:Icon=starc:Icon=dev.storyapps.starc:' \
-             -e '$a\StartupWMClass=Story Architect' $out/share/applications/starc.desktop
-
+      substituteInPlace $out/share/applications/starc.desktop \
+      --replace-fail "Icon=starc" "${''
+        Icon=dev.storyapps.starc
+        StartupWMClass=Story Architect''}"
       cp -r ${appimageContents}/share/* $out/share/
       makeWrapper ${starc-unwrapped}/bin/starc $out/bin/starc \
       --unset QT_PLUGIN_PATH --unset QT_PLUGIN_PATH
