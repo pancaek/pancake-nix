@@ -1,0 +1,3 @@
+my-xterm-256color|my xterm,
+    use=xterm-256color,
+    cnorm=\e[0 q,

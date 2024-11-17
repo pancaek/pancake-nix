@@ -119,6 +119,7 @@
       fastfetch
       gh
       (mpv.override { scripts = with mpvScripts; [ uosc ]; })
+      my-terminfo
     ]
     ++ [
       nixd
@@ -154,12 +155,8 @@
     ]
   );
 
-  networking.firewall = {
-    allowedUDPPorts = [ 5353 ];
-    allowedTCPPorts = [ 57621 ];
-  };
   environment.variables = {
-    BROWSWER = "firefox";
+    BROWSER = "firefox";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
