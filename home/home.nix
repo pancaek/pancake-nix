@@ -73,6 +73,7 @@
       bindkey '^[[3~' delete-char
       bindkey '^H' backward-delete-word
 
+      setopt globdots # show dotfiles in autocomplete list
 
       # Color man pages
 
@@ -117,15 +118,13 @@
   programs.zoxide.enable = true;
   programs.git = {
     enable = true;
-    ***REMOVED***
-    ***REMOVED***
     aliases = {
       amend = "commit --amend -C HEAD";
     };
 
     extraConfig = {
       core = {
-        editor = "code --wait";
+        editor = "hx";
       };
       diff = {
         algorithm = "patience";
