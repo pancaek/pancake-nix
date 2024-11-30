@@ -16,6 +16,7 @@
 
   home.packages = with pkgs; [
     zsh-completions
+    fastfetch
     obs-studio
     # vscode-fhs
     vesktop
@@ -39,8 +40,6 @@
     };
     recursive = true;
   };
-
-  # recursive = true;
 
   programs.zsh = {
     enable = true;
@@ -117,7 +116,7 @@
   programs.eza.enable = true;
   programs.zoxide.enable = true;
   programs.git = {
-    enable = true;
+    enable = false;
     aliases = {
       amend = "commit --amend -C HEAD";
     };
@@ -134,4 +133,45 @@
   };
 
   services.mpris-proxy.enable = true;
+  programs.helix = {
+    enable = true;
+    extraPackages = with pkgs; [
+      nixd
+      nil
+      nixfmt-rfc-style
+      texlab
+    ];
+    settings = {
+      theme = "base16_terminal";
+      editor.cursor-shape.insert = "bar";
+      editor.lsp.display-inlay-hints = true;
+    };
+    languages.language-server = {
+      nixd = {
+        command = "nixd";
+      };
+    };
+    languages.language = [
+      {
+        name = "nix";
+        auto-format = true;
+        block-comment-tokens = [
+          {
+            start = "/*";
+            end = "*/";
+          }
+        ];
+        formatter = {
+          command = "nixfmt";
+          args = [ ];
+        };
+
+        language-servers = [
+          "nixd"
+          "nil"
+        ];
+      }
+    ];
+  };
+  programs.gh.enable = true;
 }

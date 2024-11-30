@@ -116,15 +116,8 @@
       adw-gtk3
       (papirus-icon-theme.override { color = "yellow"; })
       volantes-cursors
-      fastfetch
-      gh
       (mpv.override { scripts = with mpvScripts; [ uosc ]; })
       my-terminfo
-    ]
-    ++ [
-      nixd
-      nil
-      nixfmt-rfc-style
     ]
     ++ (lib.optionals (config.programs.steam.enable) [
       (makeDesktopItem {
