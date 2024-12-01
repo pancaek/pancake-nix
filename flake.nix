@@ -25,7 +25,7 @@
     let
       system = "x86_64-linux";
 
-      nltch_overlay = final: prev: {
+      nltch-overlay = final: prev: {
         nltch = import nltch {
           # we need to explicitly pass pkgs since the repo is weird with flakes
           inherit (prev) pkgs;
@@ -41,6 +41,31 @@
       );
       extended-lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = prev; });
 
+      _2411-fixes = final: prev: {
+        # There's a strange interaction between adw-gtk3 and praat 6.4.22
+        praat = prev.praat.overrideAttrs {
+          version = "6.4.12";
+
+          src = prev.pkgs.fetchFromGitHub {
+            owner = "praat";
+            repo = "praat";
+            rev = "v${final.praat.version}";
+            hash = "sha256-nriw/nP73m27QWdhC5ooTuVMul+GdOUsnVroM/CZiiY=";
+          };
+        };
+
+        # While we wait for https://github.com/NixOS/nixpkgs/pull/358236 to backport
+        gnome-extension-manager = (
+          prev.gnome-extension-manager.overrideAttrs (old: {
+            patches = (old.patches or [ ]) ++ [
+              (prev.pkgs.fetchpatch {
+                url = "https://github.com/mjakeman/extension-manager/commit/91d1c42a30e12131dc3c5afd8a709e7db2a95b70.patch";
+                hash = "sha256-NtsJeqclUx4L3wbyQ46ZCoo4IKSu4/HoT/FD20xriZ4=";
+              })
+            ];
+          })
+        );
+      };
     in
     {
       nixosConfigurations = {
@@ -53,8 +78,9 @@
           modules = [
             {
               nixpkgs.overlays = [
-                nltch_overlay
+                nltch-overlay
                 packages-dir
+                _2411-fixes
               ];
             }
             ./modules/quiet-boot.nix
@@ -87,8 +113,9 @@
           modules = [
             {
               nixpkgs.overlays = [
-                nltch_overlay
+                nltch-overlay
                 packages-dir
+                _2411-fixes
               ];
             }
             ./modules/quiet-boot.nix
