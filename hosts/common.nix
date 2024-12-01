@@ -99,7 +99,7 @@
     };
     programs.spotify = {
       enable = true;
-      package = with pkgs; nltch.spotify-adblock;
+      package = with pkgs; spotify;
     };
   };
 
@@ -139,7 +139,7 @@
     [
       meslo-lgs-nf
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
 
       corefonts

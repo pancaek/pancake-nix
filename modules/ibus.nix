@@ -28,13 +28,14 @@ in
     # Enable sound with pipewire.
     # Wonky in Wayland
     i18n.inputMethod = {
-      enabled = "ibus";
+      enable = true;
+      type = "ibus";
       ibus = {
         engines = cfg.engines;
       };
     };
 
-    home-manager.sharedModules = lib.mkIf (lib.packageInList "ibus-mozc" cfg.engines) [
+    home-manager.sharedModules = lib.mkIf (lib.packageInList "mozc" cfg.engines) [
       { xdg.configFile."mozc/ibus_config.textproto".source = ../home/mozc/ibus_config.textproto; }
     ];
   };

@@ -50,16 +50,21 @@ in
 
     environment.systemPackages =
       (with pkgs; [
-        gnome-extension-manager
-        gnome.gnome-tweaks
-        gnome.gnome-terminal
+        (gnome-extension-manager.overrideAttrs (prev: {
+          patches = (prev.patches or [ ]) ++ [
+            (fetchpatch {
+              url = "https://github.com/mjakeman/extension-manager/commit/91d1c42a30e12131dc3c5afd8a709e7db2a95b70.patch";
+              hash = "sha256-NtsJeqclUx4L3wbyQ46ZCoo4IKSu4/HoT/FD20xriZ4=";
+            })
+          ];
+        }))
+        gnome-tweaks
+        gnome-terminal
         dynamic-wallpaper
         g4music
         endeavour
         mpv
-        gradience
         xmousepasteblock
-
         gnome-epub-thumbnailer
 
         (makeDesktopItem {
@@ -71,18 +76,14 @@ in
       ])
       ++ (with pkgs.gnomeExtensions; [
         appindicator
-        # rounded-corners # TODO: somethings up with this one, watch git
         clipboard-history
+        rounded-window-corners-reborn
         user-themes
         legacy-gtk3-theme-scheme-auto-switcher
-        custom-accent-colors
         primary-input-on-lockscreen
         # hassleless-overview-search # TODO: Version bump
         # sleep-through-notifications
 
-        # NOTE: V-shell for some reason doesn't load properly system-wide
-        # I just installed manually for now
-        # vertical-workspaces
       ])
       ++
         lib.optionals
@@ -97,35 +98,34 @@ in
 
             # gnome-help looks to be a symlink to yelp already so I think this is fine,
             (pkgs.runCommand "gnome-help" { buildInputs = [ pkgs.makeWrapper ]; } ''
-              makeWrapper ${pkgs.gnome.yelp}/bin/yelp $out/bin/gnome-help \
+              makeWrapper ${pkgs.yelp}/bin/yelp $out/bin/gnome-help \
               --set WEBKIT_DISABLE_COMPOSITING_MODE 1
             '')
             # yelp itself can have a cleaner link because its a proper package
             (pkgs.runCommand "yelp" { buildInputs = [ pkgs.makeWrapper ]; } ''
               mkdir $out
               # Link every top-level folder from yelp to our new target
-              ln -s ${pkgs.gnome.yelp}/* $out
+              ln -s ${pkgs.yelp}/* $out
               # Except the bin folder
               rm $out/bin
               mkdir $out/bin
               # We create the bin folder ourselves and link every binary in it
-              ln -s ${pkgs.gnome.yelp}/bin/* $out/bin
+              ln -s ${pkgs.yelp}/bin/* $out/bin
               # Except the main binary
               rm $out/bin/yelp
               # Because we create this ourself, by creating a wrapper
-              makeWrapper ${pkgs.gnome.yelp}/bin/yelp $out/bin/yelp \
+              makeWrapper ${pkgs.yelp}/bin/yelp $out/bin/yelp \
               --set WEBKIT_DISABLE_COMPOSITING_MODE 1
             '')
           ];
 
-    environment.gnome.excludePackages =
-      (with pkgs; [
+    environment.gnome.excludePackages = (
+      with pkgs;
+      [
         gnome-tour
         gnome-connections
         gnome-console
         gnome-text-editor
-      ])
-      ++ (with pkgs.gnome; [
         gnome-music
         epiphany # web browser
         geary # email reader
@@ -136,7 +136,8 @@ in
         gnome-calculator
         gnome-contacts
         gnome-system-monitor
-      ]);
+      ]
+    );
 
     my.programs.kvantum.enable = true;
 
