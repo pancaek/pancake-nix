@@ -44,13 +44,13 @@
       _2411-fixes = final: prev: {
         # There's a strange interaction between adw-gtk3 and praat 6.4.22
         praat = prev.praat.overrideAttrs {
-          version = "6.4.12";
+          version = "6.4.14";
 
           src = prev.pkgs.fetchFromGitHub {
             owner = "praat";
             repo = "praat";
             rev = "v${final.praat.version}";
-            hash = "sha256-nriw/nP73m27QWdhC5ooTuVMul+GdOUsnVroM/CZiiY=";
+            hash = "sha256-AY/OSoCWlWSjtLcve16nL72HidPlJqJgAOvUubMqvj0=";
           };
         };
 

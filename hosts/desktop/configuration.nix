@@ -73,7 +73,7 @@
         # Except the main binary
         rm $out/bin/foliate
         # Because we create this ourself, by creating a wrapper
-        makeWrapper ${foliate}/bin/foliate $out/bin/foliate \
+        makeWrapper ${lib.getExe foliate} $out/bin/foliate \
         --set WEBKIT_DISABLE_DMABUF_RENDERER= 1
       '')
 
