@@ -43,7 +43,7 @@
 
       _2411-fixes = final: prev: {
         # There's a strange interaction between adw-gtk3 and praat 6.4.22
-        praat = prev.praat.overrideAttrs {
+        praat = prev.praat.overrideAttrs (old: {
           version = "6.4.14";
 
           src = prev.pkgs.fetchFromGitHub {
@@ -52,7 +52,7 @@
             rev = "v${final.praat.version}";
             hash = "sha256-AY/OSoCWlWSjtLcve16nL72HidPlJqJgAOvUubMqvj0=";
           };
-        };
+        });
 
         # While we wait for https://github.com/NixOS/nixpkgs/pull/358236 to backport
         gnome-extension-manager = (

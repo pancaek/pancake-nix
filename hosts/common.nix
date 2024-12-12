@@ -99,7 +99,7 @@
     };
     programs.spotify = {
       enable = true;
-      package = with pkgs; spotify;
+      package = with pkgs; nltch.spotify-adblock;
     };
   };
 
@@ -120,16 +120,16 @@
       my-terminfo
     ]
     ++ (lib.optionals (config.programs.steam.enable) [
-      (makeDesktopItem {
-        desktopName = "Proton Experimental";
-        name = "Proton Experimental";
-        noDisplay = true;
-      })
-      (makeDesktopItem {
-        desktopName = "Steam Linux Runtime 3.0 (sniper)";
-        name = "Steam Linux Runtime 3.0 (sniper)";
-        noDisplay = true;
-      })
+      # (makeDesktopItem {
+      #   desktopName = "Proton Experimental";
+      #   name = "Proton Experimental";
+      #   noDisplay = true;
+      # })
+      # (makeDesktopItem {
+      #   desktopName = "Steam Linux Runtime 3.0 (sniper)";
+      #   name = "Steam Linux Runtime 3.0 (sniper)";
+      #   noDisplay = true;
+      # })
     ])
 
   );

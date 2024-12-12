@@ -59,6 +59,7 @@ in
         mpv
         xmousepasteblock
         gnome-epub-thumbnailer
+        libheif
 
         (makeDesktopItem {
           desktopName = "Caffeine-ng";
@@ -71,11 +72,9 @@ in
         appindicator
         clipboard-history
         rounded-window-corners-reborn
-        user-themes
         legacy-gtk3-theme-scheme-auto-switcher
         primary-input-on-lockscreen
         # hassleless-overview-search # TODO: Version bump
-        # sleep-through-notifications
 
       ])
       ++
@@ -153,6 +152,7 @@ in
         (autostartItem "xmousepasteblock" [ "xmousepasteblock &" ])
         (autostartItem "discord" [ "vesktop --start-minimized" ])
         (autostartItem "element" [ "element-desktop --hidden" ])
+        (autostartItem "caffeine" [ "caffeine start" ])
       ];
 
     systemd.services.gdm-monitors = {

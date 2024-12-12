@@ -83,6 +83,9 @@
 
       starc
       chromium
+      prismlauncher
+      fragments
+      audio-book-converter
     ]
   );
 

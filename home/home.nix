@@ -17,7 +17,6 @@
   home.packages = with pkgs; [
     zsh-completions
     fastfetch
-    obs-studio
     # vscode-fhs
     vesktop
     (reaper.overrideAttrs (prev: {
@@ -171,7 +170,12 @@
           "nil"
         ];
       }
+      {
+        name = "latex";
+        auto-format = true;
+      }
     ];
   };
   programs.gh.enable = true;
+  programs.obs-studio.enable = true;
 }

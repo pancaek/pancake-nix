@@ -2,7 +2,6 @@
   lib,
   stdenv,
   fetchFromGitHub,
-  makeWrapper,
   pkg-config,
   gtk3,
 }:
@@ -15,7 +14,11 @@ stdenv.mkDerivation {
     owner = "justinfrankel";
     repo = "WDL";
     rev = "12c86f9061c0c517bb768c2593eb36670f34eb4d";
-    hash = "sha256-om2bwIgFgo3F8QCeSL2W5ykThA9AAYq/3/kZPRII45Q=";
+    hash = "sha256-XR/p3QCs2imlk+YeyIBJ9gO0LSjwU0scmxZJQESUnec=";
+    sparseCheckout = [
+      "WDL/swell/**"
+      "WDL/lice/**"
+    ];
   };
   buildInputs = [
     pkg-config
@@ -35,12 +38,12 @@ stdenv.mkDerivation {
     runHook postInstall
   '';
 
-  patches = [ ./libswell-patch.diff ];
+  patches = [ ./fix-xdg-open.diff ];
 
   meta = with lib; {
     description = "WDL (by Cockos) mirror";
     homepage = "https://github.com/justinfrankel/WDL";
-    license = licenses.unfree; # FIXME: nix-init did not found a license
+    license = licenses.unfree; # FIXME: figure out the actual license
     maintainers = with maintainers; [ ];
     platforms = platforms.all;
   };
