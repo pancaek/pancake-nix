@@ -53,18 +53,6 @@
             hash = "sha256-AY/OSoCWlWSjtLcve16nL72HidPlJqJgAOvUubMqvj0=";
           };
         });
-
-        # While we wait for https://github.com/NixOS/nixpkgs/pull/358236 to backport
-        gnome-extension-manager = (
-          prev.gnome-extension-manager.overrideAttrs (old: {
-            patches = (old.patches or [ ]) ++ [
-              (prev.pkgs.fetchpatch {
-                url = "https://github.com/mjakeman/extension-manager/commit/91d1c42a30e12131dc3c5afd8a709e7db2a95b70.patch";
-                hash = "sha256-NtsJeqclUx4L3wbyQ46ZCoo4IKSu4/HoT/FD20xriZ4=";
-              })
-            ];
-          })
-        );
       };
     in
     {
