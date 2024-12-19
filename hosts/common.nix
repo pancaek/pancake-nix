@@ -116,21 +116,9 @@
       adw-gtk3
       (papirus-icon-theme.override { color = "yellow"; })
       volantes-cursors
-      (mpv.override { scripts = with mpvScripts; [ uosc ]; })
+      # (mpv.override { scripts = with mpvScripts; [ uosc ]; })
       my-terminfo
     ]
-    ++ (lib.optionals (config.programs.steam.enable) [
-      # (makeDesktopItem {
-      #   desktopName = "Proton Experimental";
-      #   name = "Proton Experimental";
-      #   noDisplay = true;
-      # })
-      # (makeDesktopItem {
-      #   desktopName = "Steam Linux Runtime 3.0 (sniper)";
-      #   name = "Steam Linux Runtime 3.0 (sniper)";
-      #   noDisplay = true;
-      # })
-    ])
 
   );
 
