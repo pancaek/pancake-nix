@@ -47,20 +47,11 @@
   environment.systemPackages = (
     with pkgs;
     [
-      praat
-      (rstudioWrapper.override {
-        packages = with rPackages; [
-          ggplot2
-          dplyr
-          mgcv
-        ];
-      })
-
+      # praat
       qmk
       cameractrls-gtk4
       helix
       element-desktop
-      # calibre
       (runCommand "foliate" { buildInputs = [ makeWrapper ]; } ''
         mkdir $out
         # Link every top-level folder from foliate to our new target
@@ -78,14 +69,10 @@
       '')
 
       zoom-us
-
       texliveFull
-
-      starc
       chromium
       prismlauncher
-      fragments
-      audio-book-converter
+      # aegisub
     ]
   );
 

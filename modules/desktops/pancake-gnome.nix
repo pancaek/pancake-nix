@@ -56,11 +56,11 @@ in
         dynamic-wallpaper
         g4music
         endeavour
-        mpv
+        # mpv
+        fragments
         xmousepasteblock
         gnome-epub-thumbnailer
         libheif
-
         (makeDesktopItem {
           desktopName = "Caffeine-ng";
           name = "caffeine";
@@ -121,7 +121,7 @@ in
         gnome-music
         epiphany # web browser
         geary # email reader
-        totem # gnome video
+        # totem # gnome video
         gnome-maps
         gnome-characters
         gnome-shell-extensions
