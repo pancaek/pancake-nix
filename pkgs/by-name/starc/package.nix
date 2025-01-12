@@ -1,30 +1,25 @@
 {
-  stdenvNoCC,
   lib,
-  fetchurl,
   appimageTools,
+  fetchurl,
   makeWrapper,
 }:
 
-stdenvNoCC.mkDerivation (finalAttrs: {
+appimageTools.wrapType2 rec {
   pname = "starc";
   version = "0.7.5";
 
   src = fetchurl {
-    url = "https://github.com/story-apps/starc/releases/download/v${finalAttrs.version}/starc-setup.AppImage";
+    url = "https://github.com/story-apps/starc/releases/download/v${version}/starc-setup.AppImage";
     hash = "sha256-KAY04nXVyXnjKJxzh3Pvi50Vs0EPbLk0VgfZuz7MQR0=";
   };
 
-  dontUnpack = true;
-
   nativeBuildInputs = [ makeWrapper ];
-  installPhase =
+  extraInstallCommands =
     let
-      appimageContents = appimageTools.extract { inherit (finalAttrs) pname version src; };
-      starc-unwrapped = appimageTools.wrapType2 { inherit (finalAttrs) pname version src; };
+      appimageContents = appimageTools.extract { inherit pname version src; };
     in
     ''
-      runHook preInstall
       # Fixup desktop item icons
       install -D ${appimageContents}/starc.desktop -t $out/share/applications/
       substituteInPlace $out/share/applications/starc.desktop \
@@ -32,10 +27,9 @@ stdenvNoCC.mkDerivation (finalAttrs: {
         Icon=dev.storyapps.starc
         StartupWMClass=Story Architect''}"
       cp -r ${appimageContents}/share/* $out/share/
-      makeWrapper ${starc-unwrapped}/bin/starc $out/bin/starc \
-      --unset QT_PLUGIN_PATH --unset QT_PLUGIN_PATH
 
-      runHook postInstall
+      wrapProgram $out/bin/starc \
+        --unset QT_PLUGIN_PATH
 
     '';
 
@@ -45,6 +39,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     mainProgram = "starc";
     license = lib.licenses.unfree;
     maintainers = with lib.maintainers; [ pancaek ];
-    platforms = lib.platforms.unix;
+    platforms = [ "x86_64-linux" ];
   };
-})
+}

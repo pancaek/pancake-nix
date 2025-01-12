@@ -72,6 +72,7 @@
       texliveFull
       chromium
       prismlauncher
+      starc
     ]
   );
 
