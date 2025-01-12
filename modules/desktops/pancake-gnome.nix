@@ -66,7 +66,6 @@ in
           name = "caffeine";
           noDisplay = true;
         })
-        caffeine-ng
       ])
       ++ (with pkgs.gnomeExtensions; [
         appindicator
@@ -152,7 +151,7 @@ in
         (autostartItem "xmousepasteblock" [ "xmousepasteblock &" ])
         (autostartItem "discord" [ "vesktop --start-minimized" ])
         (autostartItem "element" [ "element-desktop --hidden" ])
-        (autostartItem "caffeine" [ "caffeine start" ])
+        { services.caffeine.enable = true; }
       ];
 
     systemd.services.gdm-monitors = {
