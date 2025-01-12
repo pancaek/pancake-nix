@@ -19,6 +19,7 @@
     fastfetch
     # vscode-fhs
     vesktop
+    gh
     (reaper.overrideAttrs (prev: {
       postInstall =
         (prev.postInstall or "")
@@ -176,6 +177,5 @@
       }
     ];
   };
-  programs.gh.enable = true;
   programs.obs-studio.enable = true;
 }

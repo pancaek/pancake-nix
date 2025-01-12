@@ -72,7 +72,6 @@
       texliveFull
       chromium
       prismlauncher
-      # aegisub
     ]
   );
 

@@ -132,7 +132,7 @@
 
       corefonts
       segoe-ui
-      # komika-fonts
+      yuji-fonts
     ]
   );
 
