@@ -95,7 +95,7 @@
     modules.firefox.enable = true;
     modules.ibus = {
       enable = true;
-      engines = with pkgs.ibus-engines; [ mozc ];
+      engines = with pkgs.ibus-engines; [ mozc-ut ];
     };
     programs.spotify = {
       enable = true;
