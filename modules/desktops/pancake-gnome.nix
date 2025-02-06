@@ -73,7 +73,7 @@ in
         legacy-gtk3-theme-scheme-auto-switcher
         primary-input-on-lockscreen
         # hassleless-overview-search # TODO: Version bump
-
+        privacy-indicators-accent-color
       ])
       ++
         lib.optionals
@@ -170,7 +170,7 @@ in
         in
         {
           Type = "oneshot";
-          ExecStart = "${pkgs.coreutils}/bin/install -o gdm -g gdm \"${sourcePath}\" \"${destPath}\""; # Do the thing
+          ExecStart = "${pkgs.coreutils}/bin/install -o gdm -g gdm \"${sourcePath}\" \"${destPath}\"";
         };
     };
   };
