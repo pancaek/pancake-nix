@@ -5,14 +5,12 @@
   makeWrapper,
 }:
 let
-
   pname = "starc";
   version = "0.7.5";
   src = fetchurl {
     url = "https://github.com/story-apps/starc/releases/download/v${version}/starc-setup.AppImage";
     hash = "sha256-KAY04nXVyXnjKJxzh3Pvi50Vs0EPbLk0VgfZuz7MQR0=";
   };
-
   appimageContents = appimageTools.extract { inherit pname version src; };
 in
 appimageTools.wrapType2 {
