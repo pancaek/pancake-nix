@@ -13,7 +13,6 @@ in
   imports = [
     ../kvantum.nix
     ../piper.nix
-    ../polkit-auth.nix
   ];
 
   options.my.modules.pancake-gnome = {
@@ -26,9 +25,10 @@ in
       displayManager.gdm = {
         enable = true;
         wayland = false;
+        autoSuspend = false;
       };
       desktopManager.gnome.enable = true;
-      excludePackages = (with pkgs; [ xterm ]);
+      excludePackages = with pkgs; [ xterm ];
     };
     # NOTE: https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/2570
     # I don't actually care about functionality this but I want the panel to load
@@ -54,9 +54,8 @@ in
         gnome-tweaks
         gnome-terminal
         dynamic-wallpaper
-        g4music
+        gapless
         endeavour
-        # mpv
         fragments
         xmousepasteblock
         gnome-epub-thumbnailer

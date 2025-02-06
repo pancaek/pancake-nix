@@ -47,7 +47,6 @@
   environment.systemPackages = (
     with pkgs;
     [
-      # praat
       qmk
       cameractrls-gtk4
       helix
@@ -65,14 +64,12 @@
         rm $out/bin/foliate
         # Because we create this ourself, by creating a wrapper
         makeWrapper ${lib.getExe foliate} $out/bin/foliate \
-        --set WEBKIT_DISABLE_DMABUF_RENDERER= 1
+        --set WEBKIT_DISABLE_DMABUF_RENDERER=1
       '')
-
       zoom-us
       texliveFull
-      chromium
       prismlauncher
-      starc
+      praat
     ]
   );
 

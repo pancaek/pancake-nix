@@ -84,8 +84,6 @@
   # ZSH
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
-  # NOTE: Enabled by default in programs.zsh.enable (needed for completions from home-manager)
-  # environment.pathsToLink = [ "/share/zsh" ];
 
   my = {
     modules.quiet-boot.enable = true;

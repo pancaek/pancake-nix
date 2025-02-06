@@ -23,6 +23,8 @@ in
         "media.ffmpeg.vaapi.enabled" = true;
         "media.rdd-ffmpeg.enabled" = true;
         "gfx.x11-egl.force-enabled" = true;
+        # Potentially no longer needed?
+        # see https://github.com/elFarto/nvidia-vaapi-driver/issues/305
         "widget.dmabuf.force-enabled" = true;
       };
     };
