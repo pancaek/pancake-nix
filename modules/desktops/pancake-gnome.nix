@@ -131,6 +131,15 @@ in
 
     my.programs.kvantum.enable = true;
 
+    systemd.tmpfiles.rules =
+      let
+        sourcePath = "/home/pancaek/.config/monitors.xml";
+        destPath = "/run/gdm/.config/monitors.xml";
+      in
+      [
+        "C ${destPath} 644 gdm gdm - ${sourcePath}"
+      ];
+
     home-manager.sharedModules =
       let
         autostartItem = title: commandList: {
@@ -152,26 +161,5 @@ in
         (autostartItem "element" [ "element-desktop --hidden" ])
         { services.caffeine.enable = true; }
       ];
-
-    systemd.services.gdm-monitors = {
-      description = "Copy monitors.xml to GDM config at boot";
-
-      # Run after fs is ready
-      after = [ "local-fs.target" ];
-
-      # Run at boot
-      wantedBy = [ "multi-user.target" ];
-
-      # Service configuration
-      serviceConfig =
-        let
-          sourcePath = "/home/pancaek/.config/monitors.xml";
-          destPath = "/run/gdm/.config/monitors.xml";
-        in
-        {
-          Type = "oneshot";
-          ExecStart = "${pkgs.coreutils}/bin/install -o gdm -g gdm \"${sourcePath}\" \"${destPath}\"";
-        };
-    };
   };
 }
