@@ -119,7 +119,7 @@
       (papirus-icon-theme.override { color = "yellow"; })
       volantes-cursors
       # (mpv.override { scripts = with mpvScripts; [ uosc ]; })
-      my-terminfo
+      # my-terminfo
     ]
 
   );
@@ -132,10 +132,9 @@
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-emoji
-
       corefonts
-      segoe-ui
-      yuji-fonts
+      # breaks font fallbacks apparently :(
+      # yuji-fonts
     ]
   );
 

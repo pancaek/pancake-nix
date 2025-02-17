@@ -17,9 +17,6 @@ appimageTools.wrapType2 {
   inherit pname version src;
   nativeBuildInputs = [ makeWrapper ];
   extraInstallCommands = ''
-    wrapProgram $out/bin/starc \
-      --unset QT_PLUGIN_PATH
-      
     # Fixup desktop item icons
     install -D ${appimageContents}/starc.desktop -t $out/share/applications/
     substituteInPlace $out/share/applications/starc.desktop \
@@ -27,6 +24,8 @@ appimageTools.wrapType2 {
       Icon=dev.storyapps.starc
       StartupWMClass=Story Architect''}"
     cp -r ${appimageContents}/share/* $out/share/
+    wrapProgram $out/bin/starc \
+      --unset QT_PLUGIN_PATH
   '';
 
   meta = {

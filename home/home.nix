@@ -64,8 +64,6 @@
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       source $HOME/${config.programs.zsh.dotDir}/.p10k.zsh
 
-      export TERM=my-xterm-256color
-
       bindkey '^[[1;5D' backward-word
       bindkey '^[[1;5C' forward-word
 
@@ -87,6 +85,11 @@
       export LESS_TERMCAP_ue=$'\E[0m'
       export LESS_TERMCAP_us=$'\E[01;36m'
       export LESS=-R
+
+      hx () {
+        command hx "$@"
+        print -n '\033[0 q'
+      }
     '';
 
     initExtraBeforeCompInit = ''
