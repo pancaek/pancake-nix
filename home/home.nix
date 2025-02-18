@@ -33,9 +33,9 @@
   xdg.configFile."REAPER" = {
     source = pkgs.symlinkJoin {
       name = "reaper-userplugins";
-      paths = [
-        "${pkgs.reaper-sws-extension}"
-        "${pkgs.reapack}"
+      paths = with pkgs; [
+        reaper-sws-extension
+        reapack
       ];
     };
     recursive = true;
