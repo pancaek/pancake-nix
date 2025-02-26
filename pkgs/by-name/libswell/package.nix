@@ -20,10 +20,10 @@ stdenv.mkDerivation {
       "WDL/lice/**"
     ];
   };
-  buildInputs = [
-    pkg-config
-    gtk3
-  ];
+
+  strictDeps = true;
+  nativeBuildInputs = [ pkg-config ];
+  buildInputs = [ gtk3 ];
 
   buildFlags = [ "PRELOAD_GDK=1" ];
 
@@ -40,11 +40,11 @@ stdenv.mkDerivation {
 
   patches = [ ./fix-xdg-open.diff ];
 
-  meta = with lib; {
+  meta = {
     description = "WDL (by Cockos) mirror";
     homepage = "https://github.com/justinfrankel/WDL";
-    license = licenses.unfree; # FIXME: figure out the actual license
-    maintainers = with maintainers; [ ];
-    platforms = platforms.all;
+    license = lib.licenses.unfree; # FIXME: figure out the actual license
+    maintainers = with lib.maintainers; [ ];
+    platforms = lib.platforms.all;
   };
 }
