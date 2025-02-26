@@ -30,6 +30,7 @@ in
       desktopManager.gnome.enable = true;
       excludePackages = with pkgs; [ xterm ];
     };
+
     # NOTE: https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/2570
     # I don't actually care about functionality this but I want the panel to load
     services.fwupd.enable = true;
@@ -57,6 +58,7 @@ in
         gapless
         endeavour
         fragments
+        papers
         xmousepasteblock
         gnome-epub-thumbnailer
         libheif
@@ -74,6 +76,7 @@ in
         primary-input-on-lockscreen
         # hassleless-overview-search # TODO: Version bump
         privacy-indicators-accent-color
+        bluetooth-battery-meter
       ])
       ++
         lib.optionals
@@ -128,6 +131,8 @@ in
         gnome-system-monitor
       ]
     );
+
+    programs.evince.enable = false;
 
     my.programs.kvantum.enable = true;
 

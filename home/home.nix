@@ -35,7 +35,7 @@
       name = "reaper-userplugins";
       paths = with pkgs; [
         reaper-sws-extension
-        reapack
+        reaper-reapack-extension
       ];
     };
     recursive = true;

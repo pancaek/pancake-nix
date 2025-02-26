@@ -70,6 +70,8 @@
       texliveFull
       prismlauncher
       praat
+
+      calibre
     ]
   );
 
