@@ -49,7 +49,7 @@
           src = prev.pkgs.fetchFromGitHub {
             owner = "praat";
             repo = "praat";
-            rev = "v${final.praat.version}";
+            tag = "v${final.praat.version}";
             hash = "sha256-AY/OSoCWlWSjtLcve16nL72HidPlJqJgAOvUubMqvj0=";
           };
         });
