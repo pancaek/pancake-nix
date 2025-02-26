@@ -1,20 +1,29 @@
 {
-  lib,
-  stdenv,
-  fetchFromGitHub,
   boost,
   catch2_3,
   cmake,
   curl,
+  fetchFromGitHub,
+  git,
   libxml2,
+  openssl,
   php,
+  ruby,
   sqlite,
+  stdenv,
   zlib,
+
+  pname,
+  version,
+  meta,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
-  pname = "reapack";
-  version = "1.2.5";
+  inherit
+    pname
+    version
+    meta
+    ;
 
   src = fetchFromGitHub {
     owner = "cfillion";
@@ -24,22 +33,25 @@ stdenv.mkDerivation (finalAttrs: {
     fetchSubmodules = true;
   };
 
-  nativeBuildInputs = [ cmake ];
+  strictDeps = true;
+
+  nativeBuildInputs = [
+    cmake
+    git
+    php
+    ruby
+  ];
+
   buildInputs = [
     boost
     catch2_3
     curl
     libxml2
-    php
+    openssl
     sqlite
     zlib
   ];
 
-  meta = {
-    description = "Package manager for REAPER";
-    homepage = "https://github.com/cfillion/reapack";
-    license = lib.licenses.gpl3Only;
-    maintainers = with lib.maintainers; [ pancaek ];
-    platforms = lib.platforms.all;
-  };
+  cmakeFlags = [ "-Wno-dev" ];
+
 })

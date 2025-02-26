@@ -9,27 +9,30 @@
   pkg-config,
   gtk3,
 }:
-stdenv.mkDerivation {
+stdenv.mkDerivation (finalAttrs: {
   pname = "reaper-sws-extension";
-  version = "2.12.1";
+  version = "2.14.0.3";
 
   src = fetchFromGitHub {
     owner = "reaper-oss";
     repo = "sws";
-    rev = "a3693ad52ed16fe95ac0a570971656b6c9337f26";
-    hash = "sha256-ALntLopjjzZaBsSapzuV4WCkmaUvcR8DtiWI+pvE8g4=";
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-n4L/5eCKoiQmUNfYxhtgxgflINS9yxr3MUPrrt4YYdY=";
     fetchSubmodules = true;
   };
 
-  nativeBuildInputs = [ cmake ];
-  buildInputs = [
+  nativeBuildInputs = [
+    cmake
     php
     perl
     git
     pkg-config
+  ];
+  buildInputs = [
     gtk3
   ];
 
+  strictDeps = true;
   meta = with lib; {
     description = "A Reaper Plugin Extension";
     longDescription = ''
@@ -41,4 +44,4 @@ stdenv.mkDerivation {
     license = licenses.mit;
     platforms = platforms.all;
   };
-}
+})
