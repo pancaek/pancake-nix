@@ -36,31 +36,10 @@
         "type": "indirect"
       }
     },
-    "nltch": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1733155938,
-        "narHash": "sha256-PbbevLa7UgSZLaYwuZ9wZ3r7a0clCAa5pvPIOsS6wXU=",
-        "owner": "NL-TCH",
-        "repo": "nur-packages",
-        "rev": "1dcaa26177fb1c7a3ad3fb8780e9af71e63c338a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NL-TCH",
-        "repo": "nur-packages",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs",
-        "nltch": "nltch"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

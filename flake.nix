@@ -8,10 +8,6 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nltch = {
-      url = "github:NL-TCH/nur-packages";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -20,17 +16,10 @@
       nixpkgs,
       # nixpkgs-unstable,
       home-manager,
-      nltch,
     }:
     let
       system = "x86_64-linux";
 
-      nltch-overlay = final: prev: {
-        nltch = import nltch {
-          # we need to explicitly pass pkgs since the repo is weird with flakes
-          inherit (prev) pkgs;
-        };
-      };
       packages-dir = (
         final: prev:
         (nixpkgs.lib.packagesFromDirectoryRecursive {
@@ -66,7 +55,6 @@
           modules = [
             {
               nixpkgs.overlays = [
-                nltch-overlay
                 packages-dir
                 _2411-fixes
               ];
@@ -101,7 +89,6 @@
           modules = [
             {
               nixpkgs.overlays = [
-                nltch-overlay
                 packages-dir
                 _2411-fixes
               ];

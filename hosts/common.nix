@@ -97,7 +97,7 @@
     };
     programs.spotify = {
       enable = true;
-      package = with pkgs; nltch.spotify-adblock;
+      package = with pkgs; spotify-adblock;
     };
   };
 
