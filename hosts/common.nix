@@ -105,6 +105,7 @@
     # fixes pdf rendering
     "gfx.canvas.accelerated" = false;
   };
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -119,7 +120,6 @@
       (papirus-icon-theme.override { color = "yellow"; })
       volantes-cursors
       # (mpv.override { scripts = with mpvScripts; [ uosc ]; })
-      # my-terminfo
     ]
 
   );
