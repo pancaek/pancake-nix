@@ -31,19 +31,6 @@
 
       extended-lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = prev; });
 
-      _2411-fixes = final: prev: {
-        # There's a strange interaction between adw-gtk3 and praat 6.4.22
-        praat = prev.praat.overrideAttrs (old: {
-          version = "6.4.14";
-
-          src = prev.pkgs.fetchFromGitHub {
-            owner = "praat";
-            repo = "praat";
-            tag = "v${final.praat.version}";
-            hash = "sha256-AY/OSoCWlWSjtLcve16nL72HidPlJqJgAOvUubMqvj0=";
-          };
-        });
-      };
     in
     {
       nixosConfigurations = {
@@ -57,7 +44,6 @@
             {
               nixpkgs.overlays = [
                 packages-dir
-                _2411-fixes
               ];
             }
             ./modules/quiet-boot.nix
@@ -92,7 +78,6 @@
             {
               nixpkgs.overlays = [
                 packages-dir
-                _2411-fixes
               ];
             }
             ./modules/quiet-boot.nix
