@@ -86,6 +86,7 @@
   programs.zsh.enable = true;
 
   my = {
+    xdg.enable = true;
     modules.quiet-boot.enable = true;
     modules.audio.enable = true;
     modules.printing.enable = true;
@@ -127,14 +128,14 @@
   fonts.packages = (
     with pkgs;
     [
+      # breaks font fallbacks apparently :(
+      # yuji-fonts
       meslo-lgs-nf
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-emoji
       corefonts
-      # breaks font fallbacks apparently :(
-      # yuji-fonts
     ]
   );
 

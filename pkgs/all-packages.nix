@@ -1,5 +1,7 @@
-{ pkgs }:
-with pkgs;
+{ prev }:
 {
-  # do stuff eventually 
+  gnomeExtensions = prev.gnomeExtensions // {
+    better-ibus = prev.pkgs.callPackage ./better-ibus/package.nix { };
+  };
+
 }

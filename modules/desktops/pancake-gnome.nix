@@ -49,6 +49,18 @@ in
           ]
         );
 
+    fonts.fontconfig.localConf = ''
+      <match target="pattern">
+          <test name="family" qual="any">
+              <string>Cantarell</string>
+          </test>
+          <edit name="family" mode="append">
+              # <string>Yuji Syuku Std</string>
+              <string>Noto Sans CJK JP</string>
+          </edit>
+      </match>
+    '';
+
     environment.systemPackages =
       (with pkgs; [
         gnome-extension-manager
@@ -77,6 +89,7 @@ in
         # hassleless-overview-search # TODO: Version bump
         privacy-indicators-accent-color
         bluetooth-battery-meter
+        better-ibus
       ])
       ++
         lib.optionals

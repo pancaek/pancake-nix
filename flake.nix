@@ -22,12 +22,13 @@
 
       packages-dir = (
         final: prev:
-        (nixpkgs.lib.packagesFromDirectoryRecursive {
+        (prev.lib.packagesFromDirectoryRecursive {
           directory = ./pkgs/by-name;
           inherit (prev.pkgs) callPackage;
         })
-        // import pkgs/all-packages.nix { inherit (prev) pkgs; }
+        // import ./pkgs/all-packages.nix { inherit prev; }
       );
+
       extended-lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = prev; });
 
       _2411-fixes = final: prev: {
@@ -65,6 +66,7 @@
             ./modules/ibus.nix
             ./modules/firefox.nix
             ./modules/spotify.nix
+            ./modules/xdg.nix
             ./modules/desktops/pancake-gnome.nix
             ./hosts/desktop/nvidia.nix
             ./hosts/desktop/configuration.nix
@@ -99,6 +101,7 @@
             ./modules/ibus.nix
             ./modules/firefox.nix
             ./modules/spotify.nix
+            ./modules/xdg.nix
             ./modules/desktops/pancake-gnome.nix
             ./hosts/laptop/nvidia.nix
             ./hosts/laptop/configuration.nix
