@@ -14,12 +14,9 @@
     {
       self,
       nixpkgs,
-      # nixpkgs-unstable,
       home-manager,
     }:
     let
-      system = "x86_64-linux";
-
       packages-dir = (
         final: prev:
         (prev.lib.packagesFromDirectoryRecursive {
@@ -35,7 +32,6 @@
     {
       nixosConfigurations = {
         pancake-pc = nixpkgs.lib.nixosSystem {
-          inherit system;
           specialArgs = {
             lib = extended-lib;
           };
@@ -73,7 +69,6 @@
         };
 
         pancake-laptop = nixpkgs.lib.nixosSystem {
-          inherit system;
           modules = [
             {
               nixpkgs.overlays = [
