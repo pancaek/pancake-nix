@@ -8,6 +8,9 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    helix = {
+      url = "github:helix-editor/helix";
+    };
   };
 
   outputs =
@@ -15,7 +18,8 @@
       self,
       nixpkgs,
       home-manager,
-    }:
+      helix,
+    }@inputs:
     let
       packages-dir = (
         final: prev:
@@ -61,6 +65,9 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.pancaek = import ./home/home.nix;
+                extraSpecialArgs = {
+                  inherit inputs;
+                };
               };
 
               # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix

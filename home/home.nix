@@ -2,6 +2,8 @@
   config,
   pkgs,
   lib,
+  inputs,
+
   ...
 }:
 
@@ -138,6 +140,7 @@
   services.mpris-proxy.enable = true;
   programs.helix = {
     enable = true;
+    package = inputs.helix.packages.${pkgs.hostPlatform.system}.default;
     extraPackages = with pkgs; [
       nixd
       nil
@@ -148,6 +151,8 @@
       theme = "base16_terminal";
       editor.cursor-shape.insert = "bar";
       editor.lsp.display-inlay-hints = true;
+      editor.end-of-line-diagnostics = "hint";
+      editor.inline-diagnostics.cursor-line = "warning";
     };
     languages.language-server = {
       nixd = {
