@@ -65,12 +65,8 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.pancaek = import ./home/home.nix;
-                extraSpecialArgs = {
-                  inherit inputs;
-                };
+                extraSpecialArgs = { inherit inputs; };
               };
-
-              # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
             }
           ];
         };
@@ -101,9 +97,8 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.pancaek = import ./home/home.nix;
+                extraSpecialArgs = { inherit inputs; };
               };
-
-              # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
             }
           ];
         };

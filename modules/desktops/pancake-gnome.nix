@@ -86,7 +86,6 @@ in
         rounded-window-corners-reborn
         legacy-gtk3-theme-scheme-auto-switcher
         primary-input-on-lockscreen
-        # hassleless-overview-search # TODO: Version bump
         privacy-indicators-accent-color
         bluetooth-battery-meter
         better-ibus
