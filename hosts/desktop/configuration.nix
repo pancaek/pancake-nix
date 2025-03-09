@@ -49,7 +49,6 @@
     [
       qmk
       cameractrls-gtk4
-      helix
       element-desktop
       (runCommand "foliate" { buildInputs = [ makeWrapper ]; } ''
         mkdir $out
