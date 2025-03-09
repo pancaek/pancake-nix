@@ -21,6 +21,8 @@ stdenv.mkDerivation (finalAttrs: {
     fetchSubmodules = true;
   };
 
+  strictDeps = true;
+
   nativeBuildInputs = [
     cmake
     php
@@ -28,11 +30,11 @@ stdenv.mkDerivation (finalAttrs: {
     git
     pkg-config
   ];
+
   buildInputs = [
     gtk3
   ];
 
-  strictDeps = true;
   meta = with lib; {
     description = "A Reaper Plugin Extension";
     longDescription = ''
