@@ -21,15 +21,7 @@
       helix,
     }@inputs:
     let
-      packages-dir = (
-        final: prev:
-        (prev.lib.packagesFromDirectoryRecursive {
-          directory = ./pkgs/by-name;
-          inherit (prev.pkgs) callPackage;
-        })
-        // import ./pkgs/all-packages.nix { inherit prev; }
-      );
-
+      packages-dir = (final: prev: import ./pkgs { inherit prev; });
       extended-lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = prev; });
 
     in
@@ -72,6 +64,10 @@
         };
 
         pancake-laptop = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            lib = extended-lib;
+          };
+
           modules = [
             {
               nixpkgs.overlays = [

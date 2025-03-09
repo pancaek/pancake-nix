@@ -1,5 +1,10 @@
 { prev }:
-{
+
+(prev.lib.packagesFromDirectoryRecursive {
+  directory = ./by-name;
+  inherit (prev.pkgs) callPackage;
+})
+// {
   gnomeExtensions = prev.gnomeExtensions // {
     better-ibus = prev.pkgs.callPackage ./better-ibus/package.nix { };
   };
