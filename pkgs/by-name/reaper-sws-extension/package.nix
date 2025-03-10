@@ -17,7 +17,7 @@ stdenv.mkDerivation (finalAttrs: {
     owner = "reaper-oss";
     repo = "sws";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-n4L/5eCKoiQmUNfYxhtgxgflINS9yxr3MUPrrt4YYdY=";
+    hash = "sha256-37pBbNACQuuEk1HJTiUHdb0mDiR2+ZsEQUOhz7mrPPg=";
     fetchSubmodules = true;
   };
 
@@ -31,19 +31,17 @@ stdenv.mkDerivation (finalAttrs: {
     pkg-config
   ];
 
-  buildInputs = [
-    gtk3
-  ];
+  buildInputs = [ gtk3 ];
 
-  meta = with lib; {
-    description = "A Reaper Plugin Extension";
+  meta = {
+    description = "Reaper Plugin Extension";
     longDescription = ''
       The SWS / S&M extension is a collection of features that seamlessly integrate into REAPER, the Digital Audio Workstation (DAW) software by Cockos, Inc.
       It is a collaborative and open source project.
     '';
     homepage = "https://www.sws-extension.org/";
-    maintainers = with maintainers; [ mrtnvgr ];
-    license = licenses.mit;
-    platforms = platforms.all;
+    maintainers = with lib.maintainers; [ pancaek ];
+    license = lib.licenses.mit;
+    platforms = lib.platforms.all;
   };
 })

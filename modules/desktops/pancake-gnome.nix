@@ -64,7 +64,7 @@ in
     environment.systemPackages =
       (with pkgs; [
         gnome-extension-manager
-        gnome-tweaks
+        refine
         gnome-terminal
         dynamic-wallpaper
         gapless
