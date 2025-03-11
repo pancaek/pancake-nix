@@ -4,6 +4,7 @@
   lib,
   inputs,
 
+  self,
   ...
 }:
 
@@ -27,7 +28,7 @@
         (prev.postInstall or "")
         + ''
           rm $out/opt/REAPER/libSwell.so
-          ln -s ${libswell}/lib/libSwell.so $out/opt/REAPER/libSwell.so
+          ln -s ${self.pkgs.libswell}/lib/libSwell.so $out/opt/REAPER/libSwell.so
         '';
     }))
   ];
@@ -35,7 +36,7 @@
   xdg.configFile."REAPER" = {
     source = pkgs.symlinkJoin {
       name = "reaper-userplugins";
-      paths = with pkgs; [
+      paths = with self.pkgs; [
         reaper-sws-extension
         reaper-reapack-extension
       ];

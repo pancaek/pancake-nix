@@ -21,23 +21,23 @@
       helix,
     }@inputs:
     let
-      packages-dir = (final: prev: import ./pkgs { inherit prev; });
       extended-lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = prev; });
-
     in
     {
+      pkgs = import ./pkgs {
+        prev = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+      };
       nixosConfigurations = {
         pancake-pc = nixpkgs.lib.nixosSystem {
           specialArgs = {
             lib = extended-lib;
+            inherit self inputs;
           };
 
           modules = [
-            {
-              nixpkgs.overlays = [
-                packages-dir
-              ];
-            }
             ./modules/quiet-boot.nix
             ./modules/audio.nix
             ./modules/printing.nix
@@ -57,7 +57,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.pancaek = import ./home/home.nix;
-                extraSpecialArgs = { inherit inputs; };
+                extraSpecialArgs = { inherit self inputs; };
               };
             }
           ];
@@ -65,15 +65,11 @@
 
         pancake-laptop = nixpkgs.lib.nixosSystem {
           specialArgs = {
+            inherit self inputs;
             lib = extended-lib;
           };
 
           modules = [
-            {
-              nixpkgs.overlays = [
-                packages-dir
-              ];
-            }
             ./modules/quiet-boot.nix
             ./modules/audio.nix
             ./modules/printing.nix
@@ -93,7 +89,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.pancaek = import ./home/home.nix;
-                extraSpecialArgs = { inherit inputs; };
+                extraSpecialArgs = { inherit self inputs; };
               };
             }
           ];

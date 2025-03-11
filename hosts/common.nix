@@ -6,6 +6,7 @@
   config,
   pkgs,
   lib,
+  self,
   ...
 }:
 
@@ -98,7 +99,7 @@
     };
     programs.spotify = {
       enable = true;
-      package = with pkgs; spotify-adblock;
+      package = with self.pkgs; spotify-adblock;
     };
   };
 
