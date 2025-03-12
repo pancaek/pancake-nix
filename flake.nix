@@ -46,6 +46,7 @@
             ./modules/spotify.nix
             ./modules/xdg.nix
             ./modules/desktops/pancake-gnome.nix
+            ./modules/desktops/pancake-hyprland.nix
             ./hosts/desktop/nvidia.nix
             ./hosts/desktop/configuration.nix
 

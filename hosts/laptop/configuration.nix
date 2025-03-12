@@ -34,7 +34,7 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
+  my.modules.pancake-gnome.enable = true;
   environment.systemPackages = (with pkgs; [ ]);
 
   # Some programs need SUID wrappers, can be configured further or are

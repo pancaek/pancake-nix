@@ -91,7 +91,6 @@
     modules.quiet-boot.enable = true;
     modules.audio.enable = true;
     modules.printing.enable = true;
-    modules.pancake-gnome.enable = true;
     modules.firefox.enable = true;
     modules.ibus = {
       enable = true;
