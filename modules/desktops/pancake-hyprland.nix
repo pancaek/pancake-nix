@@ -21,27 +21,77 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    security.pam.services.gdm.enableGnomeKeyring = true;
+    boot = {
 
-    boot.kernelParams = lib.mkIf isNvidia [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+      kernelParams = lib.mkIf isNvidia [
+        "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+      ];
+      extraModprobeConfig = lib.mkIf isNvidia "options nvidia NVreg_UsePageAttributeTable=1";
+    };
 
     hardware.nvidia.powerManagement.enable = lib.mkIf isNvidia true;
 
     # Making sure to use the proprietary drivers until the issue above is fixed upstream
     hardware.nvidia.open = lib.mkIf isNvidia (lib.mkForce false);
+    services = {
 
-    services.xserver = {
-      displayManager.gdm = {
-        enable = true;
-        wayland = true;
-        autoSuspend = false;
+      xserver = {
+        displayManager.gdm = {
+          enable = true;
+          wayland = true;
+          autoSuspend = false;
+        };
+        excludePackages = with pkgs; [ xterm ];
       };
-      excludePackages = with pkgs; [ xterm ];
+      gnome = {
+        gnome-online-accounts.enable = true;
+        evolution-data-server.enable = true;
+        gnome-keyring.enable = true;
+      };
+      accounts-daemon.enable = true;
+
+      udisks2.enable = true;
+      gvfs.enable = true;
+      geoclue2.enable = true;
     };
+    programs = {
 
-    programs.hyprland.enable = true;
-    programs.hyprlock.enable = true;
-    programs.waybar.enable = true;
+      hyprland.enable = true;
+      hyprlock.enable = true;
+      waybar.enable = true;
+      dconf.enable = true;
+      nm-applet.enable = true;
+      hyprland.withUWSM = true;
+    };
+    systemd = {
+      user.services = {
+        polkit-gnome-authentication-agent-1 = {
+          description = "polkit-gnome-authentication-agent-1";
+          wantedBy = [ "graphical-session.target" ];
+          wants = [ "graphical-session.target" ];
+          after = [ "graphical-session.target" ];
+          serviceConfig = {
+            Type = "simple";
+            ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+            Restart = "on-failure";
+            RestartSec = 1;
+            TimeoutStopSec = 10;
+          };
+        };
 
+        hyprland-session = {
+          description = "Hyprland compositor session";
+          bindsTo = [ "graphical-session.target" ];
+          wants = [
+            "graphical-session-pre.target"
+            "xdg-desktop-autostart.target"
+          ];
+          after = [ "graphical-session-pre.target" ];
+          before = [ "xdg-desktop-autostart.target" ];
+        };
+      };
+    };
     environment.sessionVariables.NIXOS_OZONE_WL = 1;
 
     # NOTE: https://github.com/NixOS/nixpkgs/issues/195936#issuecomment-1366902737
@@ -57,18 +107,30 @@ in
             gst-libav
           ]
         );
-
     environment.systemPackages = (
       with pkgs;
       [
-        kitty
+        caffeine-ng
+        anyrun
+        glib
+        gnome-online-accounts-gtk
+        gsettings-desktop-schemas
+        networkmanagerapplet
+        swaynotificationcenter
+        playerctl
         nwg-look
+        wezterm
+        nwg-displays
         gapless
         endeavour
         fragments
         papers
         gnome-epub-thumbnailer
         libheif
+        gnome-calendar
+        gnome-weather
+        gnome-clocks
+
         (makeDesktopItem {
           desktopName = "Caffeine-ng";
           name = "caffeine";

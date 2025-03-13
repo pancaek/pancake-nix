@@ -92,10 +92,6 @@
     modules.audio.enable = true;
     modules.printing.enable = true;
     modules.firefox.enable = true;
-    modules.ibus = {
-      enable = true;
-      engines = with pkgs.ibus-engines; [ mozc-ut ];
-    };
     programs.spotify = {
       enable = true;
       package = with self.pkgs; spotify-adblock;

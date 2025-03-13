@@ -36,8 +36,13 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  my.modules.pancake-hyprland.enable = true;
+  my.modules.pancake-hyprland.enable = false;
+  my.modules.pancake-gnome.enable = true;
 
+  my.modules.ibus = {
+    enable = true;
+    engines = with pkgs.ibus-engines; [ mozc-ut ];
+  };
   my.programs.piper = {
     enable = true;
     experimental = true;
