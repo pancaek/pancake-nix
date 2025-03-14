@@ -6,7 +6,6 @@
   config,
   pkgs,
   lib,
-  self,
   ...
 }:
 
@@ -94,7 +93,7 @@
     modules.firefox.enable = true;
     programs.spotify = {
       enable = true;
-      package = with self.pkgs; spotify-adblock;
+      package = with pkgs; spotify-adblock;
     };
   };
 

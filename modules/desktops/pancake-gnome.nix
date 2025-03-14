@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  self,
   ...
 }:
 
@@ -89,7 +88,7 @@ in
         primary-input-on-lockscreen
         privacy-indicators-accent-color
         bluetooth-battery-meter
-        # better-ibus
+        better-ibus
       ])
       ++
         lib.optionals
@@ -123,8 +122,7 @@ in
               makeWrapper ${pkgs.yelp}/bin/yelp $out/bin/yelp \
               --set WEBKIT_DISABLE_COMPOSITING_MODE 1
             '')
-          ]
-      ++ (with self.pkgs.gnomeExtensions; [ better-ibus ]);
+          ];
 
     environment.gnome.excludePackages = (
       with pkgs;
