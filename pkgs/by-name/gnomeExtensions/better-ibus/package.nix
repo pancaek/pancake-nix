@@ -18,8 +18,6 @@ stdenv.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = [ glib ];
 
-  # buildInputs = [ xprop ];
-
   buildPhase = ''
     runHook preBuild
     glib-compile-schemas --strict --targetdir="schemas/" "schemas/"
