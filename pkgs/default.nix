@@ -5,9 +5,6 @@
   inherit (prev.pkgs) callPackage;
 })
 // {
-  gnomeExtensions = prev.gnomeExtensions // {
-    better-ibus = prev.pkgs.callPackage ./better-ibus/package.nix { };
-  };
 
   praat = prev.praat.overrideAttrs (old: {
     version = "6.4.14";

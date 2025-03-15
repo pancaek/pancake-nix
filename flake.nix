@@ -21,7 +21,7 @@
       helix,
     }@inputs:
     let
-      packages-dir = (final: prev: import ./pkgs { inherit prev; });
+      packages-dir = (final: prev: prev.lib.recursiveUpdate prev (import ./pkgs { inherit prev; }));
       extended-lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = prev; });
 
     in
