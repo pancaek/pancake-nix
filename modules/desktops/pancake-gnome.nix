@@ -172,11 +172,11 @@ in
     systemd.services.gdm-monitors = {
       description = "Copy monitors.xml to GDM config at boot";
 
-      # Run after fs is ready
-      after = [ "local-fs.target" ];
-
-      # Run at boot
-      wantedBy = [ "multi-user.target" ];
+      after = [
+        "network.target"
+        "systemd-user-sessions.service"
+        "display-manager.service"
+      ];
 
       # Service configuration
       serviceConfig =
