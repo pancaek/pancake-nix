@@ -171,14 +171,9 @@ in
 
     systemd.services.gdm-monitors = {
       description = "Copy monitors.xml to GDM config at boot";
+      after = [ "local-fs.target" ];
+      wantedBy = [ "multi-user.target" ];
 
-      after = [
-        "network.target"
-        "systemd-user-sessions.service"
-        "display-manager.service"
-      ];
-
-      # Service configuration
       serviceConfig =
         let
           sourcePath = "/home/pancaek/.config/monitors.xml";
