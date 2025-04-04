@@ -142,6 +142,9 @@
     enable = true;
     package = inputs.helix.packages.${pkgs.hostPlatform.system}.default;
     extraPackages = with pkgs; [
+      # system clipboard yank
+      xclip
+      # lsp
       nixd
       nil
       nixfmt-rfc-style
