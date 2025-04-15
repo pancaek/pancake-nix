@@ -40,6 +40,6 @@ in
     };
 
     # For `pactl`
-    environment.systemPackages = with pkgs; [ pulseaudio ];
+    # environment.systemPackages = with pkgs; [ pulseaudio ];
   };
 }
