@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+<mime-type type="audio/x-wav">
+  <comment>WAV audio</comment>
+  <alias type="audio/wav"/>
+  <alias type="audio/vnd.wave"/>
+  <sub-class-of type="application/x-riff"/>
+  <magic>
+    <match type="string" value="WAVE" offset="8"/>
+    <match type="string" value="WAV " offset="8"/>
+  </magic>
+  <glob pattern="*.wav"/>
+</mime-type>
+</mime-info>

@@ -134,6 +134,17 @@
     ]
   );
 
+  home-manager.sharedModules = [
+    {
+      home.file.".local/share/mime" = {
+        source = pkgs.symlinkJoin {
+          name = "mime-fixes";
+          paths = [ "${pkgs.mime-fixes}/share/mime" ];
+        };
+        recursive = true;
+      };
+    }
+  ];
   environment.variables = {
     BROWSER = "firefox";
   };
