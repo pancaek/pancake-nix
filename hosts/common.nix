@@ -133,10 +133,10 @@
       corefonts
     ]
   );
-
+  # Set mimetype of .wav to audio/x-wav for all users to make google drive audio player cooperate
   home-manager.sharedModules = [
     {
-      home.file.".local/share/mime" = {
+      xdg.dataFile."mime" = {
         source = pkgs.symlinkJoin {
           name = "mime-fixes";
           paths = [ "${pkgs.mime-fixes}/share/mime" ];
