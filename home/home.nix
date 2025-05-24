@@ -23,12 +23,12 @@
     vesktop
     gh
     (reaper.overrideAttrs (prev: {
-      # postInstall =
-      #   (prev.postInstall or "")
-      #   + ''
-      #     rm $out/opt/REAPER/libSwell.so
-      #     ln -s ${libswell}/lib/libSwell.so $out/opt/REAPER/libSwell.so
-      #   '';
+      postInstall =
+        (prev.postInstall or "")
+        + ''
+          rm $out/opt/REAPER/libSwell.so
+          ln -s ${libswell}/lib/libSwell.so $out/opt/REAPER/libSwell.so
+        '';
     }))
   ];
 

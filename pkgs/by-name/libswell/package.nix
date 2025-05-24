@@ -8,13 +8,13 @@
 
 stdenv.mkDerivation {
   pname = "libswell";
-  version = "unstable-2024-09-13";
+  version = "unstable-2024-05-09";
 
   src = fetchFromGitHub {
     owner = "justinfrankel";
     repo = "WDL";
-    rev = "12c86f9061c0c517bb768c2593eb36670f34eb4d";
-    hash = "sha256-XR/p3QCs2imlk+YeyIBJ9gO0LSjwU0scmxZJQESUnec=";
+    rev = "6df563d45ecf0b2b04dce867e5cfd222b162e9fe";
+    hash = "sha256-oXbIdHH5HY48kFlOlLmSw7ltC4paA86deFpkt7G2hKA=";
     sparseCheckout = [
       "WDL/swell/**"
       "WDL/lice/**"
