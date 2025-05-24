@@ -12,8 +12,8 @@ stdenv.mkDerivation (finalAttrs: {
   src = fetchFromGitHub {
     owner = "mechtifs";
     repo = "better-ibus";
-    rev = "fd54ed12d6e67a38dab7c581a54187548104bc93";
-    hash = "sha256-dA7S4bJXi610+1Tsr/vaXYPsjjYhvW7uVpI8BPoFaPA=";
+    rev = "74b68095cabc556292b4459417ade9c80802ef78";
+    hash = "sha256-G6V/PXyJ9KsdmZu3s3kEQLk7+8/WFlv/foCCC70gsmQ=";
   };
 
   nativeBuildInputs = [ glib ];
