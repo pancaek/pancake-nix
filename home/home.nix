@@ -23,12 +23,12 @@
     vesktop
     gh
     (reaper.overrideAttrs (prev: {
-      postInstall =
-        (prev.postInstall or "")
-        + ''
-          rm $out/opt/REAPER/libSwell.so
-          ln -s ${libswell}/lib/libSwell.so $out/opt/REAPER/libSwell.so
-        '';
+      # postInstall =
+      #   (prev.postInstall or "")
+      #   + ''
+      #     rm $out/opt/REAPER/libSwell.so
+      #     ln -s ${libswell}/lib/libSwell.so $out/opt/REAPER/libSwell.so
+      #   '';
     }))
   ];
 
@@ -62,7 +62,7 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    initExtra = ''
+    initContent = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       source $HOME/${config.programs.zsh.dotDir}/.p10k.zsh
 
@@ -92,9 +92,7 @@
         command hx "$@"
         print -n '\033[0 q'
       }
-    '';
 
-    initExtraBeforeCompInit = ''
       # p10k instant prompt
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
