@@ -20,10 +20,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
     services.xserver = {
       displayManager.gdm = {
         enable = true;
-        wayland = false;
+        # wayland = false;
       };
       desktopManager.gnome.enable = true;
       excludePackages = with pkgs; [ xterm ];
@@ -87,6 +88,7 @@ in
         privacy-indicators-accent-color
         bluetooth-battery-meter
         better-ibus
+        adw-gtk3-colorizer
       ])
       ++
         lib.optionals

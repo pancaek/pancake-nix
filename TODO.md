@@ -1,7 +1,10 @@
 # no wayland, sad
 issues:
+- [gnome volume osd](https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/8295)
 - praat is themed wrong, rollback to 6.4.12 for now 
-﻿
+- wayland
+  - spotify (unset WAYLAND_DISPLAY)
+  - vesktop (unset NIXOS_OZONE_WL)
 pending: 
 - [reaper's "show resource path in explorer" button doesn't launch a file explorer](https://github.com/NixOS/nixpkgs/issues/341752)
   - fixed by me, just waiting on upstream to incorporate my package that fixes it
