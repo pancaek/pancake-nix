@@ -4,7 +4,8 @@ issues:
 - praat is themed wrong, rollback to 6.4.12 for now 
 - wayland
   - spotify (unset WAYLAND_DISPLAY)
-  - vesktop (`vesktop --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3`)
+  - vesktop (add `--wayland-text-input-version=3`)
+  - element (add `--wayland-text-input-version=3`)
 pending: 
 - [reaper's "show resource path in explorer" button doesn't launch a file explorer](https://github.com/NixOS/nixpkgs/issues/341752)
   - fixed by me, just waiting on upstream to incorporate my package that fixes it
