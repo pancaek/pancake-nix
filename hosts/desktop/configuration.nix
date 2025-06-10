@@ -65,6 +65,7 @@
       texliveFull
       prismlauncher
       praat
+      vscode-fhs
     ]
   );
 
