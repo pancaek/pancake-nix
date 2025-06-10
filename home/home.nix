@@ -20,7 +20,10 @@
     zsh-completions
     fastfetch
     # vscode-fhs
-    vesktop
+    (wrapApp {
+      pkg = vesktop;
+      flags = "--unset NIXOS_OZONE_WL";
+    })
     gh
     (reaper.overrideAttrs (prev: {
       postInstall =

@@ -93,7 +93,12 @@
     modules.firefox.enable = true;
     programs.spotify = {
       enable = true;
-      package = with pkgs; spotify-adblock;
+      package =
+        with pkgs;
+        (wrapApp {
+          pkg = spotify-adblock;
+          flags = "--unset WAYLAND_DISPLAY";
+        });
     };
   };
 

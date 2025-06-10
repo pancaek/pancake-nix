@@ -56,7 +56,10 @@
     [
       qmk
       cameractrls-gtk4
-      element-desktop
+      (wrapApp {
+        pkg = element-desktop;
+        flags = "--add-flags --wayland-text-input-version=3";
+      })
       (wrapApp {
         pkg = foliate;
         flags = "--set WEBKIT_DISABLE_DMABUF_RENDERER=1";
@@ -65,7 +68,10 @@
       texliveFull
       prismlauncher
       praat
-      vscode-fhs
+      (wrapApp {
+        pkg = vscode-fhs;
+        flags = "--unset NIXOS_OZONE_WL";
+      })
     ]
   );
 
