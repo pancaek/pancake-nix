@@ -107,21 +107,11 @@ in
               --set WEBKIT_DISABLE_COMPOSITING_MODE 1
             '')
             # yelp itself can have a cleaner link because its a proper package
-            (pkgs.runCommand "yelp" { buildInputs = [ pkgs.makeWrapper ]; } ''
-              mkdir $out
-              # Link every top-level folder from yelp to our new target
-              ln -s ${pkgs.yelp}/* $out
-              # Except the bin folder
-              rm $out/bin
-              mkdir $out/bin
-              # We create the bin folder ourselves and link every binary in it
-              ln -s ${pkgs.yelp}/bin/* $out/bin
-              # Except the main binary
-              rm $out/bin/yelp
-              # Because we create this ourself, by creating a wrapper
-              makeWrapper ${pkgs.yelp}/bin/yelp $out/bin/yelp \
-              --set WEBKIT_DISABLE_COMPOSITING_MODE 1
-            '')
+            (pkgs.wrapApp {
+              pkg = pkgs.yelp;
+              flags = "--set WEBKIT_DISABLE_COMPOSITING_MODE 1";
+              binName = "yelp";
+            })
           ];
 
     environment.gnome.excludePackages = (
