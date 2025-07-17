@@ -7,14 +7,18 @@
 // {
 
   praat = prev.praat.overrideAttrs (old: {
-    version = "6.4.14";
+    version = "6.4.35";
 
     src = prev.pkgs.fetchFromGitHub {
       owner = "praat";
       repo = "praat";
-      tag = "v${prev.praat.version}";
-      hash = "sha256-AY/OSoCWlWSjtLcve16nL72HidPlJqJgAOvUubMqvj0=";
+      tag = "v6.4.35";
+      hash = "sha256-x3S7UxaAe+s85APBh3KHvPhbATpws6hL9N04GzIIWtI=";
     };
+
+    configurePhase =
+      builtins.replaceStrings [ "makefile.defs.linux.pulse" ] [ "makefile.defs.linux.pulse-gcc" ]
+        old.configurePhase;
   });
 
   wrapApp =

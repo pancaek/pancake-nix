@@ -30,6 +30,15 @@ in
       excludePackages = with pkgs; [ xterm ];
     };
 
+    # gdm cursor matches my user
+    programs.dconf.profiles.gdm.databases = [
+      {
+        settings."org/gnome/desktop/interface" = {
+          cursor-theme = "volantes_cursors";
+        };
+      }
+    ];
+
     # NOTE: https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/2570
     # I don't actually care about functionality this but I want the panel to load
     services.fwupd.enable = true;

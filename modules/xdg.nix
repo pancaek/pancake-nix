@@ -42,6 +42,9 @@ in
         NPM_CONFIG_CACHE = "$XDG_CACHE_HOME/npm";
         NPM_CONFIG_USERCONFIG = "$XDG_CONFIG_HOME/npm/npmrc";
         HISTFILE = "$XDG_STATE_HOME/bash/history";
+
+        RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
+        CARGO_HOME = "$XDG_DATA_HOME/cargo";
       };
     };
   };
