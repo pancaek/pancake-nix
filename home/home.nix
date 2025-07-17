@@ -162,6 +162,9 @@
       nixd = {
         command = "nixd";
       };
+      rust-analyzer.config = {
+        check.command = "clippy";
+      };
     };
     languages.language = [
       {
