@@ -112,6 +112,7 @@ in
       [
         caffeine-ng
         anyrun
+        hyprshot
         glib
         gnome-online-accounts-gtk
         gsettings-desktop-schemas

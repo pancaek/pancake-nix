@@ -38,10 +38,6 @@
   my.modules.pancake-hyprland.enable = true;
   my.modules.pancake-gnome.enable = false;
 
-  my.modules.ibus = {
-    enable = true;
-    engines = with pkgs.ibus-engines; [ mozc-ut ];
-  };
   my.programs.piper = {
     enable = true;
     experimental = true;

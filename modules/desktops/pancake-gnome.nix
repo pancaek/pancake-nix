@@ -145,6 +145,11 @@ in
 
     programs.evince.enable = false;
 
+    my.modules.ibus = {
+      enable = true; # TODO: broken on hyprland
+      engines = with pkgs.ibus-engines; [ mozc-ut ];
+    };
+
     my.programs.kvantum.enable = true;
 
     home-manager.sharedModules =
