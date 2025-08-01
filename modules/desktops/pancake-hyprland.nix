@@ -56,13 +56,14 @@ in
       geoclue2.enable = true;
     };
     programs = {
-
-      hyprland.enable = true;
+      hyprland = {
+        enable = true;
+        withUWSM = true;
+      };
       hyprlock.enable = true;
       waybar.enable = true;
       dconf.enable = true;
       nm-applet.enable = true;
-      hyprland.withUWSM = true;
     };
     systemd = {
       user.services = {

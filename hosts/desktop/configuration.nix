@@ -35,8 +35,8 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  my.modules.pancake-hyprland.enable = true;
-  my.modules.pancake-gnome.enable = false;
+  my.modules.pancake-hyprland.enable = false;
+  my.modules.pancake-gnome.enable = true;
 
   my.programs.piper = {
     enable = true;
@@ -62,12 +62,17 @@
       zoom-us
       texliveFull
       prismlauncher
+      # Horrible performance on nvidia
+      # (wrapApp {
+      #   pkg = modrinth-app;
+      #   flags = "--set WEBKIT_DISABLE_DMABUF_RENDERER=1";
+      # })
       praat
       # (wrapApp {
       #   pkg = vscode-fhs;
       #   flags = "--unset NIXOS_OZONE_WL";
       # })
-      fadein
+      # fadein
       (
         let
           version = "3.2.1";
