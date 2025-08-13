@@ -62,25 +62,22 @@
       zoom-us
       texliveFull
       prismlauncher
-      # Horrible performance on nvidia
-      # (wrapApp {
-      #   pkg = modrinth-app;
-      #   flags = "--set WEBKIT_DISABLE_DMABUF_RENDERER=1";
-      # })
-      praat
-      # (wrapApp {
-      #   pkg = vscode-fhs;
-      #   flags = "--unset NIXOS_OZONE_WL";
-      # })
+      # Workaround for:
+      # https://github.com/praat/praat.github.io/issues/2209
+      (wrapApp {
+        pkg = praat;
+        flags = "--set AUDIO_BACKED=pulseaudio";
+      })
       # fadein
+      libation
       (
         let
-          version = "3.2.1";
+          version = "3.2.2";
           src = fetchFromGitHub {
             owner = "ebkr";
             repo = "r2modmanPlus";
             rev = "v${version}";
-            hash = "sha256-l1xrp+Gl26kiWqh5pIKp4QiETrzr5mTrUP10T0DhUCw=";
+            hash = "sha256-EEKf95+pwgRrZTjqKXGGWDdY6yH93bJOjZcSiC5I0IQ=";
           };
 
         in
