@@ -20,14 +20,12 @@ in
       enable = true;
       preferences = lib.mkIf isNvidia {
         # NVIDIA VA-API
-        # Maybe renamed? Or possibly not even needed
-        # https://www.reddit.com/r/Fedora/comments/1jpug4s/comment/ml2v3cg
-        "media.ffmpeg.vaapi.enabled" = true;
+        "media.hardware-video-decoding.force-enabled" = true;
         "media.rdd-ffmpeg.enabled" = true;
         "gfx.x11-egl.force-enabled" = true;
         # Potentially no longer needed?
         # see https://github.com/elFarto/nvidia-vaapi-driver/issues/305
-        "widget.dmabuf.force-enabled" = true;
+        # "widget.dmabuf.force-enabled" = true;
       };
     };
 
