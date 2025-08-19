@@ -123,7 +123,6 @@
       adw-gtk3
       (papirus-icon-theme.override { color = "yellow"; })
       volantes-cursors
-      # (mpv.override { scripts = with mpvScripts; [ uosc ]; })
     ]
 
   );
@@ -131,8 +130,6 @@
   fonts.packages = (
     with pkgs;
     [
-      # breaks font fallbacks apparently :(
-      # yuji-fonts
       meslo-lgs-nf
       noto-fonts
       noto-fonts-cjk-sans
@@ -153,9 +150,6 @@
       };
     }
   ];
-  environment.variables = {
-    BROWSER = "firefox";
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
