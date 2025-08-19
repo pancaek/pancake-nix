@@ -146,7 +146,7 @@ in
     programs.evince.enable = false;
 
     my.modules.ibus = {
-      enable = true; # TODO: broken on hyprland
+      enable = true;
       engines = with pkgs.ibus-engines; [ mozc-ut ];
     };
 

@@ -127,6 +127,12 @@
 
   );
 
+  # https://gitlab.gnome.org/GNOME/totem/-/issues/616
+  # https://gitlab.gnome.org/GNOME/sushi/-/issues/135
+  environment.variables = {
+    GDK_GL = "gles";
+  };
+
   fonts.packages = (
     with pkgs;
     [
