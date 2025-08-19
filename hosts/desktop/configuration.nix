@@ -68,29 +68,8 @@
         pkg = praat;
         flags = "--set AUDIO_BACKED=pulseaudio";
       })
-      # fadein
       libation
-      (
-        let
-          version = "3.2.2";
-          src = fetchFromGitHub {
-            owner = "ebkr";
-            repo = "r2modmanPlus";
-            rev = "v${version}";
-            hash = "sha256-EEKf95+pwgRrZTjqKXGGWDdY6yH93bJOjZcSiC5I0IQ=";
-          };
-
-        in
-        r2modman.overrideAttrs {
-          inherit version src;
-
-          offlineCache = fetchYarnDeps {
-            yarnLock = "${src}/yarn.lock";
-            hash = "sha256-HLVHxjyymi0diurVamETrfwYM2mkUrIOHhbYCrqGkeg=";
-          };
-
-        }
-      )
+      r2modman
     ]
   );
 
