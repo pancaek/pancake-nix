@@ -38,13 +38,7 @@
                 packages-dir
               ];
             }
-            ./modules/quiet-boot.nix
-            ./modules/audio.nix
-            ./modules/printing.nix
-            ./modules/ibus.nix
-            ./modules/firefox.nix
-            ./modules/spotify.nix
-            ./modules/xdg.nix
+            ./modules/common
             ./modules/desktops/pancake-gnome.nix
             ./modules/desktops/pancake-hyprland.nix
             ./hosts/desktop/nvidia.nix

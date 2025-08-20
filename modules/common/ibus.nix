@@ -40,7 +40,7 @@ in
         usesMozc = (lib.packageInList "mozc" cfg.engines) || (lib.packageInList "mozc-ut" cfg.engines);
       in
       lib.mkIf usesMozc [
-        { xdg.configFile."mozc/ibus_config.textproto".source = ../home/mozc/ibus_config.textproto; }
+        { xdg.configFile."mozc/ibus_config.textproto".source = ../../home/mozc/ibus_config.textproto; }
       ];
   };
 }

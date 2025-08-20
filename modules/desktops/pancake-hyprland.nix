@@ -12,8 +12,8 @@ let
 in
 {
   imports = [
-    ../kvantum.nix
-    ../piper.nix
+    # ../kvantum.nix
+    # ../piper.nix
   ];
 
   options.my.modules.pancake-hyprland = {
