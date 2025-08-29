@@ -20,18 +20,16 @@
     zsh-completions
     fastfetch
     # vscode-fhs
-    (wrapApp {
-      pkg = vesktop;
-      flags = "--unset NIXOS_OZONE_WL";
-    })
+    # (wrapApp {
+    #   pkg = vesktop;
+    #   flags = "--unset NIXOS_OZONE_WL";
+    # })
     gh
     (reaper.overrideAttrs (prev: {
-      postInstall =
-        (prev.postInstall or "")
-        + ''
-          rm $out/opt/REAPER/libSwell.so
-          ln -s ${libswell}/lib/libSwell.so $out/opt/REAPER/libSwell.so
-        '';
+      postInstall = (prev.postInstall or "") + ''
+        rm $out/opt/REAPER/libSwell.so
+        ln -s ${libswell}/lib/libSwell.so $out/opt/REAPER/libSwell.so
+      '';
     }))
   ];
 
@@ -141,7 +139,8 @@
   services.mpris-proxy.enable = true;
   programs.helix = {
     enable = true;
-    package = inputs.helix.packages.${pkgs.hostPlatform.system}.default;
+    # package = inputs.helix.packages.${pkgs.hostPlatform.system}.default;
+    package = pkgs.helix;
     extraPackages = with pkgs; [
       # system clipboard yank
       xclip

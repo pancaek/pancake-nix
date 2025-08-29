@@ -20,23 +20,6 @@
       builtins.replaceStrings [ "makefile.defs.linux.pulse" ] [ "makefile.defs.linux.pulse-gcc" ]
         old.configurePhase;
   });
-  r2modman =
-    let
-      version = "3.2.2";
-      src = prev.fetchFromGitHub {
-        owner = "ebkr";
-        repo = "r2modmanPlus";
-        rev = "v${version}";
-        hash = "sha256-EEKf95+pwgRrZTjqKXGGWDdY6yH93bJOjZcSiC5I0IQ=";
-      };
-    in
-    prev.r2modman.overrideAttrs {
-      inherit version src;
-      offlineCache = prev.fetchYarnDeps {
-        yarnLock = "${src}/yarn.lock";
-        hash = "sha256-HLVHxjyymi0diurVamETrfwYM2mkUrIOHhbYCrqGkeg=";
-      };
-    };
   wrapApp =
     {
       pkg,
