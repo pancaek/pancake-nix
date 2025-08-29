@@ -1,5 +1,10 @@
 { prev }:
 
+let
+  electron-pin =
+    (builtins.getFlake "github:NixOS/nixpkgs/9cb344e96d5b6918e94e1bca2d9f3ea1e9615545")
+    .legacyPackages.${prev.pkgs.hostPlatform.system};
+in
 (prev.lib.packagesFromDirectoryRecursive {
   directory = ./by-name;
   inherit (prev.pkgs) callPackage;
@@ -20,6 +25,10 @@
       builtins.replaceStrings [ "makefile.defs.linux.pulse" ] [ "makefile.defs.linux.pulse-gcc" ]
         old.configurePhase;
   });
+  vesktop = electron-pin.vesktop;
+  r2modman = electron-pin.r2modman;
+  element-desktop = electron-pin.element-desktop;
+
   wrapApp =
     {
       pkg,

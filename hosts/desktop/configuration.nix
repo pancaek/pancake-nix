@@ -69,7 +69,7 @@
         flags = "--set AUDIO_BACKED=pulseaudio";
       })
       libation
-      # r2modman
+      r2modman
     ]
   );
 
