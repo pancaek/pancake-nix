@@ -70,6 +70,7 @@
       })
       libation
       r2modman
+      fadein
     ]
   );
 
