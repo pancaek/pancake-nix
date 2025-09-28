@@ -68,7 +68,6 @@
         pkg = praat;
         flags = "--set AUDIO_BACKED=pulseaudio";
       })
-      libation
       r2modman
       fadein
     ]
