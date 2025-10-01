@@ -8,9 +8,6 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix = {
-      url = "github:helix-editor/helix";
-    };
   };
 
   outputs =
@@ -18,7 +15,6 @@
       self,
       nixpkgs,
       home-manager,
-      helix,
     }@inputs:
     let
       packages-dir = (final: prev: prev.lib.recursiveUpdate prev (import ./pkgs { inherit prev; }));
