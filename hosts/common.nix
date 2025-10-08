@@ -12,7 +12,6 @@
 {
 
   nix = {
-    # package = pkgs.nixUnstable;
     optimise.automatic = true;
     settings.experimental-features = [
       "nix-command"
@@ -133,6 +132,10 @@
     GDK_GL = "gles";
   };
 
+  fonts.fontconfig.defaultFonts.emoji = [
+    "Twitter Color Emoji"
+    "Noto Color Emoji"
+  ];
   fonts.packages = (
     with pkgs;
     [
@@ -140,6 +143,7 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
+      twemoji-color-font
       noto-fonts-emoji
       corefonts
     ]
