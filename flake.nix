@@ -21,6 +21,9 @@
     let
       packages-dir = (final: prev: prev.lib.recursiveUpdate prev (import ./pkgs { inherit prev; }));
       extended-lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = prev; });
+      unstable-packages = (
+        final: prev: { unstable = import nixpkgs-unstable { inherit (final) system config; }; }
+      );
 
     in
     {
@@ -33,12 +36,8 @@
           modules = [
             {
               nixpkgs.overlays = [
+                unstable-packages
                 packages-dir
-                (final: prev: {
-                  unstable = import nixpkgs-unstable {
-                    inherit (final) system config;
-                  };
-                })
               ];
             }
             ./modules/common
@@ -72,13 +71,7 @@
                 packages-dir
               ];
             }
-            ./modules/quiet-boot.nix
-            ./modules/audio.nix
-            ./modules/printing.nix
-            ./modules/ibus.nix
-            ./modules/firefox.nix
-            ./modules/spotify.nix
-            ./modules/xdg.nix
+            ./modules/common.nix
             ./modules/desktops/pancake-gnome.nix
             ./hosts/laptop/nvidia.nix
             ./hosts/laptop/configuration.nix
