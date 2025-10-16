@@ -4,6 +4,7 @@
   inputs = {
 
     nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,6 +15,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
     }@inputs:
     let
@@ -32,6 +34,11 @@
             {
               nixpkgs.overlays = [
                 packages-dir
+                (final: prev: {
+                  unstable = import nixpkgs-unstable {
+                    inherit (final) system config;
+                  };
+                })
               ];
             }
             ./modules/common

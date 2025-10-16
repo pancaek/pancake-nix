@@ -36,9 +36,11 @@
   xdg.configFile."REAPER" = {
     source = pkgs.symlinkJoin {
       name = "reaper-userplugins";
-      paths = with pkgs; [
-        reaper-sws-extension
-        reaper-reapack-extension
+      paths = [
+        (pkgs.unstable.reaper-sws-extension.overrideAttrs (old: {
+          cmakeFlags = (old.cmakeFlags or [ ]) ++ [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.10" ];
+        }))
+        pkgs.reaper-reapack-extension
       ];
     };
     recursive = true;
