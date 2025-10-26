@@ -36,11 +36,9 @@
   xdg.configFile."REAPER" = {
     source = pkgs.symlinkJoin {
       name = "reaper-userplugins";
-      paths = [
-        (pkgs.unstable.reaper-sws-extension.overrideAttrs (old: {
-          cmakeFlags = (old.cmakeFlags or [ ]) ++ [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.10" ];
-        }))
-        pkgs.reaper-reapack-extension
+      paths = with pkgs; [
+        reaper-sws-extension
+        reaper-reapack-extension
       ];
     };
     recursive = true;
@@ -95,6 +93,23 @@
         command hx "$@"
         print -n '\033[0 q'
       }
+
+      mvbynix() {                                              
+        dir="$1" || return
+        prefix=''${dir:0:2}
+        dest=~/Documents/Git/nixpkgs/pkgs/by-name/$prefix/$dir
+        mkdir -p "$(dirname "$dest")"
+        mv "$dir" "$(dirname "$dest")"
+        if [ -f "$dest/default.nix" ]; then
+          mv "$dest/default.nix" "$dest/package.nix"
+        fi
+
+        hx $dest/package.nix
+        hx ~/Documents/Git/nixpkgs/pkgs/top-level/all-packages.nix
+        git add ~/Documents/Git/nixpkgs
+        git commit -m "$dir: modernize, move to by-name/"
+      }
+
 
       # p10k instant prompt
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"

@@ -147,6 +147,7 @@
       noto-fonts-emoji
       corefonts
     ]
+    ++ [ pkgs.darumadrop ]
   );
   # Set mimetype of .wav to audio/x-wav for all users to make google drive audio player cooperate
   home-manager.sharedModules = [

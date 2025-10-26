@@ -30,10 +30,6 @@ in
       extraModprobeConfig = lib.mkIf isNvidia "options nvidia NVreg_UsePageAttributeTable=1";
     };
 
-    hardware.nvidia.powerManagement.enable = lib.mkIf isNvidia true;
-
-    # Making sure to use the proprietary drivers until the issue above is fixed upstream
-    hardware.nvidia.open = lib.mkIf isNvidia (lib.mkForce false);
     services = {
 
       xserver = {
