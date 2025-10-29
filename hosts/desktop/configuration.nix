@@ -40,7 +40,6 @@
 
   my.programs.piper = {
     enable = true;
-    experimental = true;
   };
 
   # NOTE: QMK udev rules

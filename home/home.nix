@@ -94,7 +94,7 @@
         print -n '\033[0 q'
       }
 
-      mvbynix() {                                              
+      mvbynix () {
         dir="$1" || return
         prefix=''${dir:0:2}
         dest=~/Documents/Git/nixpkgs/pkgs/by-name/$prefix/$dir
@@ -109,7 +109,6 @@
         git add ~/Documents/Git/nixpkgs
         git commit -m "$dir: modernize, move to by-name/"
       }
-
 
       # p10k instant prompt
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
