@@ -1,9 +1,10 @@
 { prev }:
 
 let
+  system-arch = prev.stdenv.hostPlatform.system;
   electron-pin =
     (builtins.getFlake "github:NixOS/nixpkgs/9cb344e96d5b6918e94e1bca2d9f3ea1e9615545")
-    .legacyPackages.${prev.pkgs.hostPlatform.system};
+    .legacyPackages.${system-arch};
 in
 (prev.lib.packagesFromDirectoryRecursive {
   directory = ./by-name;

@@ -93,6 +93,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowAliases = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
