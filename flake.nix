@@ -22,7 +22,12 @@
       packages-dir = (final: prev: prev.lib.recursiveUpdate prev (import ./pkgs { inherit prev; }));
       extended-lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = prev; });
       unstable-packages = (
-        final: prev: { unstable = import nixpkgs-unstable { inherit (final) system config; }; }
+        final: prev: {
+          unstable = import nixpkgs-unstable {
+            inherit (final) config;
+            inherit (final.stdenv.hostPlatform) system;
+          };
+        }
       );
 
     in
