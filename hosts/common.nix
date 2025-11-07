@@ -146,8 +146,16 @@
       twemoji-color-font
       noto-fonts-color-emoji
       corefonts
+      (komika-fonts.override {
+        variants = [
+          "display"
+          "hand"
+          "poster"
+          "text"
+          "title"
+        ];
+      })
     ]
-    ++ [ pkgs.darumadrop ]
   );
   # Set mimetype of .wav to audio/x-wav for all users to make google drive audio player cooperate
   home-manager.sharedModules = [
