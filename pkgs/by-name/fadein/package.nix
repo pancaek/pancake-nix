@@ -10,17 +10,22 @@
   gtk3,
   libuuid,
   pango,
-  xorg,
   zlib,
+  xorg,
+  libX11,
+  libXxf86vm,
+  curl,
+  webkitgtk_4_1,
+  libjpeg8,
 }:
 
 stdenv.mkDerivation {
   pname = "fadein";
-  version = "unstable-2025-06-12";
+  version = "5.0.2";
 
   src = fetchzip {
-    url = "https://www.fadeinpro.com/download/demo/fadein-linux-amd64-demo.tar.gz";
-    hash = "sha256-H86Wk70rcky65ZVNmid2E2MUjoDDBVRSZfAcxvBOHRM=";
+    url = "https://web.archive.org/web/20251101223813/https://www.fadeinpro.com/download/demo/fadein-linux-x64-demo.tar.gz";
+    hash = "sha256-m2zscwE0ZUnxalhz2lclurtyTzPmGATHzlNtMBeyHos=";
   };
 
   strictDeps = true;
@@ -35,10 +40,13 @@ stdenv.mkDerivation {
     gtk3
     libuuid
     pango
-    stdenv.cc.cc.lib
+    (lib.getLib stdenv.cc.cc)
     xorg.libSM
-    xorg.libX11
-    xorg.libXxf86vm
+    libX11
+    libXxf86vm
+    curl
+    libjpeg8
+    webkitgtk_4_1
     zlib
   ];
 
@@ -58,10 +66,11 @@ stdenv.mkDerivation {
   '';
 
   meta = {
-    description = "A complete application for writing motion picture screenplays.";
-    homepage = "https://www.fadeinpro.com/r";
-    license = lib.licenses.unfree; # FIXME
+    description = "Writing motion picture screenplays.";
+    homepage = "https://www.fadeinpro.com/";
+    license = lib.licenses.unfree;
+    mainProgram = "fadein";
     maintainers = with lib.maintainers; [ pancaek ];
-    platforms = lib.platforms.linux;
+    platforms = [ "x86_64-linux" ];
   };
 }
