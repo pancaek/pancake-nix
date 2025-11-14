@@ -69,7 +69,7 @@
       })
       r2modman
       fadein
-      open-scq30
+      # open-scq30
     ]
   );
 
