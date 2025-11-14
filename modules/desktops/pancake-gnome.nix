@@ -33,8 +33,13 @@ in
     # gdm cursor matches my user
     programs.dconf.profiles.gdm.databases = [
       {
-        settings."org/gnome/desktop/interface" = {
-          cursor-theme = "volantes_cursors";
+        settings = {
+          "org/gnome/desktop/interface" = {
+            cursor-theme = "volantes_cursors";
+          };
+          "org/gnome/mutter" = {
+            experimental-features = [ "scale-monitor-framebuffer" ];
+          };
         };
       }
     ];
@@ -60,7 +65,7 @@ in
     fonts.fontconfig.localConf = ''
       <match target="pattern">
           <test name="family" qual="any">
-              <string>Cantarell</string>
+              <string>Adwaita Sans</string>
           </test>
           <edit name="family" mode="append">
               # <string>Yuji Syuku Std</string>
