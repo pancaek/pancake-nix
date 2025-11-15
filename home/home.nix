@@ -21,7 +21,7 @@
     fastfetch
     # vscode-fhs
     (wrapApp {
-      pkg = unstable.vesktop;
+      pkg = vesktop;
       flags = "--unset NIXOS_OZONE_WL";
     })
     gh
