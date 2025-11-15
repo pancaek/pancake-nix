@@ -55,8 +55,17 @@ stdenv.mkDerivation {
     mkdir -p $out/share
     cp -r usr/share/* $out/share
 
-    # Fix icon
-    install -m 444 -D usr/share/fadein/icon_app/fadein_icon_256x256.png $out/share/icons/hicolor/256x256/apps/fadein.png
+    # Fix icons
+    for size in 16 24 32 48 64 96 128 256 512; do
+      install -m 444 -D \
+        "usr/share/fadein/icon_app/fadein_icon_''${size}x''${size}.png" \
+        "$out/share/icons/hicolor/''${size}x''${size}/apps/fadein.png"
+
+      install -m 444 -D \
+        "usr/share/fadein/icon_app/fadein_doc_''${size}x''${size}.png" \
+        "$out/share/icons/hicolor/''${size}x''${size}/mimetypes/application-x-fadein-document.png"
+    done
+
     substituteInPlace $out/share/applications/fadein.desktop \
       --replace-fail 'Icon=/usr/share/fadein/icon_app/fadein_icon_256x256.png' 'Icon=fadein'
 
