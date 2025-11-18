@@ -37,10 +37,7 @@
 
   my.modules.pancake-hyprland.enable = false;
   my.modules.pancake-gnome.enable = true;
-
-  my.programs.piper = {
-    enable = true;
-  };
+  my.programs.piper.enable = true;
 
   # NOTE: QMK udev rules
   hardware.keyboard.qmk.enable = true;
