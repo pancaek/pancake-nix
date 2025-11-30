@@ -25,12 +25,7 @@
       flags = "--unset NIXOS_OZONE_WL";
     })
     gh
-    # (reaper.overrideAttrs (prev: {
-    #   postInstall = (prev.postInstall or "") + ''
-    #     rm $out/opt/REAPER/libSwell.so
-    #     ln -s ${libswell-reaper}/lib/libSwell.so $out/opt/REAPER/libSwell.so
-    #   '';
-    # }))
+    reaper
   ];
 
   xdg.configFile."REAPER" = {
