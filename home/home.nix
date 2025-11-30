@@ -37,7 +37,11 @@
     source = pkgs.symlinkJoin {
       name = "reaper-userplugins";
       paths = with pkgs; [
-        reaper-sws-extension
+        (unstable.reaper-sws-extension.overrideAttrs (old: {
+          postBuild = (old.postBuild or "") + ''
+            cmake --install . --component grooves
+          '';
+        }))
         reaper-reapack-extension
       ];
     };
