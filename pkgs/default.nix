@@ -12,24 +12,6 @@ in
 })
 // {
 
-  praat = prev.praat.overrideAttrs (old: {
-    version = "6.4.35";
-
-    src = prev.fetchFromGitHub {
-      owner = "praat";
-      repo = "praat";
-      tag = "v6.4.35";
-      hash = "sha256-x3S7UxaAe+s85APBh3KHvPhbATpws6hL9N04GzIIWtI=";
-    };
-
-    configurePhase =
-      builtins.replaceStrings [ "makefile.defs.linux.pulse" ] [ "makefile.defs.linux.pulse-gcc" ]
-        old.configurePhase;
-  });
-  vesktop = electron-pin.vesktop;
-  r2modman = electron-pin.r2modman;
-  element-desktop = electron-pin.element-desktop;
-
   wrapApp =
     {
       pkg,

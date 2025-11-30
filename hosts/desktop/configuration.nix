@@ -65,7 +65,7 @@
         flags = "--set AUDIO_BACKED=pulseaudio";
       })
       r2modman
-      fadein
+      # fadein
       # open-scq30
     ]
   );

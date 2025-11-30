@@ -21,13 +21,12 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
-    services.xserver = {
+    services = {
       displayManager.gdm = {
         enable = true;
-        # wayland = false;
       };
       desktopManager.gnome.enable = true;
-      excludePackages = with pkgs; [ xterm ];
+      xserver.excludePackages = with pkgs; [ xterm ];
     };
 
     # gdm cursor matches my user
@@ -83,7 +82,6 @@ in
         gapless
         endeavour
         fragments
-        papers
         xmousepasteblock
         gnome-epub-thumbnailer
         libheif
@@ -138,17 +136,16 @@ in
         gnome-music
         epiphany # web browser
         geary # email reader
-        # totem # gnome video
         gnome-maps
         gnome-characters
         gnome-shell-extensions
         gnome-calculator
         gnome-contacts
         gnome-system-monitor
+        # papers
+        # showtime
       ]
     );
-
-    programs.evince.enable = false;
 
     my.modules.ibus = {
       enable = true;

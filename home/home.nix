@@ -25,12 +25,12 @@
       flags = "--unset NIXOS_OZONE_WL";
     })
     gh
-    (reaper.overrideAttrs (prev: {
-      postInstall = (prev.postInstall or "") + ''
-        rm $out/opt/REAPER/libSwell.so
-        ln -s ${libswell-reaper}/lib/libSwell.so $out/opt/REAPER/libSwell.so
-      '';
-    }))
+    # (reaper.overrideAttrs (prev: {
+    #   postInstall = (prev.postInstall or "") + ''
+    #     rm $out/opt/REAPER/libSwell.so
+    #     ln -s ${libswell-reaper}/lib/libSwell.so $out/opt/REAPER/libSwell.so
+    #   '';
+    # }))
   ];
 
   xdg.configFile."REAPER" = {
@@ -50,15 +50,15 @@
 
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     shellAliases = {
       nix-update = "sudo nixos-rebuild switch";
       nix-clean = "sudo nix-collect-garbage -d";
       cat = "bat";
       grep = "grep --color=auto";
-      refresh = "source $HOME/${config.programs.zsh.dotDir}/.zshrc";
+      refresh = "source ${config.programs.zsh.dotDir}/.zshrc";
     };
-    history.path = "$HOME/${config.programs.zsh.dotDir}/zsh_history";
+    history.path = "${config.programs.zsh.dotDir}/zsh_history";
     historySubstringSearch = {
       enable = true;
       searchUpKey = "$terminfo[kcuu1]";
@@ -69,7 +69,7 @@
 
     initContent = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      source $HOME/${config.programs.zsh.dotDir}/.p10k.zsh
+      source ${config.programs.zsh.dotDir}/.p10k.zsh
 
       bindkey '^[[1;5D' backward-word
       bindkey '^[[1;5C' forward-word
@@ -141,17 +141,16 @@
   programs.zoxide.enable = true;
   programs.git = {
     enable = false;
-    aliases = {
-      amend = "commit --amend -C HEAD";
-    };
-
-    extraConfig = {
+    settings = {
       core = {
         editor = "hx";
       };
       diff = {
         algorithm = "patience";
         compactionHeuristic = true;
+      };
+      aliases = {
+        amend = "commit --amend -C HEAD";
       };
     };
   };
@@ -167,7 +166,7 @@
       # lsp
       nixd
       nil
-      nixfmt-rfc-style
+      nixfmt
       texlab
     ];
     settings = {
