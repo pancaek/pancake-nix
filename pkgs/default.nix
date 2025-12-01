@@ -2,9 +2,6 @@
 
 let
   system-arch = prev.stdenv.hostPlatform.system;
-  # electron-pin =
-  # (builtins.getFlake "github:NixOS/nixpkgs/9cb344e96d5b6918e94e1bca2d9f3ea1e9615545")
-  # .legacyPackages.${system-arch};
 in
 (prev.lib.packagesFromDirectoryRecursive {
   directory = ./by-name;
@@ -44,6 +41,13 @@ in
     else
       pkg;
 
+  gnomeExtensions.better-ibus = prev.gnomeExtensions.better-ibus.overrideAttrs (old: {
+
+    preInstall = ''
+      substituteInPlace metadata.json \
+        --replace-fail "\"48\"" "\"48\",\"49\""
+    '';
+  });
   reaper = prev.reaper.overrideAttrs (
     old:
     let
