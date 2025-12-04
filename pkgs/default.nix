@@ -48,6 +48,17 @@ in
         --replace-fail "\"48\"" "\"48\",\"49\""
     '';
   });
+
+  r2modman = prev.r2modman.overrideAttrs (old: {
+    # Hide update banner
+    preBuild = ''
+      substituteInPlace src/pages/Manager.vue \
+        --replace-fail "<div class='notification is-warning' v-if=\"portableUpdateAvailable\">" \
+           "<div style='display: none;'>"
+    '';
+
+  });
+
   reaper = prev.reaper.overrideAttrs (
     old:
     let
