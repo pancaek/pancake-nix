@@ -132,4 +132,19 @@ in
       };
     }
   );
+
+  reaper-reapack-extension =
+    let
+      version = "1.2.6";
+    in
+    prev.reaper-reapack-extension.overrideAttrs {
+      inherit version;
+      src = prev.fetchFromGitHub {
+        owner = "cfillion";
+        repo = "reapack";
+        tag = "v${version}";
+        hash = "sha256-M1EUBksCCcGD6zRT0Kr32t+inyKMieGR/y+KGxt/qrc=";
+        fetchSubmodules = true;
+      };
+    };
 }

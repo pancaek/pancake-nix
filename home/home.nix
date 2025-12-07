@@ -106,7 +106,7 @@
         hx $dest/package.nix
         hx ~/Documents/Git/nixpkgs/pkgs/top-level/all-packages.nix
         git add ~/Documents/Git/nixpkgs
-        git commit -m "$dir: modernize, move to by-name/"
+        git commit -m "$dir: move to by-name/"
       }
 
       # p10k instant prompt
