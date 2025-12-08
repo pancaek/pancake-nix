@@ -2,6 +2,8 @@
 
 let
   system-arch = prev.stdenv.hostPlatform.system;
+  nixpkgs-pin = rev: (builtins.getFlake "github:NixOS/nixpkgs/${rev}").legacyPackages.${system-arch};
+
 in
 (prev.lib.packagesFromDirectoryRecursive {
   directory = ./by-name;
