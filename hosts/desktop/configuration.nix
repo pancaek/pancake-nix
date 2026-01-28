@@ -65,6 +65,15 @@
         flags = "--set AUDIO_BACKED=pulseaudio";
       })
       r2modman
+      slack
+      google-chrome
+      hubstaff
+      (makeDesktopItem {
+        name = "netsoft-com.netsoft.hubstaff";
+        desktopName = "Hubstaff";
+        exec = "HubstaffClient";
+        icon = "hubstaff";
+      })
       # fadein
       # open-scq30
     ]
@@ -95,6 +104,9 @@
     allowAliases = false;
   };
 
+  fonts.packages = [
+    (pkgs.unstable.input-fonts.override { acceptLicense = true; })
+  ];
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
