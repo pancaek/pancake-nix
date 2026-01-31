@@ -19,7 +19,6 @@
   home.packages = with pkgs; [
     zsh-completions
     fastfetch
-    # vscode-fhs
     (wrapApp {
       pkg = vesktop;
       flags = "--unset NIXOS_OZONE_WL";
@@ -163,6 +162,7 @@
       nil
       nixfmt
       texlab
+      shfmt
     ];
     settings = {
       theme = "base16_terminal";
@@ -202,6 +202,15 @@
       {
         name = "latex";
         auto-format = true;
+      }
+      {
+        name = "bash";
+        auto-format = true;
+        formatter = {
+          command = "shfmt";
+          args = [ ];
+        };
+
       }
     ];
   };
