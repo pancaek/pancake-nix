@@ -77,56 +77,15 @@ in
     in
     rec {
       version = "7.55";
+
       runtimeDependencies =
-        (old.runtimeDependencies or [ ])
-        ++ prev.lib.optionals prev.stdenv.hostPlatform.isLinux [ prev.pkgs.openssl ];
+        prev.lib.optional prev.stdenv.hostPlatform.isLinux (old.runtimeDependencies or [ ])
+        ++ [ prev.pkgs.xdg-utils ];
 
-      installPhase =
-        if prev.pkgs.stdenv.hostPlatform.isDarwin then
-          old.installPhase
-        else
-          ''
-            runHook preInstall
-
-            HOME="$out/share" XDG_DATA_HOME="$out/share" ./install-reaper.sh \
-              --install $out/opt \
-              --integrate-user-desktop
-            rm $out/opt/REAPER/uninstall-reaper.sh
-
-            # Dynamic loading of plugin dependencies does not adhere to rpath of
-            # reaper executable that gets modified with runtimeDependencies.
-            # Patching each plugin with DT_NEEDED is cumbersome and requires
-            # hardcoding of API versions of each dependency.
-            # Setting the rpath of the plugin shared object files does not
-            # seem to have an effect for some plugins.
-            # We opt for wrapping the executable with LD_LIBRARY_PATH prefix.
-            # Note that libcurl and libxml2 are needed for ReaPack to run.
-            wrapProgram $out/opt/REAPER/reaper \
-              --prefix LD_LIBRARY_PATH : "${
-                prev.lib.makeLibraryPath (
-                  with prev.pkgs;
-                  [
-                    curl
-                    lame
-                    libxml2
-                    ffmpeg
-                    vlc
-                    xdotool
-                    stdenv.cc.cc
-                    openssl
-                  ]
-                )
-              }"
-
-            mkdir $out/bin
-            ln -s $out/opt/REAPER/reaper $out/bin/
-
-            # Avoid store path in Exec, since we already link to $out/bin
-            substituteInPlace $out/share/applications/cockos-reaper.desktop \
-              --replace-fail "Exec=\"$out/opt/REAPER/reaper\"" "Exec=reaper"
-
-            runHook postInstall
-          '';
+      postFixup = prev.lib.optionalString prev.stdenv.hostPlatform.isLinux (old.postFixup or "") + ''
+        wrapProgram $out/opt/REAPER/reaper \
+          --prefix LD_LIBRARY_PATH : ${prev.lib.makeLibraryPath [ prev.pkgs.openssl ]}
+      '';
 
       src = prev.fetchurl {
         url = url_for_platform version prev.stdenv.hostPlatform.qemuArch;
