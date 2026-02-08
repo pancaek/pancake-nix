@@ -21,7 +21,7 @@
     fastfetch
     (wrapApp {
       pkg = vesktop;
-      flags = "--unset NIXOS_OZONE_WL";
+      # flags = "--unset NIXOS_OZONE_WL";
     })
     gh
     reaper
