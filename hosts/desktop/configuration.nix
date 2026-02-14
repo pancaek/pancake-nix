@@ -49,7 +49,7 @@
       cameractrls-gtk4
       # (wrapApp {
       #   pkg = element-desktop;
-      #   flags = "--add-flags --wayland-text-input-version=3";
+      #   # flags = "--add-flags --wayland-text-input-version=3";
       # })
       (wrapApp {
         pkg = foliate;
@@ -74,6 +74,7 @@
         exec = "HubstaffClient";
         icon = "hubstaff";
       })
+      signal-desktop
       # fadein
       # open-scq30
     ]
