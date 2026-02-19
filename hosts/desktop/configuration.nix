@@ -47,10 +47,10 @@
     [
       qmk
       cameractrls-gtk4
-      # (wrapApp {
-      #   pkg = element-desktop;
-      #   # flags = "--add-flags --wayland-text-input-version=3";
-      # })
+      (wrapApp {
+        pkg = element-desktop;
+        # flags = "--add-flags --wayland-text-input-version=3";
+      })
       (wrapApp {
         pkg = foliate;
         flags = "--set WEBKIT_DISABLE_DMABUF_RENDERER=1";

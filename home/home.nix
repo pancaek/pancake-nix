@@ -92,6 +92,21 @@
         print -n '\033[0 q'
       }
 
+
+      iconfix () {
+        pkg="$1" || return
+        pre=''${pkg:0:2}
+        p=~/Documents/Git/nixpkgs/pkgs/by-name/$pre/$pkg/package.nix
+        git switch master
+        git switch -c pixmaps-$pkg
+        env NIXPKGS_ALLOW_UNFREE=1 nix-build -A $pkg
+        nautilus result & disown
+        hx $p
+        git commit -am "$pkg: move icon to spec-compliant location"
+        git push
+        pkill nautilus
+      }
+
       mvbynix () {
         dir="$1" || return
         prefix=''${dir:0:2}
