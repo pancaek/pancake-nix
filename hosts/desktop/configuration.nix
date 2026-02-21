@@ -75,6 +75,7 @@
         icon = "hubstaff";
       })
       signal-desktop
+      cine
       # fadein
       # open-scq30
     ]
