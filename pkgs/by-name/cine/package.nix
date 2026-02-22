@@ -17,7 +17,7 @@
   python3Packages,
 }:
 
-python3Packages.buildPythonApplication (finalAttrs: {
+python3Packages.buildPythonApplication rec {
   pname = "cine";
   version = "1.0.9";
   pyproject = false;
@@ -25,7 +25,7 @@ python3Packages.buildPythonApplication (finalAttrs: {
   src = fetchFromGitHub {
     owner = "diegopvlk";
     repo = "Cine";
-    tag = "v${finalAttrs.version}";
+    tag = "v${version}";
     hash = "sha256-aw+M1wCGSbRRmKKcgyM4luEr0WtPLw/v7SqBE1B5H9U=";
     fetchSubmodules = true;
   };
@@ -69,4 +69,4 @@ python3Packages.buildPythonApplication (finalAttrs: {
     mainProgram = "cine";
     platforms = lib.platforms.linux;
   };
-})
+}
