@@ -1,6 +1,5 @@
 {
   lib,
-  stdenv,
   fetchFromGitHub,
   cmake,
   meson,
@@ -15,12 +14,13 @@
   libadwaita,
   libGL,
   pkg-config,
-  python3,
+  python3Packages,
 }:
 
-stdenv.mkDerivation (finalAttrs: {
+python3Packages.buildPythonApplication (finalAttrs: {
   pname = "cine";
   version = "1.0.9";
+  pyproject = false;
 
   src = fetchFromGitHub {
     owner = "diegopvlk";
@@ -30,42 +30,35 @@ stdenv.mkDerivation (finalAttrs: {
     fetchSubmodules = true;
   };
 
+  strictDeps = true;
+  dontWrapGApps = true;
+
   nativeBuildInputs = [
     meson
     ninja
     cmake
     pkg-config
     wrapGAppsHook4
+    blueprint-compiler
+    desktop-file-utils
+    appstream
   ];
 
   buildInputs = [
     gettext
-    blueprint-compiler
-    desktop-file-utils
     glib
     gtk4
     libadwaita
-    appstream
-    (python3.withPackages (
-      ps: with ps; [
-        pygobject3
-        mpv
-      ]
-    ))
   ];
 
-  strictDeps = true;
-
-  dontWrapGApps = true;
+  dependencies = with python3Packages; [
+    pygobject3
+    mpv
+  ];
 
   preFixup = ''
-    makeWrapperArgs+=(
-      "''${gappsWrapperArgs[@]}"
-    )
-
-    wrapProgram $out/bin/cine \
-      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libGL ]} \
-      ''${makeWrapperArgs[@]}
+    makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
+    makeWrapperArgs+=(--prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libGL ]})
   '';
 
   meta = {
