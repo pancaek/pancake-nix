@@ -54,6 +54,8 @@ stdenv.mkDerivation (finalAttrs: {
     ))
   ];
 
+  strictDeps = true;
+
   dontWrapGApps = true;
 
   preFixup = ''
