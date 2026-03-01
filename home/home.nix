@@ -20,7 +20,7 @@
     zsh-completions
     fastfetch
     (wrapApp {
-      pkg = unstable.vesktop;
+      pkg = vesktop;
       # flags = "--unset NIXOS_OZONE_WL";
     })
     gh
