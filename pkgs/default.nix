@@ -61,39 +61,6 @@ in
 
   });
 
-  reaper = prev.reaper.overrideAttrs (
-    old:
-    let
-      url_for_platform =
-        version: arch:
-        if prev.pkgs.stdenv.hostPlatform.isDarwin then
-          "https://www.reaper.fm/files/${prev.lib.versions.major version}.x/reaper${
-            builtins.replaceStrings [ "." ] [ "" ] version
-          }_universal.dmg"
-        else
-          "https://www.reaper.fm/files/${prev.lib.versions.major version}.x/reaper${
-            builtins.replaceStrings [ "." ] [ "" ] version
-          }_linux_${arch}.tar.xz";
-    in
-    rec {
-      version = "7.55";
-
-      runtimeDependencies =
-        prev.lib.optional prev.stdenv.hostPlatform.isLinux (old.runtimeDependencies or [ ])
-        ++ [ prev.pkgs.xdg-utils ];
-
-      postFixup = prev.lib.optionalString prev.stdenv.hostPlatform.isLinux (old.postFixup or "") + ''
-        wrapProgram $out/opt/REAPER/reaper \
-          --prefix LD_LIBRARY_PATH : ${prev.lib.makeLibraryPath [ prev.pkgs.openssl ]}
-      '';
-
-      src = prev.fetchurl {
-        url = url_for_platform version prev.stdenv.hostPlatform.qemuArch;
-        hash = "sha256-BOjS39GySB6ptiEJvwlShL4ZcDot2nsKXCAU/CeMEIc=";
-      };
-    }
-  );
-
   reaper-reapack-extension =
     let
       version = "1.2.6";
