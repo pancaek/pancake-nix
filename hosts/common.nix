@@ -122,6 +122,7 @@
       adw-gtk3
       (papirus-icon-theme.override { color = "yellow"; })
       volantes-cursors
+      mime-fixes
     ]
 
   );
@@ -157,18 +158,6 @@
       })
     ]
   );
-  # Set mimetype of .wav to audio/x-wav for all users to make google drive audio player cooperate
-  home-manager.sharedModules = [
-    {
-      xdg.dataFile."mime" = {
-        source = pkgs.symlinkJoin {
-          name = "mime-fixes";
-          paths = [ "${pkgs.mime-fixes}/share/mime" ];
-        };
-        recursive = true;
-      };
-    }
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

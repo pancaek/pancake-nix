@@ -15,7 +15,6 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     runHook preInstall
     install -Dm444 *.xml -t $out/share/mime/packages
-    update-mime-database $out/share/mime
     runHook postInstall
   '';
 
