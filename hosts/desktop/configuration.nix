@@ -64,7 +64,7 @@
         pkg = praat;
         flags = "--set AUDIO_BACKED=pulseaudio";
       })
-      r2modman
+      unstable.r2modman
       slack
       google-chrome
       hubstaff

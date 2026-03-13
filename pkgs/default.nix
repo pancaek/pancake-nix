@@ -51,15 +51,15 @@ in
     '';
   });
 
-  # r2modman = prev.r2modman.overrideAttrs (old: {
-  #   # Hide update banner
-  #   preBuild = ''
-  #     substituteInPlace src/pages/Manager.vue \
-  #       --replace-fail "<div class='notification is-warning' v-if=\"portableUpdateAvailable\">" \
-  #          "<div style='display: none;'>"
-  #   '';
+  r2modman = prev.r2modman.overrideAttrs (old: {
+    # Hide update banner
+    preBuild = ''
+      substituteInPlace src/pages/Manager.vue \
+        --replace-fail "<div class='notification is-warning' v-if=\"portableUpdateAvailable\">" \
+           "<div style='display: none;'>"
+    '';
 
-  # });
+  });
 
   reaper-reapack-extension =
     let
@@ -75,4 +75,6 @@ in
         fetchSubmodules = true;
       };
     };
+
+  papirus-icon-theme = prev.papirus-icon-theme.overrideAttrs { dontFixup = true; };
 }
