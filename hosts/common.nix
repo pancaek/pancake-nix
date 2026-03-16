@@ -108,11 +108,18 @@
 
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    extraPackages = with pkgs; [
-      volantes-cursors
-    ];
+    package = (
+      pkgs.steam.override {
+        extraEnv = {
+          # PROTON_ENABLE_WAYLAND = "1";
+        };
+      }
+    );
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+    extraPackages = with pkgs; [ volantes-cursors ];
+    # extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
 
   environment.systemPackages = (
