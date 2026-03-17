@@ -75,6 +75,4 @@ in
         fetchSubmodules = true;
       };
     };
-
-  papirus-icon-theme = prev.papirus-icon-theme.overrideAttrs { dontFixup = true; };
 }
