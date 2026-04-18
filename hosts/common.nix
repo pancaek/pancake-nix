@@ -127,7 +127,9 @@
     [
       git
       adw-gtk3
-      (papirus-icon-theme.override { color = "yellow"; })
+      (papirus-icon-theme.override {
+        color = "yellow";
+      })
       volantes-cursors
       mime-fixes
     ]

@@ -65,15 +65,6 @@
         flags = "--set AUDIO_BACKED=pulseaudio";
       })
       unstable.r2modman
-      slack
-      google-chrome
-      hubstaff
-      (makeDesktopItem {
-        name = "netsoft-com.netsoft.hubstaff";
-        desktopName = "Hubstaff";
-        exec = "HubstaffClient";
-        icon = "hubstaff";
-      })
       signal-desktop
       cine
       # fadein
