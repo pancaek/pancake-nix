@@ -51,6 +51,14 @@ in
     '';
   });
 
+  gnome-font-viewer = prev.gnome-font-viewer.overrideAttrs (old: {
+    patches = (old.patches or [ ]) ++ [
+      (prev.fetchpatch2 {
+        url = "https://gitlab.gnome.org/GNOME/gnome-font-viewer/-/commit/e2335f8f219dbe4c8c34e62f7d6082bff4d05231.diff";
+        hash = "";
+      })
+    ];
+  });
   r2modman = prev.r2modman.overrideAttrs (old: {
     # Hide update banner
     preBuild = ''

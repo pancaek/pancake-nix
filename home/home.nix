@@ -93,18 +93,15 @@
       }
 
 
-      iconfix () {
+      fontfix () {
         pkg="$1" || return
         pre=''${pkg:0:2}
         p=~/Documents/Git/nixpkgs/pkgs/by-name/$pre/$pkg/package.nix
         git switch master
-        git switch -c pixmaps-$pkg
-        env NIXPKGS_ALLOW_UNFREE=1 nix-build -A $pkg
-        nautilus result & disown
+        git switch -c installfont-$pkg
         hx $p
-        git commit -am "$pkg: move icon to spec-compliant location"
+        git commit -am "$pkg: use installFonts"
         git push
-        pkill nautilus
       }
 
       mvbynix () {
