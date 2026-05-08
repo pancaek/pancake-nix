@@ -52,12 +52,12 @@ in
   });
 
   gnome-font-viewer = prev.gnome-font-viewer.overrideAttrs (old: {
-    patches = (old.patches or [ ]) ++ [
-      (prev.fetchpatch2 {
-        url = "https://gitlab.gnome.org/GNOME/gnome-font-viewer/-/commit/e2335f8f219dbe4c8c34e62f7d6082bff4d05231.diff";
-        hash = "";
-      })
-    ];
+    postPatch = (old.postPatch or "") + ''
+      substituteInPlace data/gnome-font-viewer.thumbnailer \
+        --replace-fail "font/woff;" "font/woff;font/woff2;"        
+      substituteInPlace data/org.gnome.font-viewer.desktop.in.in \
+        --replace-fail "font/woff;" "font/woff;font/woff2;"
+    '';
   });
   r2modman = prev.r2modman.overrideAttrs (old: {
     # Hide update banner
