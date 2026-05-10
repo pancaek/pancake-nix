@@ -118,16 +118,8 @@
   # Only needed for the VM
   # services.spice-vdagentd.enable = true;
 
-  system.replaceDependencies.replacements = with pkgs; [
-    {
-      oldDependency = hicolor-icon-theme;
-      newDependency = (
-        hicolor-icon-theme.overrideAttrs (old: {
-          patches = (old.patches or [ ]) ++ [
-            ./hicolor-1024-dirs.patch
-          ];
-        })
-      );
-    }
+  my.modules.ibus.engines = [
+    pkgs.ibus-viossa
+    pkgs.ibus-engines.table
   ];
 }
