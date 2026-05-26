@@ -67,6 +67,16 @@
       unstable.r2modman
       signal-desktop
       cine
+      unstable.heroic
+      ((unstable.cockatrice.override { qt5 = unstable.qt6; }).overrideAttrs (old: rec {
+        version = "2026-05-08-Release-3.0.0";
+        src = fetchFromGitHub {
+          owner = "Cockatrice";
+          repo = "Cockatrice";
+          tag = version;
+          hash = "sha256-jLHGWtHbJTQ5Gefrnd8aUq1K3f2QzyE4YU5bW//gH4Y=";
+        };
+      }))
       # fadein
       # open-scq30
     ]
