@@ -48,7 +48,31 @@
       qmk
       cameractrls-gtk4
       (wrapApp {
-        pkg = element-desktop;
+        pkg = (
+          unstable.element-desktop.overrideAttrs (old: {
+            desktopItems = [
+              (makeDesktopItem {
+                name = "element-desktop";
+                exec = "element-desktop %u";
+                icon = "element";
+                desktopName = "Element";
+                genericName = "Matrix Client";
+                comment = old.meta.description;
+                categories = [
+                  "Network"
+                  "InstantMessaging"
+                  "Chat"
+                ];
+                startupWMClass = "element";
+                mimeTypes = [
+                  "x-scheme-handler/element"
+                  "x-scheme-handler/io.element.desktop"
+                ];
+              })
+            ];
+
+          })
+        );
         # flags = "--add-flags --wayland-text-input-version=3";
       })
       (wrapApp {
@@ -67,7 +91,6 @@
       unstable.r2modman
       signal-desktop
       cine
-      unstable.heroic
       ((unstable.cockatrice.override { qt5 = unstable.qt6; }).overrideAttrs (old: rec {
         version = "2026-05-08-Release-3.0.0";
         src = fetchFromGitHub {
@@ -79,6 +102,23 @@
       }))
       # fadein
       # open-scq30
+      ((plugdata.override { copyDesktopItems = null; }).overrideAttrs {
+        installPhase = ''
+          runHook preInstall
+
+          cd .. # build artifacts are placed inside the source directory for some reason
+          mkdir -p $out/bin $out/lib/clap $out/lib/lv2 $out/lib/vst3
+          cp    Plugins/Standalone/plugdata      $out/bin
+          cp -r Plugins/CLAP/plugdata{,-fx}.clap $out/lib/clap
+          cp -r Plugins/VST3/plugdata{,-fx}.vst3 $out/lib/vst3
+          cp -r Plugins/LV2/plugdata{,-fx}.lv2   $out/lib/lv2
+
+          install -Dm444 Resources/Icons/plugdata_logo_linux.png $out/share/icons/hicolor/512x512/apps/plugdata.png
+          install -Dm444 Resources/Installer/plugdata.desktop -t $out/share/applications
+
+          runHook postInstall
+        '';
+      })
     ]
   );
 

@@ -67,8 +67,8 @@ in
               <string>Adwaita Sans</string>
           </test>
           <edit name="family" mode="append">
-              # <string>Yuji Syuku Std</string>
               <string>Noto Sans CJK JP</string>
+              <string>Noto Color Emoji</string>
           </edit>
       </match>
     '';
