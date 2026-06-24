@@ -1,9 +1,7 @@
 {
   spotify,
-  stdenv,
   rustPlatform,
   fetchFromGitHub,
-  xorg,
   zip,
   unzip,
 }:

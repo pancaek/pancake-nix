@@ -47,7 +47,7 @@ in
 
     preInstall = ''
       substituteInPlace metadata.json \
-        --replace-fail "\"48\"" "\"48\",\"49\""
+        --replace-fail '"48"' '"48","49"'
     '';
   });
 
@@ -59,28 +59,13 @@ in
         --replace-fail "font/woff;" "font/woff;font/woff2;"
     '';
   });
-  r2modman = prev.r2modman.overrideAttrs (old: {
-    # Hide update banner
-    preBuild = ''
-      substituteInPlace src/pages/Manager.vue \
-        --replace-fail "<div class='notification is-warning' v-if=\"portableUpdateAvailable\">" \
-           "<div style='display: none;'>"
-    '';
+  # r2modman = prev.r2modman.overrideAttrs (old: {
+  #   # Hide update banner
+  #   preBuild = ''
+  #     substituteInPlace src/pages/Manager.vue \
+  #       --replace-fail "<div class='notification is-warning' v-if=\"portableUpdateAvailable\">" \
+  #          "<div style='display: none;'>"
+  #   '';
 
-  });
-
-  reaper-reapack-extension =
-    let
-      version = "1.2.6";
-    in
-    prev.reaper-reapack-extension.overrideAttrs {
-      inherit version;
-      src = prev.fetchFromGitHub {
-        owner = "cfillion";
-        repo = "reapack";
-        tag = "v${version}";
-        hash = "sha256-M1EUBksCCcGD6zRT0Kr32t+inyKMieGR/y+KGxt/qrc=";
-        fetchSubmodules = true;
-      };
-    };
+  # });
 }
