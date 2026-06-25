@@ -47,7 +47,7 @@ in
 
     preInstall = ''
       substituteInPlace metadata.json \
-        --replace-fail '"48"' '"48","49"'
+        --replace-fail '"48"' '"48","49","50"'
     '';
   });
 

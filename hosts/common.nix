@@ -96,7 +96,7 @@
         with pkgs;
         (wrapApp {
           pkg = spotify-adblock;
-          flags = "--unset WAYLAND_DISPLAY";
+          flags = "--unset WAYLAND_DISPLAY --unset NIXOS_OZONE_WL";
         });
     };
   };

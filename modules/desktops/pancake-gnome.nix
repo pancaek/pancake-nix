@@ -176,20 +176,7 @@ in
         { services.caffeine.enable = true; }
       ];
 
-    systemd.services.gdm-monitors = {
-      description = "Copy monitors.xml to GDM config at boot";
-      after = [ "local-fs.target" ];
-      wantedBy = [ "multi-user.target" ];
-
-      serviceConfig =
-        let
-          sourcePath = "/home/pancaek/.config/monitors.xml";
-          destPath = "/run/gdm/.config/monitors.xml";
-        in
-        {
-          Type = "oneshot";
-          ExecStart = "${pkgs.coreutils}/bin/install -o gdm -g gdm \"${sourcePath}\" \"${destPath}\"";
-        };
-    };
+    # TODO: somehow copy monitors.xml to
+    # /run/current-system/etc/xdg/monitors.xml
   };
 }
