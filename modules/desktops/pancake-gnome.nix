@@ -177,6 +177,28 @@ in
       ];
 
     # TODO: somehow copy monitors.xml to
-    # /run/current-system/etc/xdg/monitors.xml
+    # /etc/xdg/monitors.xml
+    # Basically, make this suck less
+    systemd.services.gdm-monitors = {
+      description = "Copy monitors.xml to GDM config at boot";
+      after = [ "local-fs.target" ];
+      wantedBy = [ "multi-user.target" ];
+
+      serviceConfig = {
+        Type = "oneshot";
+      };
+
+      script =
+        let
+          sourcePath = "/home/pancaek/.config/monitors.xml";
+          destPath = "/etc/xdg/monitors.xml";
+        in
+        ''
+          ${pkgs.coreutils}/bin/rm -f "${destPath}" 
+          ${pkgs.coreutils}/bin/install -D -o root -g root "${sourcePath}" "${destPath}"
+        '';
+
+    };
+
   };
 }
