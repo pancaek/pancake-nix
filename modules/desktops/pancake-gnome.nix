@@ -47,20 +47,6 @@ in
     # I don't actually care about functionality this but I want the panel to load
     services.fwupd.enable = true;
 
-    # NOTE: https://github.com/NixOS/nixpkgs/issues/195936#issuecomment-1366902737
-    # AND: https://github.com/NixOS/nixpkgs/issues/195936#issuecomment-1366902737
-    environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 =
-      lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0"
-        (
-          with pkgs.gst_all_1;
-          [
-            gst-plugins-good
-            gst-plugins-bad
-            gst-plugins-ugly
-            gst-libav
-          ]
-        );
-
     fonts.fontconfig.localConf = ''
       <match target="pattern">
           <test name="family" qual="any">

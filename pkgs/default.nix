@@ -59,6 +59,21 @@ in
         --replace-fail "font/woff;" "font/woff;font/woff2;"
     '';
   });
+
+  nautilus = prev.nautilus.overrideAttrs (old: {
+    # NOTE: https://github.com/NixOS/nixpkgs/issues/195936#issuecomment-1366902737
+    # AND: https://github.com/NixOS/nixpkgs/issues/195936#issuecomment-1366902737
+
+    buildInputs = (
+      old.buildInputs or [ ]
+      ++ (with prev.gst_all_1; [
+        gst-plugins-good
+        gst-plugins-bad
+        gst-plugins-ugly
+        gst-libav
+      ])
+    );
+  });
   # r2modman = prev.r2modman.overrideAttrs (old: {
   #   # Hide update banner
   #   preBuild = ''
