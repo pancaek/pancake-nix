@@ -102,23 +102,23 @@
       }))
       # fadein
       # open-scq30
-      ((plugdata.override { copyDesktopItems = null; }).overrideAttrs {
-        installPhase = ''
-          runHook preInstall
+      # ((plugdata.override { copyDesktopItems = null; }).overrideAttrs {
+      #   installPhase = ''
+      #     runHook preInstall
 
-          cd .. # build artifacts are placed inside the source directory for some reason
-          mkdir -p $out/bin $out/lib/clap $out/lib/lv2 $out/lib/vst3
-          cp    Plugins/Standalone/plugdata      $out/bin
-          cp -r Plugins/CLAP/plugdata{,-fx}.clap $out/lib/clap
-          cp -r Plugins/VST3/plugdata{,-fx}.vst3 $out/lib/vst3
-          cp -r Plugins/LV2/plugdata{,-fx}.lv2   $out/lib/lv2
+      #     cd .. # build artifacts are placed inside the source directory for some reason
+      #     mkdir -p $out/bin $out/lib/clap $out/lib/lv2 $out/lib/vst3
+      #     cp    Plugins/Standalone/plugdata      $out/bin
+      #     cp -r Plugins/CLAP/plugdata{,-fx}.clap $out/lib/clap
+      #     cp -r Plugins/VST3/plugdata{,-fx}.vst3 $out/lib/vst3
+      #     cp -r Plugins/LV2/plugdata{,-fx}.lv2   $out/lib/lv2
 
-          install -Dm444 Resources/Icons/plugdata_logo_linux.png $out/share/icons/hicolor/512x512/apps/plugdata.png
-          install -Dm444 Resources/Installer/plugdata.desktop -t $out/share/applications
+      #     install -Dm444 Resources/Icons/plugdata_logo_linux.png $out/share/icons/hicolor/512x512/apps/plugdata.png
+      #     install -Dm444 Resources/Installer/plugdata.desktop -t $out/share/applications
 
-          runHook postInstall
-        '';
-      })
+      #     runHook postInstall
+      #   '';
+      # })
     ]
   );
 
