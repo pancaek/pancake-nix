@@ -100,6 +100,7 @@
           hash = "sha256-jLHGWtHbJTQ5Gefrnd8aUq1K3f2QzyE4YU5bW//gH4Y=";
         };
       }))
+      protonplus
       # fadein
       # open-scq30
       # ((plugdata.override { copyDesktopItems = null; }).overrideAttrs {
