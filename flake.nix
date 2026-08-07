@@ -73,10 +73,11 @@
           modules = [
             {
               nixpkgs.overlays = [
+                unstable-packages
                 packages-dir
               ];
             }
-            ./modules/common.nix
+            ./modules/common
             ./modules/desktops/pancake-gnome.nix
             ./hosts/laptop/nvidia.nix
             ./hosts/laptop/configuration.nix

@@ -156,15 +156,15 @@
       twemoji-color-font
       noto-fonts-color-emoji
       corefonts
-      (komika-fonts.override {
-        variants = [
-          "display"
-          "hand"
-          "poster"
-          "text"
-          "title"
-        ];
-      })
+#      (komika-fonts.override {
+ #       variants = [
+  #        "display"
+   #       "hand"
+    #      "poster"
+     #     "text"
+      #    "title"
+       # ];
+      # })
     ]
   );
 
