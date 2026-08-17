@@ -38,7 +38,6 @@
   my.modules.pancake-hyprland.enable = false;
   my.modules.pancake-gnome.enable = true;
   my.programs.piper.enable = true;
-  programs.gamescope.enable = true;
   # NOTE: QMK udev rules
   hardware.keyboard.qmk.enable = true;
 
@@ -90,36 +89,9 @@
       })
       unstable.r2modman
       signal-desktop
-      cine
-      ((unstable.cockatrice.override { qt5 = unstable.qt6; }).overrideAttrs (old: rec {
-        version = "2026-05-08-Release-3.0.0";
-        src = fetchFromGitHub {
-          owner = "Cockatrice";
-          repo = "Cockatrice";
-          tag = version;
-          hash = "sha256-jLHGWtHbJTQ5Gefrnd8aUq1K3f2QzyE4YU5bW//gH4Y=";
-        };
-      }))
-      protonplus
+      # protonplus
       # fadein
       # open-scq30
-      # ((plugdata.override { copyDesktopItems = null; }).overrideAttrs {
-      #   installPhase = ''
-      #     runHook preInstall
-
-      #     cd .. # build artifacts are placed inside the source directory for some reason
-      #     mkdir -p $out/bin $out/lib/clap $out/lib/lv2 $out/lib/vst3
-      #     cp    Plugins/Standalone/plugdata      $out/bin
-      #     cp -r Plugins/CLAP/plugdata{,-fx}.clap $out/lib/clap
-      #     cp -r Plugins/VST3/plugdata{,-fx}.vst3 $out/lib/vst3
-      #     cp -r Plugins/LV2/plugdata{,-fx}.lv2   $out/lib/lv2
-
-      #     install -Dm444 Resources/Icons/plugdata_logo_linux.png $out/share/icons/hicolor/512x512/apps/plugdata.png
-      #     install -Dm444 Resources/Installer/plugdata.desktop -t $out/share/applications
-
-      #     runHook postInstall
-      #   '';
-      # })
     ]
   );
 
