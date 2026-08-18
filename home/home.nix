@@ -20,8 +20,8 @@
     zsh-completions
     fastfetch
     (wrapApp {
-      pkg = unstable.vesktop;
-      # flags = "--unset NIXOS_OZONE_WL";
+      pkg = vesktop;
+      flags = "--add-flags '--ozone-platform=x11 --disable-gpu'";
     })
     gh
     reaper

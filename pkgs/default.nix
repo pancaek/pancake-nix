@@ -74,6 +74,7 @@ in
       ])
     );
   });
+
   # r2modman = prev.r2modman.overrideAttrs (old: {
   #   # Hide update banner
   #   preBuild = ''
