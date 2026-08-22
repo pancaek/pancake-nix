@@ -11,26 +11,32 @@
   libuuid,
   pango,
   zlib,
-  xorg,
-  libX11,
-  libXxf86vm,
+  libsm,
+  libx11,
+  libxxf86vm,
+  wayland,
   curl,
   webkitgtk_4_1,
   libjpeg8,
+  wrapGAppsHook3,
 }:
 
 stdenv.mkDerivation {
   pname = "fadein";
-  version = "5.0.2";
+  version = "5.0.13";
 
   src = fetchzip {
-    url = "https://web.archive.org/web/20251101223813/https://www.fadeinpro.com/download/demo/fadein-linux-x64-demo.tar.gz";
-    hash = "sha256-m2zscwE0ZUnxalhz2lclurtyTzPmGATHzlNtMBeyHos=";
+    url = "https://web.archive.org/web/20260819062342/https://www.fadeinpro.com/download/demo/fadein-linux-x64-demo.tar.gz";
+    hash = "sha256-6rq4DyuE8W6BOeNSFvwm102nXqVSHeUEHXuZbh3fbdA=";
   };
 
   strictDeps = true;
+  __structuredAttrs = true;
 
-  nativeBuildInputs = [ autoPatchelfHook ];
+  nativeBuildInputs = [
+    autoPatchelfHook
+    wrapGAppsHook3
+  ];
 
   buildInputs = [
     cairo
@@ -41,12 +47,13 @@ stdenv.mkDerivation {
     libuuid
     pango
     (lib.getLib stdenv.cc.cc)
-    xorg.libSM
-    libX11
-    libXxf86vm
+    libsm
+    libx11
+    libxxf86vm
     curl
     libjpeg8
     webkitgtk_4_1
+    wayland
     zlib
   ];
 
@@ -57,11 +64,11 @@ stdenv.mkDerivation {
 
     # Fix icons
     for size in 16 24 32 48 64 96 128 256 512; do
-      install -m 444 -D \
+      install -Dm444 \
         "usr/share/fadein/icon_app/fadein_icon_''${size}x''${size}.png" \
         "$out/share/icons/hicolor/''${size}x''${size}/apps/fadein.png"
 
-      install -m 444 -D \
+      install -Dm444 \
         "usr/share/fadein/icon_app/fadein_doc_''${size}x''${size}.png" \
         "$out/share/icons/hicolor/''${size}x''${size}/mimetypes/application-x-fadein-document.png"
     done
@@ -75,8 +82,9 @@ stdenv.mkDerivation {
   '';
 
   meta = {
-    description = "Writing motion picture screenplays.";
+    description = "Writing motion picture screenplays";
     homepage = "https://www.fadeinpro.com/";
+    changelog = "https://www.fadeinpro.com/page.pl?content=version_notes";
     license = lib.licenses.unfree;
     mainProgram = "fadein";
     maintainers = with lib.maintainers; [ pancaek ];

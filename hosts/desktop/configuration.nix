@@ -90,7 +90,7 @@
       unstable.r2modman
       signal-desktop
       # protonplus
-      # fadein
+      fadein
       # open-scq30
     ]
   );
