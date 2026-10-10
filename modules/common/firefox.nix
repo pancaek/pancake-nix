@@ -33,5 +33,7 @@ in
       MOZ_DISABLE_RDD_SANDBOX = 1;
       LIBVA_DRIVER_NAME = "nvidia";
     };
+    programs.firefox.nativeMessagingHosts.packages = [ pkgs.unstable.firefoxpwa ];
+    environment.systemPackages = [ pkgs.unstable.firefoxpwa ];
   };
 }

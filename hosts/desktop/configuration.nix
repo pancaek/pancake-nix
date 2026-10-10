@@ -85,7 +85,7 @@
       # https://github.com/praat/praat.github.io/issues/2209
       (wrapApp {
         pkg = praat;
-        flags = "--set AUDIO_BACKEND=pulseaudio";
+        # flags = "--set AUDIO_BACKEND=pulseaudio";
       })
       unstable.r2modman
       signal-desktop
